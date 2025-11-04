@@ -11,11 +11,11 @@
         <div class="card shadow-sm">
             <div class="card-header text-white">
                 @if ($cajaAbierta)
-                    <button class="btn btn-success" disabled>
+                    <button class="btn btn-primary" disabled>
                         <i class="fas fa-plus"></i> Abrir Caja (Ya hay una caja abierta)
                     </button>
                 @else
-                    <a href="{{ route('cajas.create', ['id' => $id]) }}" class="btn btn-success">
+                    <a href="{{ route('cajas.create', ['id' => $id]) }}" class="btn btn-primary">
                         <i class="fas fa-plus"></i> Abrir Caja
                     </a>
                 @endif
@@ -25,29 +25,23 @@
             </div>
 
 
-            <div class="card shadow-lg border-0" style="border-radius: 15px;">
-                <div class="card-header linear-gradient-nuevo text-white"
-                    style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                    <h3 class="card-title"><i class="fas fa-user-tag"></i> Registro de cajas</h3>
-                </div>
-                <div class="card-body" style="background: #f8f9fa;">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped" id="cajasTable">
-                            <thead class="linear-gradient">
-                                <tr>
-                                    <th>Fecha Apertura</th>
-                                    <th>Fecha Cierre</th>
-                                    <th>Usuario Apertura</th>
-                                    <th>Usuario Cierre</th>
-                                    <th>Monto Inicial</th>
-                                    <th>Monto Vendido</th>
-                                    <th>Monto Total</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped" id="cajasTable">
+                        <thead>
+                            <tr>
+                                <th>Fecha Apertura</th>
+                                <th>Fecha Cierre</th>
+                                <th>Usuario Apertura</th>
+                                <th>Usuario Cierre</th>
+                                <th>Monto Inicial</th>
+                                <th>Monto Vendido</th>
+                                <th>Monto Total</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -129,7 +123,7 @@
                 icon: 'error',
                 title: 'Oops...',
                 text: '{{ session('
-                                                        error ') }}',
+                        error ') }}',
             });
         </script>
     @endif
