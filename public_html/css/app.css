@@ -1,0 +1,105 @@
+/* Animación para fondo degradado */
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Fondo del sidebar con degradado animado */
+.sidebar-gradient {
+    background: linear-gradient(
+        135deg,
+        #ff8c00 0%,
+        #ff00c8 25%,
+        #9a3bff 50%,
+        #3d2fff 75%,
+        #3d2fff 100%
+    ) !important;
+    background-size: 300% 300%;
+    animation: gradientFlow 15s ease infinite;
+    color: #111 !important; /* Texto oscuro */
+}
+
+/* Estilo de los enlaces del sidebar */
+.sidebar .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    border-radius: 12px;
+    background-color: transparent;
+    color: #111 !important; /* Texto oscuro */
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: none;
+}
+
+/* Hover en botones */
+.sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.25); /* Fondo claro transparente */
+    color: #000 !important;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
+    transform: scale(1.03);
+}
+
+/* Botón activo */
+.sidebar .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.4);
+    color: #000 !important;
+    font-weight: bold;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Íconos en sidebar */
+.sidebar .nav-icon {
+    font-size: 18px;
+    color: #000 !important;
+    margin-right: 15px;
+    transition: color 0.3s ease;
+}
+
+/* Íconos activos */
+.sidebar .nav-link.active .nav-icon {
+    color: #000 !important;
+}
+
+/* Estilo del input del buscador */
+.form-inline input[type="search"] {
+    background-color: #f3e5f5 !important; /* Lila suave */
+    color: #000 !important; /* Texto negro */
+    border: 1px solid #d1a7f0; /* Borde violeta suave */
+    border-radius: 8px;
+    padding: 6px 12px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+/* Placeholder del input */
+.form-inline input[type="search"]::placeholder {
+    color: #666; /* Gris medio */
+    font-style: italic;
+}
+
+/* Estilo al enfocar */
+.form-inline input[type="search"]:focus {
+    border-color: #9c27b0; /* Lila intenso */
+    outline: none;
+    box-shadow: 0 0 5px rgba(156, 39, 176, 0.3);
+}
+
+/* Sugerencias (si las hubiese dinámicamente con JS/autocomplete) */
+.ui-autocomplete {
+    background-color: #fff; /* Fondo blanco */
+    color: #000; /* Texto negro */
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    border-radius: 4px;
+    font-size: 14px;
+    z-index: 9999;
+}
