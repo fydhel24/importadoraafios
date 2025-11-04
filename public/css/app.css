@@ -103,3 +103,85 @@
     font-size: 14px;
     z-index: 9999;
 }
+.nav-sidebar .nav-treeview {
+    padding-left: 20px; /* Indenta el submenu */
+}
+/* =======================================
+   🔹 ICONOS RESPONSIVOS EN NAVBAR TOP
+   ======================================= */
+
+/* Ajuste base para todos los íconos del topnav */
+.navbar-nav > .nav-item > .nav-link > i {
+    font-size: 1.3rem; /* Tamaño base */
+    padding: 6px;
+    transition: all 0.3s ease;
+    color: var(--primary, #4a00e0);
+}
+
+/* Hover suave */
+.navbar-nav > .nav-item > .nav-link:hover > i {
+    transform: scale(1.15);
+    color: #3b78d8;
+}
+
+/* Margen y alineación más precisa */
+.navbar-nav > .nav-item {
+    margin: 0 0.25rem;
+}
+
+/* Asegura que los íconos no generen salto vertical */
+.navbar-nav > .nav-item > .nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ====== Breakpoints responsivos ====== */
+
+/* 📱 Pantallas pequeñas (móviles) */
+@media (max-width: 576px) {
+    .navbar-nav > .nav-item > .nav-link > i {
+        font-size: 1rem; /* reduce tamaño */
+        padding: 4px;
+    }
+
+    .navbar-nav > .nav-item {
+        margin: 0 0.1rem;
+    }
+
+    .navbar-nav {
+        flex-wrap: wrap; /* evita desbordes */
+        justify-content: center;
+    }
+}
+
+/* 📱 Pantallas medianas (tablets) */
+@media (min-width: 577px) and (max-width: 768px) {
+    .navbar-nav > .nav-item > .nav-link > i {
+        font-size: 1.15rem;
+    }
+
+    .navbar-nav {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+}
+
+/* 💻 Pantallas grandes (desktop) */
+@media (min-width: 769px) {
+    .navbar-nav > .nav-item > .nav-link > i {
+        font-size: 1.3rem;
+    }
+}
+
+/* ====== Efecto de sombra ligera al tocar (opcional para móviles) ====== */
+.navbar-nav > .nav-item > .nav-link:active > i {
+    transform: scale(0.95);
+    color: #2a65c8;
+}
+
+/* ====== Opcional: fondo circular suave en hover ====== */
+.navbar-nav > .nav-item > .nav-link:hover {
+    background-color: rgba(128, 0, 128, 0.08);
+    border-radius: 50%;
+}
