@@ -14,28 +14,32 @@
     color: white;
 }
 
+/* Estilo formal sin degradado */
 .linear-gradient {
-    background: linear-gradient(
-        135deg,
-        #ff8c00 0%,
-        #ff00c8 25%,
-        #9a3bff 50%,
-        #3d2fff 75%,
-        #3d2fff 100%
-    ) !important;
+    background-color: #1f2a44 !important; /* Azul marino oscuro elegante */
     color: white;
+    border: none;
+    transition: all 0.3s ease;
 }
 
-.linear-gradient-nuevo{
-   background: linear-gradient(
-        135deg,
-        #3d2fff 0%,       /* Azul intenso */
-        #3d2fff 40%,      /* Azul aún dominante */
-        #9a3bff 60%,      /* Lila */
-        #ff00c8 90%,      /* Rosado neón (apenas visible) */
-        #ff8c00 97%,      /* Naranja (muy sutil) */
-        #ff8c00 100%      /* Último punto fijo */
-    ) !important;
+.linear-gradient:hover {
+    background-color: #24375b !important; /* Un poco más claro al pasar el mouse */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(36, 55, 91, 0.4);
+}
+
+/* Variante nueva: color sólido formal con toque moderno */
+.linear-gradient-nuevo {
+    background-color: #2b1e5f !important; /* Azul violáceo profundo, moderno y tecnológico */
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.linear-gradient-nuevo:hover {
+    background-color: #3a2b7a !important; /* Un poco más luminoso al hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(58, 43, 122, 0.4);
 }
 
 /* Animación de entrada suave para filas de la tabla */

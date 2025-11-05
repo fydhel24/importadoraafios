@@ -64,7 +64,7 @@ return [
     |
     */
 
-'logo' => '<b style="color: #ffffff !important; font-weight: bold;">AFIOS</b>',
+    'logo' => '<b style="color: #ffffff !important; font-weight: bold;">AFIOS</b>',
 
     'logo_img' => 'images/logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
@@ -206,7 +206,7 @@ return [
     'classes_content_header' => '',
     'classes_content' => '',
 
-     //cambio
+    //cambio
     'classes_sidebar' => 'sidebar-purple elevation-4 sidebar-gradient',
 
     'classes_sidebar_nav' => 'sidebar-letter-white',
@@ -268,7 +268,7 @@ return [
     */
 
 
-    
+
     'use_route_url' => false,
     'dashboard_url' => 'home',
     'logout_url' => 'logout',
@@ -307,10 +307,10 @@ return [
     */
     'menu' => [
         // Navbar items:
-          [
+        [
             'text'    => '',
             'url'     => 'carpetas',
-            'icon' => 'fas fa-camera-retro',// Ícono de la cámara (puedes cambiarlo)
+            'icon' => 'fas fa-camera-retro', // Ícono de la cámara (puedes cambiarlo)
             'icon_color' => 'primary', // Color del ícono
             'topnav_right' => true,
             'can' => 'pedidos.index',
@@ -324,13 +324,13 @@ return [
         [
             'text' => '',
             'url'  => '/notas',
-           'icon' => 'fas fa-calendar-alt',
+            'icon' => 'fas fa-calendar-alt',
             'topnav_right' => true
         ],
         [
             'text' => '',
             'url'  => '/change-password',
-           'icon' => 'fas fa-lock-open',
+            'icon' => 'fas fa-lock-open',
             'topnav_right' => true
         ],
 
@@ -341,39 +341,39 @@ return [
             'can' => 'proveedores.index',
             'topnav_right' => true
         ],
-        
-       [
-    'text' => '',
-    'url'  => '/solicitudes',
-    'icon' => 'fas fa-file-signature',
-    'topnav_right' => true,
-    'can' => 'pedidos.index',
-],
+
+        [
+            'text' => '',
+            'url'  => '/solicitudes',
+            'icon' => 'fas fa-file-signature',
+            'topnav_right' => true,
+            'can' => 'pedidos.index',
+        ],
 
 
         // Sidebar items:
-        [
+        /* [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
-        ],
+        ], */
         [
             'text' => 'blog',
             'url' => 'admin/blog',
             'can' => 'manage-blog',
         ],
 
-        [
+        /*  [
             'text' => 'Reporte Caja',
             'url'  => '/caja-sucursal',
             'icon' => 'fas fa-fw fa-share',
             'can' => 'caja_sucursal.index'
-        ],
-        [
+        ], */
+        /*  [
             'text' => 'Cuaderno sucursal',
             'url'  => '/envioscuadernosucursal',
             'icon' => 'fas fa-book-open',
             'can' =>  'pedidos.index',
-        ],
+        ], */
         [
             'text' => 'Gestion de Usuarios',
             'icon' => 'fas fa-users',
@@ -393,8 +393,8 @@ return [
 
             ],
         ],
-        
-        
+
+
         [
             'text' => 'Cuaderno',
             'icon' => 'fas fa-book',
@@ -441,13 +441,13 @@ return [
                     'icon' => 'fas fa-hourglass-half', // Icono de pendiente o espera
                     'can' => 'pedidos.index',
                 ],
-                
- [
-    'text' => 'Cuaderno Pendientes',
-    'url'  => '/envios/faltante', // Usa la ruta que configuraste en routes/web.php
-    'icon' => 'fas fa-globe', // Icono de globo (para algo relacionado con el mundo, como la paz)
-    'can' => 'pedidos.index',
-],
+
+                [
+                    'text' => 'Cuaderno Pendientes',
+                    'url'  => '/envios/faltante', // Usa la ruta que configuraste en routes/web.php
+                    'icon' => 'fas fa-globe', // Icono de globo (para algo relacionado con el mundo, como la paz)
+                    'can' => 'pedidos.index',
+                ],
 
 
                 [
@@ -455,7 +455,7 @@ return [
                     'url'  => '/envios/extra1', // Usa la ruta que configuraste en routes/web.php
                     'icon' => 'fas fa-globe', // Icono de globo (para algo relacionado con el mundo, como la paz)
                     'can' => 'pedidos.index',
- ],
+                ],
             ],
 
         ],
@@ -484,32 +484,6 @@ return [
                     'icon' => 'fas fa-sun',
                     'can' => 'orden.index'
                 ]
-            ],
-        ],
-
-        [
-            'text' => 'Solicitud y Envios de Productos',
-            'icon' => 'fas fa-plane-arrival',
-            'submenu' => [
-
-                [
-                    'text' => 'Envio de Productos',
-                    'url'  => 'envios', // Usa la ruta que configuraste en routes/web.php
-                    'icon' => 'fas fa-calendar-week',
-                    'can' => 'envios.index'
-                ],
-                [
-                    'text' => 'Historial de Envios',
-                    'url'  => '/envios/historial', // Usa la ruta configurada en web.php
-                    'icon' => 'fas fa-history',
-                    'can' => 'envios.historial'
-                ],
-                [
-                    'text' => 'Solicitud de Productos',
-                    'url'  => '/envios/solicitud', // Usa la ruta configurada en web.php
-                    'icon' => 'fas fa-clipboard-check',
-                    'can' => 'envios.solicitud'
-                ],
             ],
         ],
 
@@ -555,13 +529,13 @@ return [
             'text' => 'Detalles de productos',
             'icon' => 'fas fa-info',
             'submenu' => [
-                [
+                /* [
                     'text' => 'Inventarios',
                     'url' => 'inventarios',
                     'icon' => 'fas fa-solid fa-warehouse',
                     'label_color' => 'success',
                     'can' => 'inventarios.index'
-                ],
+                ], */
 
                 [
                     'text' => 'Sucursales',
@@ -601,7 +575,31 @@ return [
                 ],
             ],
         ],
+        [
+            'text' => 'Solicitud y Envios de Productos',
+            'icon' => 'fas fa-plane-arrival',
+            'submenu' => [
 
+                [
+                    'text' => 'Envio de Productos',
+                    'url'  => 'envios', // Usa la ruta que configuraste en routes/web.php
+                    'icon' => 'fas fa-calendar-week',
+                    'can' => 'envios.index'
+                ],
+                [
+                    'text' => 'Historial de Envios',
+                    'url'  => '/envios/historial', // Usa la ruta configurada en web.php
+                    'icon' => 'fas fa-history',
+                    'can' => 'envios.historial'
+                ],
+                [
+                    'text' => 'Solicitud de Productos',
+                    'url'  => '/envios/solicitud', // Usa la ruta configurada en web.php
+                    'icon' => 'fas fa-clipboard-check',
+                    'can' => 'envios.solicitud'
+                ],
+            ],
+        ],
         [
             'text' => 'Cajas Sucursales',
             'url'  => '/cajas-sucursales',
@@ -609,27 +607,6 @@ return [
             'can'  => 'productos.index'
         ],
 
-
-        [
-             'text' => 'Ventas Caja',
-            'icon' => 'fas fa-cash-register', // Icono de caja registradora
-            'submenu' => [
-                [
-                    'text' => 'Ventas de Recojo',
-                    'url'  => '/ventarecojomoderno',
-                    'icon' => 'fas fa-hand-holding-box', // Icono de recoger una caja
-                    'can'  => 'control.index'
-                ],
-                 [
-                    'text' => 'Venta Rápida Moderna',
-                    'url'  => '/ventarapidamoderna', // Usa la ruta correcta aquí
-                    'icon' => 'fas fa-bolt', // Icono de rayo (rápido, ágil)
-                ],
-
-            ],
-        ],
-
-        // Agrupamos los tres elementos de ventas en un solo submenu
         [
             'text' => 'Ventas',
             'icon' => 'fas fa-solid fa-cash-register',
@@ -655,14 +632,31 @@ return [
                     'icon' => 'fas fa-solid fa-horse',
                     'can' => 'control.index'
                 ],
-               
+
             ],
         ],
-        
-        
-        
-        
-         [
+        [
+            'text' => 'Ventas Caja',
+            'icon' => 'fas fa-cash-register', // Icono de caja registradora
+            'submenu' => [
+                [
+                    'text' => 'Ventas de Recojo',
+                    'url'  => '/ventarecojomoderno',
+                    'icon' => 'fas fa-hand-holding-box', // Icono de recoger una caja
+                    'can'  => 'control.index'
+                ],
+                [
+                    'text' => 'Venta Rápida Moderna',
+                    'url'  => '/ventarapidamoderna', // Usa la ruta correcta aquí
+                    'icon' => 'fas fa-bolt', // Icono de rayo (rápido, ágil)
+                ],
+
+            ],
+        ],
+
+        // Agrupamos los tres elementos de ventas en un solo submenu
+
+        [
             'text' => 'Ventas Promocion',
             'icon' => 'fas fa-solid fa-cash-register',
             'submenu' => [
@@ -673,25 +667,21 @@ return [
                     'can' => 'control.index'
 
                 ],
-                 [
+                [
                     'text' => 'PROMOCIONES',
                     'url'  => 'promociones', // Usa la ruta que configuraste en routes/web.php
                     'icon' => 'fas fa-solid fa-hourglass-start',
                     'can' => 'promociones.index'
                 ],
-                 [
+                [
                     'text' => 'Venta Rápida Moderna',
                     'url'  => 'ventarapidamoderna', // Usa la ruta que configuraste en routes/web.php
-                   'icon' => 'fas fa-bolt', // Ícono de rayo (rápido, ágil)
+                    'icon' => 'fas fa-bolt', // Ícono de rayo (rápido, ágil)
 
                 ],
-                
+
             ],
         ],
-
-
-
-
 
         // Restauramos "Envio de Productos"
         [
@@ -744,13 +734,13 @@ return [
                     'label_color' => 'info', // Color del label
                     'can' => 'report.user.ventas'
                 ],
-                [
+                /* [
                     'text' => 'Reporte de inventarios',
                     'url' => '/reporte/inventario', // Cambia la URL para que coincida con la ruta
                     'icon' => 'fas fa-boxes',
                     'label_color' => 'success',
                     'can' => 'report.inventario'
-                ],
+                ], */
 
                 [
                     'text' => 'Reporte de pedidos',
