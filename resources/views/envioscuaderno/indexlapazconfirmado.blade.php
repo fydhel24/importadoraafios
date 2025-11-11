@@ -1008,6 +1008,11 @@
 
                     }
                 },
+                
+                pageLength: 10, // 👈 cantidad inicial de filas
+                lengthMenu: [10, 25, 50, 100, 200], // 👈 opciones disponibles
+
+
                 columns: [
 
 
@@ -1225,7 +1230,7 @@
                             var id_pedido = row.id_pedido;
                             var id = row.id;
                             var buttonHTML = `
-      <button class="btn btn-action-delete btn-sm delete-envio" title="Eliminar" data-id="${row.id}">
+      <button class="btn btn-sm btn-danger delete-envio" data-id="${row.id}">
         <i class="fas fa-trash-alt"></i>
       </button>
     `;
@@ -1234,7 +1239,7 @@
                             // Botón de editar si hay id_pedido
                             buttonHTML += `
       ${row.id_pedido ? 
-        `<a href="/orden/cuaderno/lpconfirmados/edit/${row.id}/${row.id_pedido}" class="btn btn-action-edit btn-sm" title="Editar" style="color: #007bff; border-color: #007bff; background-color: #f0f8ff;">
+        `<a href="/orden/cuaderno/lpconfirmados/edit/${row.id}/${row.id_pedido}" class="btn btn-light btn-sm" style="color: #007bff; border-color: #007bff; background-color: #f0f8ff;">
                   <i class="fas fa-edit"></i>
                 </a>`
       : `<span style="color: red;"><i class="fas fa-exclamation-triangle"></i></span>`}
@@ -1242,7 +1247,7 @@
                             // Botón de nota de venta si id_pedido y lapaz existen
                             buttonHTML += `
       ${row.id_pedido  ? 
-        `<a href="/nota-venta/${row.id_pedido}" class="btn btn-action-extra btn-sm " title="Nota de Venta">
+        `<a href="/nota-venta/${row.id_pedido}" class="btn btn-light btn-sm" style="color: #007bff; border-color: #007bff; background-color: #f0f8ff;">
                   <i class="fa fa-file-invoice"></i>
                 </a>`
       : ''}

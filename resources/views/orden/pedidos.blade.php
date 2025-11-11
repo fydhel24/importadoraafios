@@ -169,8 +169,8 @@
                     }
                 </style>
                 <div class="table-responsive">
-                    <table id="data_table" class="table table-bordered table-striped">
-                        <thead class="linear-gradient">
+                    <table id="data_table" class="table table-striped">
+                        <thead class="thead-light">
                             <tr>
                                 <th><input type="checkbox" id="selectAll"></th>
                                 <th>ID</th>
@@ -259,11 +259,12 @@
                                     </td> --}}
                                     <td>
                                         @can('orden.edit')
-                                            <a href="{{ route('orden.edit', $pedido->id) }}" class="btn btn-action-edit btn-sm" title="Editar">
+                                            <a href="{{ route('orden.edit', $pedido->id) }}" class="btn btn-light btn-sm"
+                                                style="color: #007bff; border-color: #007bff; background-color: #f0f8ff;">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <a href="{{ route('nota.venta', ['pedidoId' => $pedido->id]) }}"
-                                                class="btn btn-action-extra btn-sm " title="Nota de Venta">
+                                                class="btn btn-primary">
                                                 <i class="fa fa-file-invoice" aria-hidden="true"></i>
                                             </a>
                                         @endcan
@@ -273,7 +274,8 @@
                                                 style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-action-delete btn-sm" title="Eliminar">
+                                                <button type="submit" class="btn btn-light btn-sm"
+                                                    style="color: #dc3545; border-color: #dc3545; background-color: #f8d7da;">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
                                             </form>

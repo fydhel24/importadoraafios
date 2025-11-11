@@ -10,7 +10,7 @@
         </div>
         <div class="col-sm-6">
             <div class="float-right">
-                <a href="{{ route('carpetas.index') }}" class="btn btn-secondary mr-2">
+                <a href="{{ url()->previous() }}" class="btn btn-secondary mr-2">
                     <i class="fas fa-arrow-left"></i> Volver
                 </a>
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addCapturaModal">
@@ -229,7 +229,7 @@
                 </div>
                 <div class="modal-body text-center d-flex align-items-center justify-content-center"
                     style="overflow: hidden;">
-                    <img id="modalZoomImage" src="/placeholder.svg" class="img-fluid"
+                    <img id="modalZoomImage" src="" class="img-fluid"
                         style="cursor: grab; max-height: 80vh;" draggable="false">
                 </div>
                 <div class="modal-footer border-0 pt-0 justify-content-center">
@@ -734,8 +734,7 @@
                         // Manejar errores de carga de imagen
                         imgElement.onerror = function() {
                             console.error('Error cargando imagen:', this.src);
-                            this.src =
-                                '/placeholder.svg?height=400&width=600&text=Error+cargando+imagen';
+                            
                         };
 
                         // Zoom al hacer click

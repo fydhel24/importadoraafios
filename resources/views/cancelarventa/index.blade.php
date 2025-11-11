@@ -110,13 +110,11 @@
             font-weight: bold;
             color: #000;
         }
-
         .bg-red-soft {
-            background-color: #f8d7da !important;
-            /* Rojo suave */
-            color: #721c24 !important;
-            /* Texto en tono oscuro */
-        }
+        background-color: #f8d7da !important; /* Rojo suave */
+        color: #721c24 !important;           /* Texto en tono oscuro */
+    }
+
     </style>
     <link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet">
     <!-- DataTables JS & CSS (CDN) -->
@@ -147,14 +145,15 @@
                         d.user_id = $('#user_id').val();
                     }
                 },
-                createdRow: function(row, data, dataIndex) {
-                    if (data.estado === 'CANCELADA' || data.estado === 'Cancelada') {
-                        $(row).addClass('bg-red-soft');
+             createdRow: function(row, data, dataIndex) {
+    if (data.estado === 'CANCELADA' || data.estado === 'Cancelada') {
+        $(row).addClass('bg-red-soft');
+        
+    }
+},
 
-                    }
-                },
-
-                columns: [{
+                columns: [
+                    {
                         data: null,
                         orderable: false,
                         searchable: false,
@@ -198,7 +197,7 @@
                         data: 'total_precio',
                         name: 'total_precio'
                     },
-                    {
+                  {
                         data: 'acciones',
                         name: 'acciones',
                         orderable: false,
@@ -210,17 +209,16 @@
                             return data; // Retorna el contenido original si no está cancelada
                         }
                     },
-                    {
-                        data: 'estado',
-                        name: 'estado',
-                        render: function(data, type, row) {
-                            return `<span class="badge ${data === 'Activo' ? 'bg-success' : 'bg-danger'}">${data}</span>`;
-                        }
-                    },
-
+                    { 
+                    data: 'estado', 
+                    name: 'estado',
+                    render: function(data, type, row) {
+                        return `<span class="badge ${data === 'Activo' ? 'bg-success' : 'bg-danger'}">${data}</span>`;
+                    }  },
+                    
                 ],
                 responsive: true,
-
+           
             });
 
             $('#reporte-form').on('submit', function(e) {
@@ -242,7 +240,7 @@
                 // Crear un formulario oculto para enviar los IDs seleccionados
                 const form = $('<form>', {
                     method: 'POST',
-                    action: '{{ route('cancelarventa.generarReporte') }}'
+                    action: '{{ route("cancelarventa.generarReporte") }}'
                 }).append($('<input>', {
                     type: 'hidden',
                     name: '_token',
@@ -269,41 +267,43 @@
 
 
 
-        function devolucionRapida(ventaId) {
-            if (confirm('¿Está seguro de realizar la devolución rápida de esta venta?')) {
-                $.ajax({
-                    url: '/cancelarventa/devolucion-rapida/' + ventaId,
-                    type: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            Swal.fire({
-                                title: '¡Éxito!',
-                                text: 'Devolución realizada correctamente',
-                                icon: 'success'
-                            });
-                            $('#ventas-table').DataTable().ajax.reload();
-                        } else {
-                            Swal.fire({
-                                title: 'Error',
-                                text: response.message || 'Hubo un error al procesar la devolución',
-                                icon: 'error'
-                            });
-                        }
-                    },
-                    error: function(xhr) {
-                        Swal.fire({
-                            title: 'Error',
-                            text: xhr.responseJSON ? xhr.responseJSON.message :
-                                'Hubo un error al procesar la devolución',
-                            icon: 'error'
-                        });
-                    }
+    function devolucionRapida(ventaId) {
+    if (confirm('¿Está seguro de realizar la devolución rápida de esta venta?')) {
+        $.ajax({
+            url: '/cancelarventa/devolucion-rapida/' + ventaId,
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: '¡Éxito!',
+                        text: 'Devolución realizada correctamente',
+                        icon: 'success'
+                    });
+                    $('#ventas-table').DataTable().ajax.reload();
+                } else {
+                    Swal.fire({
+                        title: 'Error',
+                        text: response.message || 'Hubo un error al procesar la devolución',
+                        icon: 'error'
+                    });
+                }
+            },
+            error: function(xhr) {
+                Swal.fire({
+                    title: 'Error',
+                    text: xhr.responseJSON ? xhr.responseJSON.message : 'Hubo un error al procesar la devolución',
+                    icon: 'error'
                 });
             }
-        }
+        });
+    }
+}
+
+
+
     </script>
 @endpush
 
@@ -378,39 +378,34 @@
         </div>
 
 
-
+        
         <!-- Botón para generar reportes -->
         <button type="button" class="btn btn-success mb-3" id="generar-reporte"><i class="fas fa-file-pdf"></i> Generar
             Reporte</button>
 
+        
+        <div class="card-body">
+            <i class="fas fa-table"></i> Ventas Registradas
+            <div class="table-responsive">
+                <table id="ventas-table" class="table table-striped table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th><input type="checkbox" id="select-all"></th> <!-- Checkbox para seleccionar todos -->
+                            <th>ID Venta</th>
+                            <th>Fecha de Venta</th>
+                            <th>Vendedor</th>
+                            <th>Cliente</th>
+                            <th>CI</th>
+                            <th>Productos</th>
+                            <th>Cantidad Vendida</th>
+                            <th>Precio Total</th>
+                            <th>Acciones</th>
+                            <th>Estado</th>
 
-        <div class="card shadow-lg border-0" style="border-radius: 15px;">
-            <div class="card-header linear-gradient-nuevo text-white"
-                style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                <h3 class="card-title"><i class="fas fa-user-tag"></i> Ventas Registradas</h3>
-            </div>
-            <div class="card-body" style="background: #f8f9fa;">
-                <div class="table-responsive">
-                    <table id="ventas-table" class="table table-bordered table-striped">
-                        <thead class="linear-gradient">
-                            <tr>
-                                <th><input type="checkbox" id="select-all"></th> <!-- Checkbox para seleccionar todos -->
-                                <th>ID Venta</th>
-                                <th>Fecha de Venta</th>
-                                <th>Vendedor</th>
-                                <th>Cliente</th>
-                                <th>CI</th>
-                                <th>Productos</th>
-                                <th>Cantidad Vendida</th>
-                                <th>Precio Total</th>
-                                <th>Acciones</th>
-                                <th>Estado</th>
-
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
         </div>
     </div>

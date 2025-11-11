@@ -125,4 +125,8 @@ class Producto extends Model
     {
         return $this->hasMany(PrecioProducto::class, 'id_producto', 'id');
     }
+    public function predicciones()
+    {
+        return $this->hasMany(Prediccion::class);
+    }
 }

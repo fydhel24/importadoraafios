@@ -1513,4 +1513,47 @@ class EnvioController extends Controller
             }
         }
     }
+    
+     public function searchPedidoSucursal(Request $request)
+    {
+        $search = trim($request->input('search'));
+        $limit = $request->input('limit', 3);
+
+        // Validar búsqueda
+        if (empty($search)) {
+            return response()->json(['message' => 'Por favor ingresa un término de búsqueda.'], 400);
+        }
+
+        // Obtener la sucursal del usuario logueado
+        $user = auth()->user();
+        $sucursal = $user->sucursales->first();
+
+        if (!$sucursal) {
+            return response()->json(['message' => 'El usuario no tiene una sucursal asignada.'], 403);
+        }
+
+        // Construir nombre de la semana
+        $nombreSemana = 'PEDIDOS SUCURSAL ' . $sucursal->id;
+
+        // Buscar la semana correspondiente
+        $semana = Semana::whereRaw('LOWER(nombre) = ?', [strtolower($nombreSemana)])->first();
+
+        if (!$semana) {
+            return response()->json([]); // No se encontró semana, retornar vacío
+        }
+
+        // Buscar pedidos asociados a esa semana
+        $pedidos = Pedido::where('id_semana', $semana->id)
+            ->where(function ($query) use ($search) {
+                $query->where('id', 'like', '%' . $search . '%')
+                    ->orWhere('nombre', 'like', '%' . $search . '%');
+            })
+            ->limit($limit)
+            ->get();
+
+        return response()->json($pedidos);
+    }
+
+    
+    
 }

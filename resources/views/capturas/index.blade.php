@@ -41,6 +41,9 @@
                 </table>
             </div>
         </div>
+
+        <!-- Modal de agregar o modificar foto -->
+        <!-- Modal para agregar o modificar foto -->
         <!-- Modal para agregar o modificar fotos -->
         <div class="modal fade" id="fotoModal" tabindex="-1" aria-labelledby="fotoModalLabel" aria-hidden="true">
             <div class="modal-dialog">

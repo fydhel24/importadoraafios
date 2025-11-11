@@ -135,12 +135,12 @@ class UserController extends Controller
     {
         $request->validate([
             'old_password' => 'required',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:8|confirmed',
             'password_confirmation' => 'required',
         ], [
             'old_password.required' => 'La contraseña actual es obligatoria.',
             'password.required' => 'La nueva contraseña es obligatoria.',
-            'password.min' => 'La nueva contraseña debe tener al menos 6 caracteres.',
+            'password.min' => 'La nueva contraseña debe tener al menos 8 caracteres.',
             'password.confirmed' => 'La confirmación de la nueva contraseña no coincide.',
         ]);
 

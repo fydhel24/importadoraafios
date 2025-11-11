@@ -59,7 +59,7 @@
 
         <!-- Tabla de productos -->
         <div class="card shadow-lg border-0 mt-4" style="border-radius: 15px;">
-            <div class="card-header linear-gradient-nuevo text-white"
+            <div class="card-header bg-gradient-blue text-white"
                 style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
                 <h3 class="card-title"><i class="fas fa-box-open"></i> Productos Registrados</h3>
             </div>
@@ -177,8 +177,8 @@
                             // Agregar botón de editar si el usuario tiene permiso
                             @can('productos.edit')
                                 actions += `
-                                    <a href="/productos/${row.id}/edit" class="btn btn-action-edit btn-sm" title="Editar">
-                                        <i class="fas fa-edit"></i>
+                                    <a href="/productos/${row.id}/edit" class="btn btn-gradient-success btn-sm">
+                                        <i class="fas fa-edit"></i> Editar
                                     </a>
                                 `;
                             @endcan
@@ -189,8 +189,8 @@
                                     <form action="/productos/${row.id}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-action-delete btn-sm" title="Eliminar">
-                                            <i class="fas fa-trash-alt"></i>
+                                        <button type="submit" class="btn btn-gradient-danger btn-sm">
+                                            <i class="fas fa-power-off"></i> Desactivar
                                         </button>
                                     </form>
                                 `;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AuditoriaDetalle;
 use App\Models\Producto;
 use App\Models\Foto;
 use App\Models\Categoria;
@@ -13,6 +14,7 @@ use App\Models\Cupo;
 use App\Models\Inventario;
 use App\Models\Pedido;
 use App\Models\Semana;
+use App\Models\StockLog;
 use App\Models\Venta;
 use Carbon\Carbon;
 use Codedge\Fpdf\Fpdf\Fpdf;
@@ -237,7 +239,7 @@ class ProductoController extends Controller
         $producto->estado_producto = 'inactivo';
         $producto->save();
 
-        return redirect()->route('productos.index')->with('success', 'Producto eliminado exitosamente.');
+        return redirect()->route('productos.index')->with('success', 'Producto desactivado exitosamente.');
     }
 
     public function destroyiamge(Foto $foto)
@@ -397,37 +399,18 @@ class ProductoController extends Controller
             ? $request->file('foto_comprobante')->store('fotos', 'public')
             : null;
 
-        $hoy = Carbon::now();
-        $numeroSemana = $hoy->weekOfYear;
-        $anio = $hoy->year;
-
-        // Buscar una semana con fecha dentro de la semana actual
-        $inicioSemana = $hoy->copy()->startOfWeek();
-        $finSemana = $hoy->copy()->endOfWeek();
-
-        $semana = Semana::whereBetween('fecha', [$inicioSemana, $finSemana])->first();
-
-        if (!$semana) {
-            // Crear una nueva semana si no existe
-            $semana = Semana::create([
-                'nombre' => 'Semana ' . $numeroSemana . ' - ' . $anio,
-                'fecha' => $hoy->toDateString(),
-            ]);
-        }
-
-        $id_semana = $semana->id;
         // Get the last ID of the week
         /* $ultimaSemana = Semana::latest('id')->first();
         $id_semana = $ultimaSemana ? $ultimaSemana->id : null; */
         // Usar la semana 
-        /* $semanaFija = Semana::find(102);
+        $semanaFija = Semana::find(102);
         if (!$semanaFija) {
             return response()->json([
                 'error' => 'No se encontró la semana.'
             ], 404);
         }
         $id_semana = $semanaFija->id;
- */
+
 
         // Create the pedido
         $dataToStore = array_merge($request->all(), [
@@ -664,7 +647,7 @@ class ProductoController extends Controller
         // Configurar encabezado del PDF
         $pdf->SetFont('Arial', 'B', 16);
         $pdf->SetTextColor(0, 51, 102); // Color azul oscuro para el encabezado
-        $pdf->Cell(0, 10, 'REPORTE DE PRODUCTOS - IMPORTADORA AFIOS', 0, 1, 'C');
+        $pdf->Cell(0, 10, 'REPORTE DE PRODUCTOS - IMPORTADORA MIRANDA', 0, 1, 'C');
         $pdf->Ln(10); // Salto de línea
         $pdf->Line(10, $pdf->GetY(), 280, $pdf->GetY()); // Línea horizontal
         $pdf->Ln(5); // Salto de línea para separación
@@ -797,9 +780,18 @@ class ProductoController extends Controller
         }
 
         // Obtener las sucursales
-        $sucursales = Producto::with('inventarios')->get()->pluck('inventarios')->flatten()->unique('id_sucursal')->sortBy('id_sucursal')->pluck('id_sucursal');
-        // Obtener las sucursales (con nombre)
-        $sucurnombre = Sucursale::all();
+        /*  $sucursales = Producto::with('inventarios')->get()->pluck('inventarios')->flatten()->unique('id_sucursal')->sortBy('id_sucursal')->pluck('id_sucursal');
+        $sucurnombre = Sucursale::all(); */
+        // Obtener solo la sucursal con id 1
+        $sucursales = Producto::with('inventarios')->get()
+            ->pluck('inventarios')
+            ->flatten()
+            ->where('id_sucursal', 1) // Solo sucursal 1
+            ->unique('id_sucursal')
+            ->pluck('id_sucursal');
+
+        $sucurnombre = Sucursale::where('id', 1)->get();
+
         // Registrar las sucursales obtenidas
         Log::info('Sucursales obtenidas:', $sucursales->toArray());
 
@@ -866,10 +858,19 @@ class ProductoController extends Controller
                 ->make(true);
         }
 
-        // Obtener las sucursales
-        $sucursales = Producto::with('inventarios')->get()->pluck('inventarios')->flatten()->unique('id_sucursal')->sortBy('id_sucursal')->pluck('id_sucursal');
-        // Obtener las sucursales (con nombre)
-        $sucurnombre = Sucursale::all();
+        // Obtener todas las sucursales
+        /* $sucursales = Producto::with('inventarios')->get()->pluck('inventarios')->flatten()->unique('id_sucursal')->sortBy('id_sucursal')->pluck('id_sucursal');
+        $sucurnombre = Sucursale::all(); */
+        // Obtener solo la sucursal con id 1
+        $sucursales = Producto::with('inventarios')->get()
+            ->pluck('inventarios')
+            ->flatten()
+            ->where('id_sucursal', 1) // Solo sucursal 1
+            ->unique('id_sucursal')
+            ->pluck('id_sucursal');
+
+        $sucurnombre = Sucursale::where('id', 1)->get();
+
         // Obtener todas las categorías
         $categorias = Categoria::all();
         // Registrar las sucursales obtenidas
@@ -877,6 +878,7 @@ class ProductoController extends Controller
 
         return view('productos.stockedit', compact('startDate', 'endDate', 'sucursales', 'sucurnombre', 'categorias'));
     }
+
     public function updateStock(Request $request)
     {
         // Validar los datos recibidos
@@ -886,64 +888,90 @@ class ProductoController extends Controller
             'new_value' => 'required|numeric|min:0',
         ]);
 
-        // Buscar el producto
         $producto = Producto::find($request->product_id);
 
         // Intentar encontrar el inventario de este producto en la sucursal especificada
         $inventario = $producto->inventarios()->where('id_sucursal', $request->sucursal_id)->first();
 
-        // Obtener el usuario autenticado
         $user = auth()->user();
+
         if ($inventario) {
-            // Si el inventario existe, actualizar el stock
-            $inventario->cantidad = $request->new_value;
-            $inventario->id_user = $user->id;  // Guardar el usuario que realizó la actualización
-            $inventario->updated_at = now();  // Actualizar la fecha de la última modificación
-            $inventario->save();
+            $valorAnterior = $inventario->cantidad;
 
+            // Solo registrar si hubo un cambio
+            if ($valorAnterior != $request->new_value) {
+                // Actualizar el stock
+                $inventario->cantidad = $request->new_value;
+                $inventario->id_user = $user->id;
+                $inventario->updated_at = now();
+                $inventario->save();
 
-            // Responder con éxito
+                // Registrar log de stock
+                StockLog::create([
+                    'producto_id' => $producto->id,
+                    'sucursal_id' => $request->sucursal_id,
+                    'valor_anterior' => $valorAnterior,
+                    'valor_nuevo' => $request->new_value,
+                    'usuario_id' => $user->id,
+                ]);
+            }
+
             return response()->json(['success' => true]);
         } else {
             // Si el inventario no existe, crear uno nuevo
             $producto->inventarios()->create([
                 'id_sucursal' => $request->sucursal_id,
                 'cantidad' => $request->new_value,
-                'id_user' => $user->id, // Guardar el usuario que realiza la creación
-                'created_at' => now(),  // Asegurarse de que la fecha de creación se guarde
-                'updated_at' => now(),  // Asegurarse de que la fecha de actualización se guarde
+                'id_user' => $user->id,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
 
-            // Responder con éxito
+            // Registrar log también para nuevo inventario (valor anterior = 0)
+            StockLog::create([
+                'producto_id' => $producto->id,
+                'sucursal_id' => $request->sucursal_id,
+                'valor_anterior' => 0,
+                'valor_nuevo' => $request->new_value,
+                'usuario_id' => $user->id,
+            ]);
+
             return response()->json(['success' => true]);
         }
     }
     public function updateAlmacenStock(Request $request)
     {
-        // Validar los datos recibidos
         $validated = $request->validate([
             'product_id' => 'required|exists:productos,id',
             'new_value' => 'required|numeric|min:0',
         ]);
 
-        // Buscar el producto
         $producto = Producto::find($request->product_id);
 
         if ($producto) {
-            // Actualizar el stock del producto
-            $producto->stock = $request->new_value;
-            $producto->save();
+            $valorAnterior = $producto->stock;
+            $nuevoValor = $request->new_value;
 
-            // Responder con éxito
+            // Solo si cambia el valor
+            if ($valorAnterior != $nuevoValor) {
+                $producto->stock = $nuevoValor;
+                $producto->save();
+
+                // Registrar log para stock en almacén
+                StockLog::create([
+                    'producto_id' => $producto->id,
+                    'sucursal_id' => null, // Almacén
+                    'valor_anterior' => $valorAnterior,
+                    'valor_nuevo' => $nuevoValor,
+                    'usuario_id' => auth()->id(),
+                ]);
+            }
+
             return response()->json(['success' => true]);
         }
 
-        // Si no se encontró el producto
         return response()->json(['success' => false, 'message' => 'Producto no encontrado']);
     }
-
-
-
 
     public function generatePdf(Request $request)
     {
@@ -1084,11 +1112,6 @@ class ProductoController extends Controller
             'no_destacados' => $productosNoDestacados
         ]);
     }
-
-
-
-
-
     public function obtenerProductoPorId($id)
     {
         $producto = Producto::with(['categoria', 'marca', 'tipo', 'cupo', 'fotos', 'precioProductos', 'inventarios'])->find($id);
@@ -1098,5 +1121,488 @@ class ProductoController extends Controller
         $producto->precio_extra = $producto->precioProductos->first()->precio_extra ?? 0;
         $producto->stock_sucursal_1 = $producto->inventarios()->where('id_sucursal', 1)->sum('cantidad') ?? 0;
         return response()->json($producto);
+    }
+
+
+
+    public function formulariosucursal1(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'ci' => 'required|string|max:255',
+            'celular' => 'required|string|max:255',
+            'destino' => 'required|string|max:255',
+            'direccion' => 'required|string|max:255',
+            'estado' => 'required|string|max:255',
+            'cantidad_productos' => 'required|integer',
+            'detalle' => 'nullable|string',
+            'productos' => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    if (!is_string($value)) {
+                        $fail('The ' . $attribute . ' must be a string.');
+                        return;
+                    }
+                    try {
+                        json_decode($value, true, 512, JSON_THROW_ON_ERROR);
+                    } catch (JsonException $e) {
+                        $fail('The ' . $attribute . ' must be a valid JSON string.');
+                    }
+                },
+            ],
+            'monto_deposito' => 'required|numeric',
+            'codigo' => 'nullable|string|max:50', // Agregamos el nuevo campo
+            'monto_enviado_pagado' => 'required|numeric',
+            'foto_comprobante' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+            'id_usuario' => 'nullable|integer',
+        ]);
+
+        // Handle 'null' string for id_usuario
+        if ($request->input('id_usuario') === 'null') {
+            $request->merge(['id_usuario' => null]);
+        }
+
+        // Decode the JSON string to an array
+        $productos = json_decode($request->input('productos'), true);
+
+        if (!is_array($productos)) {
+            throw new \InvalidArgumentException('Invalid JSON format for productos');
+        }
+
+        // Inicializamos el array de nombres de productos
+        $productosNombres = [];
+
+        // Recorremos los productos para obtener sus nombres
+        foreach ($productos as $producto) {
+            // Verificar si 'id_producto' está presente y es numérico
+            if (isset($producto['id_producto']) && is_numeric($producto['id_producto'])) {
+                // Si 'id_producto' es numérico, obtenemos el nombre del producto
+                $productoNombre = Producto::find($producto['id_producto'])->nombre ?? 'Producto no encontrado';
+                $productosNombres[] = $productoNombre;
+            } else {
+                // Si no es un id_producto válido (como una cadena como '167W' o '2 POWERB MAGNETIC'),
+                // usamos directamente el valor de producto (que se espera sea un nombre o código)
+                $productosNombres[] = strtoupper($producto['id_producto']);
+            }
+        }
+
+        // Unimos los nombres de los productos con comas
+        $productosString = implode(', ', $productosNombres);
+
+        // Store the photo if exists
+        $fotoPath = $request->file('foto_comprobante')
+            ? $request->file('foto_comprobante')->store('fotos', 'public')
+            : null;
+
+        // Get the last ID of the week
+        /* $ultimaSemana = Semana::latest('id')->first();
+        $id_semana = $ultimaSemana ? $ultimaSemana->id : null; */
+        // Usar la semana 
+        $semanaFija = Semana::find(157);
+        if (!$semanaFija) {
+            return response()->json([
+                'error' => 'No se encontró la semana.'
+            ], 404);
+        }
+        $id_semana = $semanaFija->id;
+
+
+        // Create the pedido
+        $dataToStore = array_merge($request->all(), [
+            'foto_comprobante' => $fotoPath,
+            'fecha' => now(),
+            'id_semana' => $id_semana,
+            'productos' => $productosString, // Agregamos el string de nombres de productos
+            'codigo' => $request->input('codigo')
+        ]);
+
+        $pedido = Pedido::create($dataToStore);
+
+        // Verify that each product exists before inserting into pedido_producto
+        foreach ($productos as $producto) {
+            $product = Producto::find($producto['id_producto']);
+            if (!$product) {
+                throw new \InvalidArgumentException('Product does not exist.');
+            }
+
+            PedidoProducto::create([
+                'id_pedido' => $pedido->id,
+                'id_producto' => $producto['id_producto'],
+                'cantidad' => $producto['cantidad'],
+                'precio' => $producto['precio'],
+                'id_usuario' => $request->input('id_usuario'), // Can be null
+                'fecha' => now(),
+            ]);
+        }
+
+        // Return JSON response
+        return response()->json([
+            'success' => true,
+            'message' => $pedido->id,
+            'pedido' => $pedido,
+            'codigo' => $pedido->codigo, // Agregamos el campo en la respuesta
+
+            'productos' => $pedido->productos, // Assuming you have defined the relationship in the Pedido model
+        ], 201);
+    }
+    public function formulariosucursal2(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'ci' => 'required|string|max:255',
+            'celular' => 'required|string|max:255',
+            'destino' => 'required|string|max:255',
+            'direccion' => 'required|string|max:255',
+            'estado' => 'required|string|max:255',
+            'cantidad_productos' => 'required|integer',
+            'detalle' => 'nullable|string',
+            'productos' => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    if (!is_string($value)) {
+                        $fail('The ' . $attribute . ' must be a string.');
+                        return;
+                    }
+                    try {
+                        json_decode($value, true, 512, JSON_THROW_ON_ERROR);
+                    } catch (JsonException $e) {
+                        $fail('The ' . $attribute . ' must be a valid JSON string.');
+                    }
+                },
+            ],
+            'monto_deposito' => 'required|numeric',
+            'codigo' => 'nullable|string|max:50', // Agregamos el nuevo campo
+            'monto_enviado_pagado' => 'required|numeric',
+            'foto_comprobante' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+            'id_usuario' => 'nullable|integer',
+        ]);
+
+        // Handle 'null' string for id_usuario
+        if ($request->input('id_usuario') === 'null') {
+            $request->merge(['id_usuario' => null]);
+        }
+
+        // Decode the JSON string to an array
+        $productos = json_decode($request->input('productos'), true);
+
+        if (!is_array($productos)) {
+            throw new \InvalidArgumentException('Invalid JSON format for productos');
+        }
+
+        // Inicializamos el array de nombres de productos
+        $productosNombres = [];
+
+        // Recorremos los productos para obtener sus nombres
+        foreach ($productos as $producto) {
+            // Verificar si 'id_producto' está presente y es numérico
+            if (isset($producto['id_producto']) && is_numeric($producto['id_producto'])) {
+                // Si 'id_producto' es numérico, obtenemos el nombre del producto
+                $productoNombre = Producto::find($producto['id_producto'])->nombre ?? 'Producto no encontrado';
+                $productosNombres[] = $productoNombre;
+            } else {
+                // Si no es un id_producto válido (como una cadena como '167W' o '2 POWERB MAGNETIC'),
+                // usamos directamente el valor de producto (que se espera sea un nombre o código)
+                $productosNombres[] = strtoupper($producto['id_producto']);
+            }
+        }
+
+        // Unimos los nombres de los productos con comas
+        $productosString = implode(', ', $productosNombres);
+
+        // Store the photo if exists
+        $fotoPath = $request->file('foto_comprobante')
+            ? $request->file('foto_comprobante')->store('fotos', 'public')
+            : null;
+
+        // Get the last ID of the week
+        /* $ultimaSemana = Semana::latest('id')->first();
+        $id_semana = $ultimaSemana ? $ultimaSemana->id : null; */
+        // Usar la semana 
+        $semanaFija = Semana::find(158);
+        if (!$semanaFija) {
+            return response()->json([
+                'error' => 'No se encontró la semana.'
+            ], 404);
+        }
+        $id_semana = $semanaFija->id;
+
+
+        // Create the pedido
+        $dataToStore = array_merge($request->all(), [
+            'foto_comprobante' => $fotoPath,
+            'fecha' => now(),
+            'id_semana' => $id_semana,
+            'productos' => $productosString, // Agregamos el string de nombres de productos
+            'codigo' => $request->input('codigo')
+        ]);
+
+        $pedido = Pedido::create($dataToStore);
+
+        // Verify that each product exists before inserting into pedido_producto
+        foreach ($productos as $producto) {
+            $product = Producto::find($producto['id_producto']);
+            if (!$product) {
+                throw new \InvalidArgumentException('Product does not exist.');
+            }
+
+            PedidoProducto::create([
+                'id_pedido' => $pedido->id,
+                'id_producto' => $producto['id_producto'],
+                'cantidad' => $producto['cantidad'],
+                'precio' => $producto['precio'],
+                'id_usuario' => $request->input('id_usuario'), // Can be null
+                'fecha' => now(),
+            ]);
+        }
+
+        // Return JSON response
+        return response()->json([
+            'success' => true,
+            'message' => $pedido->id,
+            'pedido' => $pedido,
+            'codigo' => $pedido->codigo, // Agregamos el campo en la respuesta
+
+            'productos' => $pedido->productos, // Assuming you have defined the relationship in the Pedido model
+        ], 201);
+    }
+    public function formulariosucursal3(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'ci' => 'required|string|max:255',
+            'celular' => 'required|string|max:255',
+            'destino' => 'required|string|max:255',
+            'direccion' => 'required|string|max:255',
+            'estado' => 'required|string|max:255',
+            'cantidad_productos' => 'required|integer',
+            'detalle' => 'nullable|string',
+            'productos' => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    if (!is_string($value)) {
+                        $fail('The ' . $attribute . ' must be a string.');
+                        return;
+                    }
+                    try {
+                        json_decode($value, true, 512, JSON_THROW_ON_ERROR);
+                    } catch (JsonException $e) {
+                        $fail('The ' . $attribute . ' must be a valid JSON string.');
+                    }
+                },
+            ],
+            'monto_deposito' => 'required|numeric',
+            'codigo' => 'nullable|string|max:50', // Agregamos el nuevo campo
+            'monto_enviado_pagado' => 'required|numeric',
+            'foto_comprobante' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+            'id_usuario' => 'nullable|integer',
+        ]);
+
+        // Handle 'null' string for id_usuario
+        if ($request->input('id_usuario') === 'null') {
+            $request->merge(['id_usuario' => null]);
+        }
+
+        // Decode the JSON string to an array
+        $productos = json_decode($request->input('productos'), true);
+
+        if (!is_array($productos)) {
+            throw new \InvalidArgumentException('Invalid JSON format for productos');
+        }
+
+        // Inicializamos el array de nombres de productos
+        $productosNombres = [];
+
+        // Recorremos los productos para obtener sus nombres
+        foreach ($productos as $producto) {
+            // Verificar si 'id_producto' está presente y es numérico
+            if (isset($producto['id_producto']) && is_numeric($producto['id_producto'])) {
+                // Si 'id_producto' es numérico, obtenemos el nombre del producto
+                $productoNombre = Producto::find($producto['id_producto'])->nombre ?? 'Producto no encontrado';
+                $productosNombres[] = $productoNombre;
+            } else {
+                // Si no es un id_producto válido (como una cadena como '167W' o '2 POWERB MAGNETIC'),
+                // usamos directamente el valor de producto (que se espera sea un nombre o código)
+                $productosNombres[] = strtoupper($producto['id_producto']);
+            }
+        }
+
+        // Unimos los nombres de los productos con comas
+        $productosString = implode(', ', $productosNombres);
+
+        // Store the photo if exists
+        $fotoPath = $request->file('foto_comprobante')
+            ? $request->file('foto_comprobante')->store('fotos', 'public')
+            : null;
+
+        // Get the last ID of the week
+        /* $ultimaSemana = Semana::latest('id')->first();
+        $id_semana = $ultimaSemana ? $ultimaSemana->id : null; */
+        // Usar la semana 
+        $semanaFija = Semana::find(159);
+        if (!$semanaFija) {
+            return response()->json([
+                'error' => 'No se encontró la semana.'
+            ], 404);
+        }
+        $id_semana = $semanaFija->id;
+
+
+        // Create the pedido
+        $dataToStore = array_merge($request->all(), [
+            'foto_comprobante' => $fotoPath,
+            'fecha' => now(),
+            'id_semana' => $id_semana,
+            'productos' => $productosString, // Agregamos el string de nombres de productos
+            'codigo' => $request->input('codigo')
+        ]);
+
+        $pedido = Pedido::create($dataToStore);
+
+        // Verify that each product exists before inserting into pedido_producto
+        foreach ($productos as $producto) {
+            $product = Producto::find($producto['id_producto']);
+            if (!$product) {
+                throw new \InvalidArgumentException('Product does not exist.');
+            }
+
+            PedidoProducto::create([
+                'id_pedido' => $pedido->id,
+                'id_producto' => $producto['id_producto'],
+                'cantidad' => $producto['cantidad'],
+                'precio' => $producto['precio'],
+                'id_usuario' => $request->input('id_usuario'), // Can be null
+                'fecha' => now(),
+            ]);
+        }
+
+        // Return JSON response
+        return response()->json([
+            'success' => true,
+            'message' => $pedido->id,
+            'pedido' => $pedido,
+            'codigo' => $pedido->codigo, // Agregamos el campo en la respuesta
+
+            'productos' => $pedido->productos, // Assuming you have defined the relationship in the Pedido model
+        ], 201);
+    }
+    public function formulariosucursal4(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'ci' => 'required|string|max:255',
+            'celular' => 'required|string|max:255',
+            'destino' => 'required|string|max:255',
+            'direccion' => 'required|string|max:255',
+            'estado' => 'required|string|max:255',
+            'cantidad_productos' => 'required|integer',
+            'detalle' => 'nullable|string',
+            'productos' => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    if (!is_string($value)) {
+                        $fail('The ' . $attribute . ' must be a string.');
+                        return;
+                    }
+                    try {
+                        json_decode($value, true, 512, JSON_THROW_ON_ERROR);
+                    } catch (JsonException $e) {
+                        $fail('The ' . $attribute . ' must be a valid JSON string.');
+                    }
+                },
+            ],
+            'monto_deposito' => 'required|numeric',
+            'codigo' => 'nullable|string|max:50', // Agregamos el nuevo campo
+            'monto_enviado_pagado' => 'required|numeric',
+            'foto_comprobante' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+            'id_usuario' => 'nullable|integer',
+        ]);
+
+        // Handle 'null' string for id_usuario
+        if ($request->input('id_usuario') === 'null') {
+            $request->merge(['id_usuario' => null]);
+        }
+
+        // Decode the JSON string to an array
+        $productos = json_decode($request->input('productos'), true);
+
+        if (!is_array($productos)) {
+            throw new \InvalidArgumentException('Invalid JSON format for productos');
+        }
+
+        // Inicializamos el array de nombres de productos
+        $productosNombres = [];
+
+        // Recorremos los productos para obtener sus nombres
+        foreach ($productos as $producto) {
+            // Verificar si 'id_producto' está presente y es numérico
+            if (isset($producto['id_producto']) && is_numeric($producto['id_producto'])) {
+                // Si 'id_producto' es numérico, obtenemos el nombre del producto
+                $productoNombre = Producto::find($producto['id_producto'])->nombre ?? 'Producto no encontrado';
+                $productosNombres[] = $productoNombre;
+            } else {
+                // Si no es un id_producto válido (como una cadena como '167W' o '2 POWERB MAGNETIC'),
+                // usamos directamente el valor de producto (que se espera sea un nombre o código)
+                $productosNombres[] = strtoupper($producto['id_producto']);
+            }
+        }
+
+        // Unimos los nombres de los productos con comas
+        $productosString = implode(', ', $productosNombres);
+
+        // Store the photo if exists
+        $fotoPath = $request->file('foto_comprobante')
+            ? $request->file('foto_comprobante')->store('fotos', 'public')
+            : null;
+
+        // Get the last ID of the week
+        /* $ultimaSemana = Semana::latest('id')->first();
+        $id_semana = $ultimaSemana ? $ultimaSemana->id : null; */
+        // Usar la semana 
+        $semanaFija = Semana::find(160);
+        if (!$semanaFija) {
+            return response()->json([
+                'error' => 'No se encontró la semana.'
+            ], 404);
+        }
+        $id_semana = $semanaFija->id;
+
+
+        // Create the pedido
+        $dataToStore = array_merge($request->all(), [
+            'foto_comprobante' => $fotoPath,
+            'fecha' => now(),
+            'id_semana' => $id_semana,
+            'productos' => $productosString, // Agregamos el string de nombres de productos
+            'codigo' => $request->input('codigo')
+        ]);
+
+        $pedido = Pedido::create($dataToStore);
+
+        // Verify that each product exists before inserting into pedido_producto
+        foreach ($productos as $producto) {
+            $product = Producto::find($producto['id_producto']);
+            if (!$product) {
+                throw new \InvalidArgumentException('Product does not exist.');
+            }
+
+            PedidoProducto::create([
+                'id_pedido' => $pedido->id,
+                'id_producto' => $producto['id_producto'],
+                'cantidad' => $producto['cantidad'],
+                'precio' => $producto['precio'],
+                'id_usuario' => $request->input('id_usuario'), // Can be null
+                'fecha' => now(),
+            ]);
+        }
+
+        // Return JSON response
+        return response()->json([
+            'success' => true,
+            'message' => $pedido->id,
+            'pedido' => $pedido,
+            'codigo' => $pedido->codigo, // Agregamos el campo en la respuesta
+
+            'productos' => $pedido->productos, // Assuming you have defined the relationship in the Pedido model
+        ], 201);
     }
 }

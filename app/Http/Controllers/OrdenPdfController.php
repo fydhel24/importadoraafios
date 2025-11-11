@@ -84,7 +84,7 @@ class OrdenPdfController extends Controller
 
         $pdf->SetXY($x, $y);
         $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(85, $cellHeight, utf8_decode("IMPORTADORA AFIOS  #" . strtoupper($row['id'])), 1, 0, 'C');
+        $pdf->Cell(85, $cellHeight, utf8_decode("IMPORTADORA MIRANDA  #" . strtoupper($row['id'])), 1, 0, 'C');
         $pdf->Cell(15, $cellHeight, utf8_decode(strtoupper($row['codigo'])), 1, 1, 'C');
         $pdf->SetX($x);
         $nameFontSize = $this->getFontSize($row['nombre'], 20); // Ajusta el tamaño del nombre
@@ -597,9 +597,9 @@ class OrdenPdfController extends Controller
         // Título
         $pdf->SetFont('Helvetica', 'B', 30); // Cambiar a Helvetica y aumentar tamaño a 30
         $pdf->SetTextColor(0, 51, 102); // Color azul oscuro
-        $pdf->Cell(0, 10, utf8_decode("IMPORTADORA AFIOS"), 0, 1, 'C');
+        $pdf->Cell(0, 10, utf8_decode("IMPORTADORA MIRANDA"), 0, 1, 'C');
         $pdf->SetFont('Arial', 'I', 10);
-        $pdf->Cell(0, 10, utf8_decode("Novedad del mercado,siempre con los nuevos modelos."), 0, 1, 'C');
+        $pdf->Cell(0, 10, utf8_decode("A un Click del Producto que necesitas"), 0, 1, 'C');
 
         $pdf->Ln(10);
 
@@ -802,13 +802,13 @@ class OrdenPdfController extends Controller
                 ->where('id_sucursal', 1)
                 ->first();
 
-            if (!$inventario || $inventario->cantidad < $cantidadSolicitada) {
-                $cantidadDisponible = $inventario ? $inventario->cantidad : 0;
-                return response()->json([
-                    'error' => "Stock insuficiente para el producto: " . strtoupper($producto->nombre ?? 'SIN NOMBRE') .
-                        ". Solicitado: {$cantidadSolicitada}, Disponible: {$cantidadDisponible}"
-                ], 400);
-            }
+            // if (!$inventario || $inventario->cantidad < $cantidadSolicitada) {
+            //     $cantidadDisponible = $inventario ? $inventario->cantidad : 0;
+            //     return response()->json([
+            //         'error' => "Stock insuficiente para el producto: " . strtoupper($producto->nombre ?? 'SIN NOMBRE') .
+            //             ". Solicitado: {$cantidadSolicitada}, Disponible: {$cantidadDisponible}"
+            //     ], 400);
+            // }
 
             $inventario->cantidad -= $cantidadSolicitada;
             $inventario->save();
@@ -847,9 +847,9 @@ class OrdenPdfController extends Controller
         $pdf->Ln(25);
         $pdf->SetFont('Helvetica', 'B', 30);
         $pdf->SetTextColor(0, 51, 102);
-        $pdf->Cell(0, 10, utf8_decode("IMPORTADORA AFIOS"), 0, 1, 'C');
+        $pdf->Cell(0, 10, utf8_decode("IMPORTADORA MIRANDA"), 0, 1, 'C');
         $pdf->SetFont('Arial', 'I', 10);
-        $pdf->Cell(0, 10, utf8_decode("Novedad del mercado,siempre con los nuevos modelos."), 0, 1, 'C');
+        $pdf->Cell(0, 10, utf8_decode("A un Click del Producto que necesitas"), 0, 1, 'C');
 
         $pdf->Ln(10);
 
@@ -1007,9 +1007,9 @@ class OrdenPdfController extends Controller
         // Título
         $pdf->SetFont('Helvetica', 'B', 30); // Cambiar a Helvetica y aumentar tamaño a 30
         $pdf->SetTextColor(0, 51, 102); // Color azul oscuro
-        $pdf->Cell(0, 10, utf8_decode("IMPORTADORA AFIOS"), 0, 1, 'C');
+        $pdf->Cell(0, 10, utf8_decode("IMPORTADORA MIRANDA"), 0, 1, 'C');
         $pdf->SetFont('Arial', 'I', 10);
-        $pdf->Cell(0, 10, utf8_decode("Novedad del mercado,siempre con los nuevos modelos."), 0, 1, 'C');
+        $pdf->Cell(0, 10, utf8_decode("A un Click del Producto que necesitas"), 0, 1, 'C');
 
         $pdf->Ln(10);
 
@@ -1091,7 +1091,7 @@ class OrdenPdfController extends Controller
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'inline; filename="pedidos.pdf"');
     }
-    public function generarPdfFichasSeleccionadas(Request $request)
+    /*  public function generarPdfFichasSeleccionadas(Request $request)
     {
         $envioIds = $request->input('pedidos', []); // Este contiene ids de envíos
 
@@ -1183,6 +1183,133 @@ class OrdenPdfController extends Controller
             $pdf->MultiCell($cellWidth - 10, $lineHeight, utf8_decode('N°: ' . strtoupper($counter++)), 0, 'M');
             //$pdf->MultiCell($cellWidth - 10, $lineHeight, utf8_decode('N° PEDIDO: ' . strtoupper($pedido->id)), 0, 'M');
 
+
+            $pdf->SetFont('Arial', 'B', 14);
+            $pdf->SetXY($x + 5, $pdf->GetY());
+            $pdf->MultiCell($cellWidth - 10, $lineHeight, utf8_decode('N° DE PEDIDO: ' . strtoupper($pedido->id)), 0, 'L');
+
+            $pdf->SetFont('Arial', 'B', 10);
+            $pdf->SetXY($x + 5, $pdf->GetY());
+            $pdf->MultiCell($cellWidth - 10, $lineHeight, utf8_decode('NOMBRE: ' . strtoupper($pedido->nombre ?? 'N/A')), 0, 'L');
+
+            $pdf->SetFont('Arial', 'B', 12);
+            $pdf->SetXY($x + 5, $pdf->GetY());
+            $pdf->MultiCell($cellWidth - 10, $lineHeight, utf8_decode('CI: ' . strtoupper($pedido->ci ?? 'N/A')), 0, 'L');
+
+            $pdf->SetXY($x + 5, $pdf->GetY());
+            $pdf->MultiCell($cellWidth - 10, $lineHeight, utf8_decode('CEL: ' . strtoupper($pedido->celular ?? 'N/A')), 0, 'L');
+
+            $pdf->SetXY($x + 5, $pdf->GetY());
+            $pdf->MultiCell($cellWidth - 10, $lineHeight, utf8_decode('DESTINO: ' . strtoupper($pedido->destino ?? 'N/A')), 0, 'L');
+
+            $pdf->SetXY($x + 5, $pdf->GetY());
+            $pdf->MultiCell($cellWidth - 10, $lineHeight, utf8_decode('ESTADO: ' . strtoupper($pedido->estado ?? 'N/A')), 0, 'L');
+
+            $cellCount++;
+            $cellsInPage++;
+        }
+
+        return response($pdf->Output('S', 'fichas_pedidos.pdf'))
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'inline; filename="fichas_pedidos.pdf"');
+    } */
+
+    public function generarPdfFichasSeleccionadas(Request $request)
+    {
+        $envioIds = $request->input('pedidos', []); // Este contiene ids de envíos
+
+        // Validar si hay envíos seleccionados
+        if (empty($envioIds)) {
+            return response()->json(['error' => 'No se seleccionaron envíos.'], 400);
+        }
+
+        // Crear un array para almacenar todos los productos
+        $pedidosProductos = collect(); // colección vacía
+
+        // Recorremos cada id_envio recibido
+        foreach ($envioIds as $envioId) {
+            // Buscar el envío y cargar el pedido relacionado
+            $envio = \App\Models\Envio::with('pedido')->find($envioId);
+
+            // Validar si el envío o el pedido existen
+            if ($envio && $envio->pedido) {
+                // Obtener los productos del pedido
+                $productos = \App\Models\PedidoProducto::with('pedido')
+                    ->where('id_pedido', $envio->pedido->id)
+                    ->get();
+
+                // Agregarlos a la colección principal
+                $pedidosProductos = $pedidosProductos->merge($productos);
+
+                // Si no hay productos, agregamos un objeto "falso" solo con el pedido
+                if ($productos->isEmpty()) {
+                    // Creamos un objeto stdClass con solo el pedido
+                    $fake = new \stdClass();
+                    $fake->pedido = $envio->pedido;
+                    $fake->id_pedido = $envio->pedido->id;
+                    $pedidosProductos->push($fake);
+                }
+            }
+        }
+
+        // Ya no validamos si $pedidosProductos->isEmpty()
+
+        // Ordenar por id_pedido
+        $pedidosProductos = $pedidosProductos->sortBy(function ($producto) {
+            return $producto->pedido->id;
+        });
+        // Agrupar por id_pedido
+        $pedidosUnicos = $pedidosProductos->groupBy('id_pedido');
+
+        // Crear el PDF
+        $pdf = new FPDF('P', 'mm', [216, 330]); // Tamaño oficio
+        $pdf->AddPage();
+        $pdf->SetFont('Arial', 'B', 12);
+
+        $margin = 10;
+        $pageWidth = 216 - 2 * $margin;
+        $pageHeight = 330 - 2 * $margin;
+
+        $numColumns = 2;
+        $numRows = 3;
+        $cellWidth = $pageWidth / $numColumns;
+        $cellHeight = $pageHeight / $numRows;
+
+        $logoPath = public_path('images/logo_gris-3.png');
+
+        $cellCount = 0;
+        $cellsInPage = 0;
+        $cellPerPage = $numColumns * $numRows;
+
+        $counter = 1; // Inicializar el contador
+        foreach ($pedidosUnicos as $pedidoId => $productosDelPedido) {
+            $pedido = $productosDelPedido->first()->pedido;
+
+            if (!$pedido) continue;
+
+            if ($cellsInPage >= $cellPerPage) {
+                $pdf->AddPage();
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY($margin, $margin);
+                $cellsInPage = 0;
+                $cellCount = 0;
+            }
+
+            $x = $margin + ($cellCount % $numColumns) * $cellWidth;
+            $y = $margin + floor($cellCount / $numColumns) * $cellHeight;
+
+            // Marco exterior
+            $pdf->Rect($x, $y, $cellWidth, $cellHeight);
+
+            // Marca de agua
+            $pdf->Image($logoPath, $x, $y, $cellWidth, $cellHeight, 'PNG');
+
+            $pdf->SetXY($x + 5, $y + 5);
+            $pdf->SetFont('Arial', 'B', 16);
+
+            $lineHeight = 10;
+
+            $pdf->MultiCell($cellWidth - 10, $lineHeight, utf8_decode('N°: ' . strtoupper($counter++)), 0, 'M');
 
             $pdf->SetFont('Arial', 'B', 14);
             $pdf->SetXY($x + 5, $pdf->GetY());
@@ -1318,13 +1445,13 @@ class OrdenPdfController extends Controller
 
         // Cabecera
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS"), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);
-        $pdf->Cell(0, 4, utf8_decode("Novedad del mercado,siempre con los nuevos modelos."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("A un Click del Producto que Necesita!!"), 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);
-        $pdf->Cell(0, 4, utf8_decode("Telefono: 79133123"), 0, 1, 'C');
-        // $pdf->Cell(0, 4, utf8_decode("Direccion: Caparazon Mall Center, Planta Baja, Local Nro29"), 0, 1, 'C');
-        // $pdf->Cell(0, 4, utf8_decode($pedido['nombre_sucursal']), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("Telefono: 70621016"), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("Direccion: Caparazon Mall Center, Planta Baja, Local Nro29"), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode($pedido['nombre_sucursal']), 0, 1, 'C');
         $pdf->Cell(0, 4, utf8_decode("Fecha: " . date('Y/m/d H:i:s')), 0, 1, 'C');
 
 
@@ -1352,7 +1479,7 @@ class OrdenPdfController extends Controller
         $pdf->Cell(0, 4, utf8_decode("Cliente: " . $pedido['nombre_cliente']), 0, 1, 'L');
         $pdf->Cell(0, 4, utf8_decode("CI / NIT: " . $pedido['nit']), 0, 1, 'L'); // Mostrar el CI aquí
         $pdf->Cell(0, 4, utf8_decode("Fecha: " . $pedido['fecha']), 0, 1, 'L');
-        // $pdf->Cell(0, 4, utf8_decode("Vendedor: " . $pedido['nombre_vendedor']), 0, 1, 'L');
+        $pdf->Cell(0, 4, utf8_decode("Vendedor: " . $pedido['nombre_vendedor']), 0, 1, 'L');
 
         /*    vendedor quiero que se vea aqui */
 
@@ -1436,127 +1563,108 @@ class OrdenPdfController extends Controller
     }
     public function datos($pdf, $pedido, $marginTop)
     {
-        $pdf->SetY($marginTop);
+        // Reducir margen superior al mínimo
+        $pdf->SetY($marginTop - 2);
 
-        // Logo centrado
-        $pdf->Image('images/logo.png', 30, 5, 20, 20, 'PNG'); // Ajusta la ruta y tamaño del logo
-        $pdf->Ln(17); // Espacio debajo del logo
+        // Logo centrado más arriba y pequeño
+        $pdf->Image('images/logo.png', 30, 2, 18, 18, 'PNG');
+        $pdf->Ln(15);
 
-        // Cabecera
+        // Cabecera compacta
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);
-        $pdf->Cell(0, 4, utf8_decode("Novedad del mercado,siempre con los nuevos modelos."), 0, 1, 'C');
-        $pdf->SetFont('Arial', '', 8);
-        $pdf->Cell(0, 4, utf8_decode("Telefono: 79133123"), 0, 1, 'C');
-        // $pdf->Cell(0, 4, utf8_decode("Direccion: Caparazon Mall Center, Planta Baja, Local Nro29"), 0, 1, 'C');
-        // $pdf->Cell(0, 4, utf8_decode($pedido['nombre_sucursal']), 0, 1, 'C');
-        $pdf->Cell(0, 4, utf8_decode("Fecha: " . date('Y/m/d H:i:s')), 0, 1, 'C');
-
-
-        $pdf->Cell(0, 4, utf8_decode("Codigo de Venta:IMP" . date('Y/m/d')), 0, 1, 'C');
+        $pdf->Cell(0, 3, utf8_decode("A un Click del Producto que Necesita!!"), 0, 1, 'C');
+        $pdf->Cell(0, 3, utf8_decode("Fecha: " . date('Y/m/d H:i:s')), 0, 1, 'C');
 
         // Línea separadora
-        $pdf->Ln(2);
-        $pdf->Cell(0, 0, '', 'T'); // Línea horizontal
-        $pdf->Ln(2);
+        $pdf->Ln(1);
+        $pdf->Cell(0, 0, '', 'T');
+        $pdf->Ln(1);
 
-
+        // Forma de pago
         $pdf->SetFont('Arial', '', 8);
-        $pdf->Cell(0, 4, utf8_decode("Forma de Pago: " . $pedido['forma_pago']), 0, 1, 'C');
-        $pdf->SetFont('Arial', 'B', 8);
-        // Información de la factura
+        $pdf->Cell(0, 3, utf8_decode("Forma de Pago: " . $pedido['forma_pago']), 0, 1, 'C');
+
+        // Título
         $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(0, 4, utf8_decode("COMPRA DE PRODUCTO"), 0, 1, 'C');
-        $pdf->Cell(0, 4, utf8_decode(strtoupper($pedido['garantia'])), 0, 1, 'C');
 
         // Línea separadora
-        $pdf->Ln(2);
-        $pdf->Cell(0, 0, '', 'T'); // Línea horizontal
-        $pdf->Ln(2);
+        $pdf->Ln(1);
+        $pdf->Cell(0, 0, '', 'T');
+        $pdf->Ln(1);
 
-        $pdf->Cell(0, 4, utf8_decode("Cliente: " . $pedido['nombre_cliente']), 0, 1, 'L');
-        $pdf->Cell(0, 4, utf8_decode("CI / NIT: " . $pedido['nit']), 0, 1, 'L'); // Mostrar el CI aquí
-        $pdf->Cell(0, 4, utf8_decode("Fecha: " . $pedido['fecha']), 0, 1, 'L');
-        // $pdf->Cell(0, 4, utf8_decode("Vendedor: " . $pedido['nombre_vendedor']), 0, 1, 'L');
+        // Información de cliente y vendedor
+        $pdf->SetFont('Arial', '', 7);
+        $halfWidth = 35;
 
-        /*    vendedor quiero que se vea aqui */
+        $pdf->Cell($halfWidth, 4, utf8_decode("Cliente: " . $pedido['nombre_cliente']), 0, 0, 'L');
+        $pdf->Cell($halfWidth, 4, utf8_decode("CI / NIT: " . $pedido['nit']), 0, 1, 'L');
 
+        $pdf->Cell($halfWidth, 4, utf8_decode("Fecha: " . $pedido['fecha']), 0, 0, 'L');
+        $pdf->Cell($halfWidth, 4, utf8_decode("Vendedor: " . $pedido['nombre_vendedor']), 0, 1, 'L');
 
         // Línea separadora
-        $pdf->Ln(2);
-        $pdf->Cell(0, 0, '', 'T'); // Línea horizontal
-        $pdf->Ln(2);
+        $pdf->Ln(1);
+        $pdf->Cell(0, 0, '', 'T');
+        $pdf->Ln(1);
 
         // Detalle de productos
-        $pdf->SetFont('Arial', 'B', 8);
-        // Cabecera
-        $pdf->Cell(10, 6, utf8_decode("Cant."), 1, 0, 'C');
-        $pdf->Cell(30, 6, utf8_decode("Desc."), 1, 0, 'C');
-        $pdf->Cell(10, 6, utf8_decode("P.Unit"), 1, 0, 'C');
-        $pdf->Cell(15, 6, utf8_decode("Subtotal"), 1, 1, 'C');
+        $pdf->SetFont('Arial', 'B', 7);
+        $pdf->Cell(10, 5, utf8_decode("Cant."), 1, 0, 'C');
+        $pdf->Cell(30, 5, utf8_decode("Desc."), 1, 0, 'C');
+        $pdf->Cell(10, 5, utf8_decode("P.Unit"), 1, 0, 'C');
+        $pdf->Cell(15, 5, utf8_decode("Subtotal"), 1, 1, 'C');
 
         // Productos
         $pdf->SetFont('Arial', '', 6);
-
         if (is_array($pedido['productos'])) {
             foreach ($pedido['productos'] as $producto) {
                 $pdf->Cell(10, 4, utf8_decode($producto['cantidad']), 1, 0, 'C');
 
-                // Ajustar el tamaño de la fuente según la longitud del nombre del producto
                 $nombre = utf8_decode($producto['nombre'] ?? 'Sin descripción');
-                $maxCaracteres = 20; // Número de caracteres antes de reducir el tamaño
-
+                $maxCaracteres = 20;
                 if (strlen($nombre) > $maxCaracteres) {
-                    $pdf->SetFont('Arial', '', 5); // Disminuye el tamaño de fuente si el texto es muy largo
+                    $pdf->SetFont('Arial', '', 5);
                 } else {
-                    $pdf->SetFont('Arial', '', 7); // Tamaño normal
+                    $pdf->SetFont('Arial', '', 6);
                 }
 
                 $pdf->Cell(30, 4, $nombre, 1, 0, 'L');
-
                 $pdf->SetFont('Arial', '', 6);
-                $pdf->Cell(10, 4, utf8_decode($producto['precio']), 1, 0, 'R'); // Precio unitario
-                $pdf->Cell(15, 4, utf8_decode($producto['total']), 1, 1, 'R'); // Total del producto
+                $pdf->Cell(10, 4, utf8_decode($producto['precio']), 1, 0, 'R');
+                $pdf->Cell(15, 4, utf8_decode($producto['total']), 1, 1, 'R');
             }
         } else {
-            $pdf->Cell(0, 10, 'No hay productos disponibles.', 0, 1, 'C');
+            $pdf->Cell(0, 6, 'No hay productos disponibles.', 0, 1, 'C');
         }
 
         // Línea separadora
-        $pdf->Ln(2);
-        $pdf->Cell(0, 0, '', 'T'); // Línea horizontal
-        $pdf->Ln(2);
+        $pdf->Ln(1);
+        $pdf->Cell(0, 0, '', 'T');
+        $pdf->Ln(1);
 
-        // Subtotal y total
-        $pdf->SetFont('Arial', 'B', 8);
+        // Totales compactos
+        $pdf->SetFont('Arial', 'B', 7);
+        $subtotal = array_sum(array_column($pedido['productos'] ?? [], 'total'));
+        $precio_original = $subtotal + ($pedido['descuento'] ?? 0);
 
-        // Calculate the subtotal
-        $subtotal = array_sum(array_column($pedido['productos'], 'total')) + $pedido['descuento'];
-
-        $pdf->Cell(0, 4, utf8_decode("PRECIO ORIGINAL: " . number_format($subtotal, 2)), 0, 1, 'R');
-        $pdf->Cell(0, 4, utf8_decode("DESCUENTO: " . number_format($pedido['descuento'], 2)), 0, 1, 'R');
-        $pdf->Cell(0, 4, utf8_decode("TOTAL: " . number_format($pedido['subtotal'], 2)), 0, 1, 'R');
-        $pdf->Cell(0, 4, utf8_decode("PAGADO: " . number_format($pedido['pagado'], 2)), 0, 1, 'R');
-        $pdf->Cell(0, 4, utf8_decode("CAMBIO: " . number_format($pedido['cambio'], 2)), 0, 1, 'R');
-        $pdf->Cell(0, 4, utf8_decode("MONTO A PAGAR: " . number_format($pedido['monto_a_pagar'], 2)), 0, 1, 'R');
+        $pdf->Cell(0, 3, utf8_decode("PRECIO ORIGINAL: " . number_format($precio_original, 2)), 0, 1, 'R');
+        $pdf->Cell(0, 3, utf8_decode("DESCUENTO: " . number_format($pedido['descuento'], 2)), 0, 1, 'R');
+        $pdf->Cell(0, 3, utf8_decode("TOTAL: " . number_format($pedido['subtotal'], 2)), 0, 1, 'R');
+        $pdf->Cell(0, 3, utf8_decode("PAGADO: " . number_format($pedido['pagado'], 2)), 0, 1, 'R');
+        $pdf->Cell(0, 3, utf8_decode("CAMBIO: " . number_format($pedido['cambio'], 2)), 0, 1, 'R');
+        $pdf->Cell(0, 3, utf8_decode("MONTO A PAGAR: " . number_format($pedido['monto_a_pagar'], 2)), 0, 1, 'R');
 
         // Línea separadora
-        $pdf->Ln(2);
-        $pdf->Cell(0, 0, '', 'T'); // Línea horizontal
-        $pdf->Ln(2);
+        $pdf->Ln(1);
+        $pdf->Cell(0, 0, '', 'T');
+        $pdf->Ln(1);
 
-        // Subtotal y total
+        // Mensaje final compacto
         $pdf->SetFont('Arial', 'B', 7);
-        $pdf->Cell(0, 4, utf8_decode("NOTA IMPORTANTE"), 0, 1, 'C');
-        $pdf->SetFont('Arial', '', 7);
-        $pdf->Cell(0, 4, utf8_decode("Los productos en PROMOCION NO CUENTAN CON NINGUN"), 0, 1, 'C');
-        $pdf->Cell(0, 4, utf8_decode("TIPO DE GARANTIA, ya que se encuentran en precio de REMATE."), 0, 1, 'C');
-        $pdf->Cell(0, 4, utf8_decode("Si su producto llegara a contar con algun defecto de FABRICA"), 0, 1, 'C');
-        $pdf->Cell(0, 4, utf8_decode("si quiere cambiarlo debe cancelar el producto al precio normal."), 0, 1, 'C');
-        $pdf->Cell(0, 4, utf8_decode("y debe traerlo como maximo al dia siguente por la tarde con su"), 0, 1, 'C');
-        $pdf->Cell(0, 4, utf8_decode("NOTA DE VENTA de lo contrario"), 0, 1, 'C');
-        $pdf->Cell(0, 4, utf8_decode("pierde derecho a cualquier RECLAMO"), 0, 1, 'C');
-        $pdf->Cell(0, 4, utf8_decode("GRACIAS POR SU COMPRA :D !!!"), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("¡GRACIAS POR SU COMPRA!"), 0, 1, 'C');
+        $pdf->Ln(1);
     }
 }

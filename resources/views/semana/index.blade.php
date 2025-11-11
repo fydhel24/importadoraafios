@@ -14,12 +14,16 @@
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
+                            <span id="card_title">
+                                {{ __('Semanas') }}
+                            </span>
+
                             <div class="float-right">
                                 @can('semanas.create')
                                     {{-- Permiso para crear semanas --}}
-                                    <a href="{{ route('semanas.create') }}" class="btn btn-action-extra"
+                                    <a href="{{ route('semanas.create') }}" class="btn btn-primary btn-sm float-right"
                                         data-placement="left">
-                                        {{ __('Crear Semana') }}
+                                        {{ __('Create New') }}
                                     </a>
                                 @endcan
                             </div>
@@ -31,64 +35,57 @@
                         </div>
                     @endif
 
-                    <div class="card shadow-lg border-0" style="border-radius: 15px;">
-                        <div class="card-header linear-gradient-nuevo text-white"
-                            style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                            <h3 class="card-title"><i class="fas fa-user-tag"></i>Registro de Semanas</h3>
-                        </div>
-                        <div class="card-body" style="background: #f8f9fa;">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
-                                    <thead class="linear-gradient">
+                    <div class="card-body bg-white">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="thead">
+                                    <tr>
+                                        <th>No</th>
+
+                                        <th>Nombre</th>
+                                        <th>Fecha</th>
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($semanas as $semana)
                                         <tr>
-                                            <th>No</th>
+                                            <td>{{ ++$i }}</td>
 
-                                            <th>Nombre</th>
-                                            <th>Fecha</th>
+                                            <td>{{ $semana->nombre }}</td>
+                                            <td>{{ $semana->fecha }}</td>
 
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($semanas as $semana)
-                                            <tr>
-                                                <td>{{ ++$i }}</td>
+                                            <td>
+                                                <form action="{{ route('semanas.destroy', $semana->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary"
+                                                        href="{{ route('semanas.show', $semana->id) }}">
+                                                        <i class="fa fa-fw fa-eye"></i> {{ __('Show') }}
+                                                    </a>
 
-                                                <td>{{ $semana->nombre }}</td>
-                                                <td>{{ $semana->fecha }}</td>
-
-                                                <td>
-                                                    <form action="{{ route('semanas.destroy', $semana->id) }}"
-                                                        method="POST">
-                                                        <a class="btn btn-action-extra btn-sm " title="Ver"
-                                                            href="{{ route('semanas.show', $semana->id) }}">
-                                                            <i class="fa fa-fw fa-eye"></i>
+                                                    @can('semanas.edit')
+                                                        {{-- Permiso para editar semanas --}}
+                                                        <a class="btn btn-sm btn-success"
+                                                            href="{{ route('semanas.edit', $semana->id) }}">
+                                                            <i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}
                                                         </a>
+                                                    @endcan
 
-                                                        @can('semanas.edit')
-                                                            {{-- Permiso para editar semanas --}}
-                                                            <a class="btn btn-action-edit btn-sm" title="Editar"
-                                                                href="{{ route('semanas.edit', $semana->id) }}" >
-                                                                <i class="fa fa-fw fa-edit"></i>
-                                                            </a>
-                                                        @endcan
-
-                                                        @can('semanas.destroy')
-                                                            {{-- Permiso para eliminar semanas --}}
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-action-delete btn-sm" title="Eliminar"
-                                                                onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;">
-                                                                <i class="fa fa-fw fa-trash"></i>
-                                                            </button>
-                                                        @endcan
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                                    @can('semanas.destroy')
+                                                        {{-- Permiso para eliminar semanas --}}
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm"
+                                                            onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;">
+                                                            <i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}
+                                                        </button>
+                                                    @endcan
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

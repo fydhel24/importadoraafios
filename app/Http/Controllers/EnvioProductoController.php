@@ -422,7 +422,7 @@ class EnvioProductoController extends Controller
 
         return view('envios.solicitud', compact('usuariosDestino', 'sucursales'));
     } */
-   public function solicitudes(Request $request)
+    public function solicitudes(Request $request)
     {
         if ($request->ajax()) {
             $query = InventarioHistorial::with([
@@ -486,9 +486,9 @@ class EnvioProductoController extends Controller
                     // Verificamos si el usuario autenticado es administrador
                     if (auth()->user()->hasAnyRole(['Admin', 'Vendedor Antiguo'])) {
                         if ($historial->estado == 'pendiente') {
-                            $botones .= '<button class="btn btn-action-extra btn-sm confirmar-envio" data-id="' . $historial->id . '">Confirmar Envío</button>';
-                            $botones .= '<a href="' . route('envios.edit', $historial->id) . '" class="btn btn-action-edit btn-sm" title="Editar"><i class="fas fa-edit"></i></a>';
-                            $botones .= '<button  class="btn btn-action-delete btn-sm eliminar-solicitud " title="Eliminar" data-id="' . $historial->id . '"><i class="fas fa-trash-alt"></i></button>';
+                            $botones .= '<button class="btn btn-success btn-sm confirmar-envio" data-id="' . $historial->id . '">Confirmar Envío</button>';
+                            $botones .= '<a href="' . route('envios.edit', $historial->id) . '" class="btn btn-primary btn-sm ml-2">Editar</a>';
+                            $botones .= '<button class="btn btn-danger btn-sm eliminar-solicitud ml-2" data-id="' . $historial->id . '">Eliminar</button>';
                         }
                     }
 
@@ -1104,7 +1104,7 @@ class EnvioProductoController extends Controller
 
         // Configuración del encabezado
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
         $pdf->Ln(2); // Espacio adicional
         $pdf->Cell(0, 0, '', 'T'); // Línea separadora
         $pdf->Ln(2);
@@ -1175,7 +1175,7 @@ class EnvioProductoController extends Controller
 
         // Configuración del título y encabezado
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
 
         // Línea separadora
         $pdf->Ln(2);
@@ -1255,7 +1255,7 @@ class EnvioProductoController extends Controller
 
         // Configuración del título y encabezado
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
 
         // Línea separadora
         $pdf->Ln(2);
@@ -1385,7 +1385,7 @@ class EnvioProductoController extends Controller
 
         // Encabezado principal
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
         $pdf->Ln(2);
         $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(0, 4, utf8_decode("REPORTE DE ENVÍOS"), 0, 1, 'C');
@@ -1647,7 +1647,7 @@ class EnvioProductoController extends Controller
 
         // Encabezado principal
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
         $pdf->Ln(2);
         $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(0, 4, utf8_decode("REPORTE DE MAL ESTADO CONFIRMADO"), 0, 1, 'C');
@@ -1986,7 +1986,7 @@ class EnvioProductoController extends Controller
 
         // Encabezado principal
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
         $pdf->Ln(2);
         $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(0, 4, utf8_decode("REPORTE DE ENVIO AL ALMACEN "), 0, 1, 'C');

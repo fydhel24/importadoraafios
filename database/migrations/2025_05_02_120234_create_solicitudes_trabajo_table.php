@@ -20,7 +20,7 @@ return new class extends Migration
         });
 
         // 👇 Aquí lo importante
-        //DB::statement("ALTER TABLE solicitudes_trabajo AUTO_INCREMENT = 1000");
+        DB::statement("ALTER TABLE solicitudes_trabajo AUTO_INCREMENT = 1000");
     }
 
 

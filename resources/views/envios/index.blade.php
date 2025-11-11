@@ -73,13 +73,10 @@
             transform: translateY(1px);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
         .bg-rosado {
-            background-color: #ff69b4;
-            /* Color rosado */
-            color: white;
-            /* Texto en blanco */
-        }
+    background-color: #ff69b4; /* Color rosado */
+    color: white; /* Texto en blanco */
+}
     </style>
     <!-- DataTables CSS -->
 
@@ -302,29 +299,25 @@
 
     </div>
 
-    <div class="card shadow-lg border-0" style="border-radius: 15px;">
-        <div class="card-header linear-gradient-nuevo text-white"
-            style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-            <h3 class="card-title"><i class="fas fa-user-tag"></i> Envios Registradas</h3>
+    <div class="card-body">
+        <i class="fas fa-table"></i> Envios Registradas
+        <div class="table-responsive">
+            <table id="enviosTable" class="table table-striped table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Producto</th>
+                        <th>Origen</th>
+                        <th>Destino</th>
+                        <th>Cantidad</th>
+                        <th>Usuario Origen</th>
+                        <th>Usuario Destino</th>
+                        <th>Fecha de Envío</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
-        <div class="card-body" style="background: #f8f9fa;">
-            <div class="table-responsive">
-                <table id="enviosTable" class="table table-bordered table-striped">
-                    <thead class="linear-gradient">
-                        <tr>
-                            <th>Producto</th>
-                            <th>Origen</th>
-                            <th>Destino</th>
-                            <th>Cantidad</th>
-                            <th>Usuario Origen</th>
-                            <th>Usuario Destino</th>
-                            <th>Fecha de Envío</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-        </div>
+    </div>
     </div>
 
     <!-- Modal para enviar a Sucursal 1 -->

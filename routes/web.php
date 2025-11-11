@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuditoriaController;
+use App\Http\Controllers\AnalisisPredictivoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ConsultasModifi;
@@ -50,6 +52,9 @@ use App\Http\Controllers\SalesController;
 use App\Http\Controllers\CapturaController;
 use App\Http\Controllers\CarpetaController;
 use App\Http\Controllers\RecojoController;
+use App\Http\Controllers\PagoEmpleadoController;
+use App\Http\Controllers\ProdRegistroMalEstadoController;
+//use App\Http\Controllers\AuditoriaController;
 //SolicitudTrabajoController
 use App\Http\Controllers\SolicitudTrabajoController;
 //rutas de roles
@@ -685,6 +690,51 @@ Route::get('/carpetas/{carpeta}/search-realtime', [CarpetaController::class, 'se
 Route::get('/envioscuaderno/sinmarcados', [EnvioController::class, 'indexsinmarcados'])->name('envioscuaderno.indexsinmarcados');
       Route::get('/data-table/envios/sinmarcados', [EnvioController::class, 'dataTablesinmarcados'])->name('envios.dataTablesinmarcados');
 
+//08/08/2025
+
+Route::get('/envios/search-pedido/sucursal', [EnvioController::class, 'searchPedidoSucursal'])->name('envios.searchPedidoSucursal');
+
+//rutas pagos empleados
+    Route::get('/planilla-pagos', [PagoEmpleadoController::class, 'index'])->name('pagos.index');
+    Route::post('/pagos/realizar', [PagoEmpleadoController::class, 'realizarPago'])->name('pagos.realizar');
+    Route::get('/pagos/pdf/all', [PagoEmpleadoController::class, 'generateAllPdf'])->name('pagos.generateAllPdf');
+    Route::get('/pagos/pdf/single', [PagoEmpleadoController::class, 'generatePdf'])->name('pagos.generatePdf');
+
+
+//rutas230925lupe
+// Route::resource('registros', RegistroMalEstadoController::class);
+
+Route::resource('registros', ProdRegistroMalEstadoController::class)
+    ->names([
+        'index'   => 'prodregistromalestado.index',
+        'create'  => 'prodregistromalestado.create',
+        'store'   => 'prodregistromalestado.store',
+        'show'    => 'prodregistromalestado.show',
+        'edit'    => 'prodregistromalestado.edit',
+        'update'  => 'prodregistromalestado.update',
+        'destroy' => 'prodregistromalestado.destroy',
+    ]);
+
+// Rutas adicionales para actualizar checkboxes y campos en tiempo real
+Route::put('prodregistromalestado/{id}/toggle-check', [ProdRegistroMalEstadoController::class, 'toggleCheck'])->name('prodregistromalestado.toggleCheck');
+Route::put('prodregistromalestado/{id}/update-descripcion', [ProdRegistroMalEstadoController::class, 'updateDescripcion'])->name('prodregistromalestado.updateDescripcion');
+Route::put('prodregistromalestado/{id}/update-estado', [ProdRegistroMalEstadoController::class, 'updateEstado'])->name('prodregistromalestado.updateEstado');
+
+Route::get('/productos/buscar', [ProdRegistroMalEstadoController::class, 'buscarProductos'])
+    ->name('productos.buscar');
+    
+//rutaauditoriastock091025
+Route::get('/reportes/auditoria-stock', [AuditoriaController::class, 'auditoriaStock'])->name('report.stocklog');
+    Route::get('/reportes/auditoria-stock/data', [AuditoriaController::class, 'auditoriaStockData'])->name('report.stocklog.data');
+    Route::post('/auditoria/detalle/store', [AuditoriaController::class, 'guardarDetalle'])->name('auditoria.detalle.store');
+    Route::get('/inventario/stock-actual', [AuditoriaController::class, 'getStockActual'])->name('inventario.stock_actual');
+    Route::get('/auditorias/inventario', [AuditoriaController::class, 'vistaAuditorias'])->name('auditorias.inventario');
+    Route::get('auditorias/data', [AuditoriaController::class, 'getAuditoriasData'])->name('auditorias.data');
+    Route::post('/auditorias/{id}/solucionar', [AuditoriaController::class, 'marcarComoSolucionado'])->name('auditorias.solucionar');
+    
+    //rutas de analisispredictivo
+    Route::get('/analisis', [AnalisisPredictivoController::class, 'index'])->name('analisis.index');
+    Route::get('/analisis/search-ajax', [AnalisisPredictivoController::class, 'searchProductos'])->name('analisis.searchProductos');
 
 });
 
@@ -704,11 +754,21 @@ Route::get('/dashboard/home', [VentaController::class, 'estadisticasHome'])->nam
 
 ///06/07/2025
     Route::get('/ventarecojomoderno', [RecojoController::class, 'indexmoderno'])->name('recojo.index');
+    Route::get('/ventarecojomodernocola', [RecojoController::class, 'indexmodernocola'])->name('recojo.index');
     
     Route::get('/ventas/detalles/{id}', [RecojoController::class, 'verid']);
 
     Route::get('/ventas/detalles', [RecojoController::class, 'ver']);
     Route::post('/fin/moderno', [ControlController::class, 'finmodernoantiguo'])->name('control.finmoderno');
+    Route::get('/ventas/modernocola', [RecojoController::class, 'getVentasModernas']);
+    Route::get('/recojoproductocola/{idventa}', function ($idventa) {
+        return view('ventarecojo.pro1', ['idventa' => $idventa]);
+    })->name('recojoproducto.pro');
 
 // Rutas de autenticación
 Auth::routes();
+use App\Http\Controllers\VerificacionController;
+
+Route::get('/verificacion', [VerificacionController::class, 'index'])->name('verificacion.index');
+Route::get('/verificacion/validar', [VerificacionController::class, 'validar'])->name('verificacion.validar');
+

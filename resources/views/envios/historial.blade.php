@@ -47,32 +47,27 @@
     </div>
 
 
-    <div class="card shadow-lg border-0" style="border-radius: 15px;">
-        <div class="card-header linear-gradient-nuevo text-white"
-            style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-            <h3 class="card-title"><i class="fas fa-user-tag"></i> Registro de Envios</h3>
-        </div>
-        <div class="card-body" style="background: #f8f9fa;">
+    <div class="card-body">
+        <i class="fas fa-table"></i> Registro de Envios
 
-
-            <div class="table-responsive">
-                <table id="historialTable" class="table table-bordered table-striped">
-                    <thead class="linear-gradient">
-                        <tr>
-                            <th>ID</th>
-                            <th>Sucursal Origen</th>
-                            <th>Sucursal Destino</th>
-                            <th>Usuario Origen</th>
-                            <th>Usuario Destino</th>
-                            <th>Fecha de Envío</th>
-                            <th>Estado</th>
-                            <th>Producto</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
+        <div class="table-responsive">
+            <table id="historialTable" class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Sucursal Origen</th>
+                        <th>Sucursal Destino</th>
+                        <th>Usuario Origen</th>
+                        <th>Usuario Destino</th>
+                        <th>Fecha de Envío</th>
+                        <th>Estado</th>
+                        <th>Producto</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
+    </div>
     </div>
 @endsection
 

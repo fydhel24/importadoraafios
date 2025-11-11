@@ -99,7 +99,7 @@ public function generateIndividualPdf($id)
         // Encabezado elegante con título centralizado
         $pdf->SetFont('Arial', 'B', 16);
         $pdf->SetTextColor(30, 144, 255); // Azul moderno
-        $pdf->Cell(0, 8, "Importadora Afios", 0, 1, 'C');
+        $pdf->Cell(0, 8, "Importadora Miranda", 0, 1, 'C');
         $pdf->Ln(10);
 
         // Información de la caja

@@ -119,7 +119,7 @@
             @csrf
             {{-- linea de codigo agregado --}}
             <input type="hidden" id="sucursal_id" value="{{ auth()->user()->sucursal_id }}">
-
+<input type="hidden" name="venta_token" value="{{ session('venta_token') }}">
 
             <div id="carritoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="carritoModalLabel"
                 aria-hidden="true">

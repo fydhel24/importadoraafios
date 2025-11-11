@@ -18,7 +18,7 @@
         @endcan
 
         <div class="card shadow-lg border-0" style="border-radius: 15px;">
-            <div class="card-header linear-gradient-nuevo text-white"
+            <div class="card-header bg-gradient-blue text-white"
                 style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
                 <h3 class="card-title"><i class="fas fa-user-tag"></i> Roles Registrados</h3>
             </div>
@@ -40,7 +40,7 @@
                                     <td>{{ $role->name }}</td>
                                     <td class="text-center">
                                         @can('roles.edit')
-                                            <a href="{{ route('roles.edit', $role) }}" class="btn btn-action-edit btn-sm"
+                                            <a href="{{ route('roles.edit', $role) }}" class="btn btn-gradient-success btn-sm"
                                                 title="Editar rol" style="border-radius: 5px;">
                                                 <i class="fas fa-edit"></i>
                                             </a>
@@ -51,7 +51,7 @@
                                                 style="display:inline;" id="delete-form-{{ $role->id }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" class="btn btn-action-delete btn-sm"
+                                                <button type="button" class="btn btn-gradient-danger btn-sm"
                                                     onclick="confirmDelete({{ $role->id }})" title="Eliminar rol"
                                                     style="border-radius: 5px;">
                                                     <i class="fas fa-trash-alt"></i>

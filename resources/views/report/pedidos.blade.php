@@ -4,12 +4,11 @@
 
 @section('content')
 <div class="container">
-    <div class="card shadow-lg border-0" style="border-radius: 15px;">
-            <div class="card-header linear-gradient-nuevo text-white"
-                style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                <h3 class="card-title"><i class="fas fa-user-tag"></i> Reportes de Pedidos</h3>
-            </div>
-            <div class="card-body" style="background: #f8f9fa;">
+    <div class="card shadow mb-4">
+        <div class="card-header bg-primary text-white">
+            <h2 class="card-title">Reporte de Pedidos - Importadora Miranda</h2>
+        </div>
+        <div class="card-body">
             <!-- Formulario de Filtro de Fecha -->
             <form action="{{ route('reporte.pedidos') }}" method="GET" class="form-inline mb-4">
                 <div class="form-group mr-3">
@@ -41,8 +40,8 @@
 
             <!-- Tabla de Detalles de Pedidos -->
             <div class="table-responsive">
-                <table id="pedidos-reporte-table" class="table table-bordered table-striped">
-                    <thead class="linear-gradient">
+                <table id="pedidos-reporte-table" class="table table-bordered table-striped table-hover shadow-sm">
+                    <thead class="thead-dark">
                         <tr>
                             <th>Nombre</th>
                             <th>CI</th>
@@ -75,7 +74,31 @@
 </div>
 @endsection
 
-
+@push('css')
+    <style>
+        .card-header {
+            background: linear-gradient(90deg, rgba(75,178,180,1) 0%, rgba(0,15,173,1) 50%, rgba(99,38,190,1) 100%);
+            color: white;
+        }
+        .table thead th {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #f2f2f2;
+        }
+        .form-control {
+            border-radius: 10px;
+        }
+        .btn {
+            border-radius: 20px;
+        }
+        .form-group label {
+            font-size: 14px;
+        }
+    </style>
+@endpush
 
 @push('js')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

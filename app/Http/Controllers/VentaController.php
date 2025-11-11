@@ -603,13 +603,13 @@ class VentaController extends Controller
             $pdf->Image('images/logo.png', 30, 5, 20, 20, 'PNG');
             $pdf->Ln(15);
             $pdf->SetFont('Arial', 'B', 10);
-            $pdf->Cell(0, 5, 'IMPORTADORA AFIOS S.A.', 0, 1, 'C');
+            $pdf->Cell(0, 5, 'IMPORTADORA MIRANDA S.A.', 0, 1, 'C');
             $pdf->SetFont('Arial', '', 8);
-            $pdf->Cell(0, 5, 'Novedad del mercado,siempre con los nuevos modelos.', 0, 1, 'C');
-            $pdf->Cell(0, 5, 'Telefono: 79133123', 0, 1, 'C');
-            // $pdf->Cell(0, 5, 'Direccion: Caparazon Mall Center, Planta Baja, Local Nro29', 0, 1, 'C');
-            // $pdf->Cell(0, 5, 'Sucursal: ' . $venta->sucursal->nombre, 0, 1, 'C');
-            // $pdf->Cell(0, 5, 'Vendedor: ' . $venta->user->name, 0, 1, 'C');
+            $pdf->Cell(0, 5, 'A un Click del Producto que Necesita!!', 0, 1, 'C');
+            $pdf->Cell(0, 5, 'Telefono: 70621016', 0, 1, 'C');
+            $pdf->Cell(0, 5, 'Direccion: Caparazon Mall Center, Planta Baja, Local Nro29', 0, 1, 'C');
+            $pdf->Cell(0, 5, 'Sucursal: ' . $venta->sucursal->nombre, 0, 1, 'C');
+            $pdf->Cell(0, 5, 'Vendedor: ' . $venta->user->name, 0, 1, 'C');
             $pdf->Cell(0, 5, 'Codigo de Venta: IMP' . $venta->id, 0, 1, 'C');
 
             // Línea separadora
@@ -689,103 +689,122 @@ class VentaController extends Controller
     }
 
 
-    public function generarReporteIndividual($id)
+     public function generarReporteIndividual($id)
     {
-        // Buscar la venta por su ID con relaciones
+        // Buscar la venta con relaciones
         $venta = Venta::with('ventaProductos.producto', 'user')->findOrFail($id);
         $pagado = $venta->pagado;
 
-        // Generar PDF con FPDF
-        $pdf = new FPDF('P', 'mm', [80, 200]);
+        // Crear el PDF (tamaño ticket)
+        $pdf = new FPDF('P', 'mm', [80, 120]);
         $pdf->AddPage();
+        $marginTop = 10;
+        $pdf->SetY($marginTop - 2);
 
-        // Datos generales
-        $pdf->Image('images/logo.png', 30, 5, 20, 20, 'PNG');
+        // === CABECERA ===
+        $pdf->Image('images/logo.png', 30, 2, 18, 18, 'PNG');
         $pdf->Ln(15);
-        $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(0, 5, 'IMPORTADORA AFIOS', 0, 1, 'C');
+
+        $pdf->SetFont('Arial', 'B', 9);
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);
-        $pdf->Cell(0, 5, 'Novedad del mercado,siempre con los nuevos modelos.', 0, 1, 'C');
-        $pdf->Cell(0, 5, 'Telefono: 79133123', 0, 1, 'C');
-        // $pdf->Cell(0, 5, 'Direccion: Caparazon Mall Center, Planta Baja, Local Nro29', 0, 1, 'C');
-        // $pdf->Cell(0, 5, 'Sucursal: ' . $venta->sucursal->nombre, 0, 1, 'C');
-        // $pdf->Cell(0, 5, 'Vendedor: ' . $venta->user->name, 0, 1, 'C');
-        $pdf->Cell(0, 5, 'Codigo de Venta: IMP' . $venta->id, 0, 1, 'C');
+        $pdf->Cell(0, 3, utf8_decode("A un Click del Producto que Necesita!!"), 0, 1, 'C');
+        $pdf->Cell(0, 3, utf8_decode("Fecha: " . date('Y/m/d H:i:s')), 0, 1, 'C');
 
         // Línea separadora
-        $pdf->Ln(2);
+        $pdf->Ln(1);
         $pdf->Cell(0, 0, '', 'T');
-        $pdf->Ln(2);
+        $pdf->Ln(1);
 
-        // Nota de Venta
-        $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(0, 5, 'NOTA DE VENTA', 0, 1, 'C');
-        $pdf->Ln(2);
-        $pdf->Cell(0, 0, '', 'T');
-        $pdf->Ln(2);
-
-        // Información del cliente y la venta
+        // Forma de pago
         $pdf->SetFont('Arial', '', 8);
-        $pdf->Cell(0, 5, utf8_decode('Cliente: ' . $venta->nombre_cliente), 0, 1, 'L');
-        $pdf->Cell(0, 5, 'CI / NIT: ' . $venta->ci, 0, 1, 'L');
-        $pdf->Cell(0, 5, 'Fecha: ' . $venta->fecha, 0, 1, 'L');
-        $pdf->Cell(0, 5, 'Forma de Pago: ' . ($venta->tipo_pago), 0, 1, 'L');
+        $pdf->Cell(0, 3, utf8_decode("Forma de Pago: " . $venta->tipo_pago), 0, 1, 'C');
 
-        // Línea separadora
-        $pdf->Ln(5);
-
-        // Encabezado de la tabla de productos
+        // Título del documento
         $pdf->SetFont('Arial', 'B', 8);
-        $pdf->Cell(10, 6, 'Cant.', 1, 0, 'C');
-        $pdf->Cell(25, 6, 'Descripcion', 1, 0, 'C');
-        $pdf->Cell(15, 6, 'P. Unit.', 1, 0, 'C');
-        $pdf->Cell(15, 6, 'Subtotal', 1, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("NOTA DE VENTA"), 0, 1, 'C');
 
-        // Detalle de productos
+        // Línea separadora
+        $pdf->Ln(1);
+        $pdf->Cell(0, 0, '', 'T');
+        $pdf->Ln(1);
+
+        // === INFORMACIÓN DE CLIENTE Y VENDEDOR ===
+        $pdf->SetFont('Arial', '', 7);
+        $halfWidth = 35;
+
+        $pdf->Cell($halfWidth, 4, utf8_decode("Cliente: " . $venta->nombre_cliente), 0, 0, 'L');
+        $pdf->Cell($halfWidth, 4, utf8_decode("CI / NIT: " . $venta->ci), 0, 1, 'L');
+
+        $pdf->Cell($halfWidth, 4, utf8_decode("Fecha: " . $venta->fecha), 0, 0, 'L');
+        $pdf->Cell($halfWidth, 4, utf8_decode("Vendedor: " . $venta->user->name), 0, 1, 'L');
+
+        // Línea separadora
+        $pdf->Ln(1);
+        $pdf->Cell(0, 0, '', 'T');
+        $pdf->Ln(1);
+
+        // === DETALLE DE PRODUCTOS ===
+        $pdf->SetFont('Arial', 'B', 7);
+        $pdf->Cell(10, 5, utf8_decode("Cant."), 1, 0, 'C');
+        $pdf->Cell(30, 5, utf8_decode("Desc."), 1, 0, 'C');
+        $pdf->Cell(10, 5, utf8_decode("P.Unit"), 1, 0, 'C');
+        $pdf->Cell(15, 5, utf8_decode("Subtotal"), 1, 1, 'C');
+
+        $pdf->SetFont('Arial', '', 6);
         $subtotal = 0;
-        foreach ($venta->ventaProductos as $ventaProducto) {
-            $cantidad = $ventaProducto->cantidad;
-            $descripcion = $ventaProducto->producto->nombre;
-            $precioUnitario = $ventaProducto->precio_unitario;
-            $subtotalProducto = $cantidad * $precioUnitario;
+
+        foreach ($venta->ventaProductos as $vp) {
+            $cantidad = $vp->cantidad;
+            $nombre = utf8_decode($vp->producto->nombre ?? 'Sin descripción');
+            $precio = $vp->precio_unitario;
+            $subtotalProducto = $cantidad * $precio;
             $subtotal += $subtotalProducto;
 
+            // Ajuste de tamaño de texto si el nombre es muy largo
+            $maxCaracteres = 20;
+            if (strlen($nombre) > $maxCaracteres) {
+                $pdf->SetFont('Arial', '', 5);
+            } else {
+                $pdf->SetFont('Arial', '', 6);
+            }
 
+            $pdf->Cell(10, 4, $cantidad, 1, 0, 'C');
+            $pdf->Cell(30, 4, $nombre, 1, 0, 'L');
             $pdf->SetFont('Arial', '', 6);
-            $pdf->Cell(10, 6, $cantidad, 1, 0, 'C');
-            $pdf->Cell(25, 6, utf8_decode($descripcion), 1, 0, 'L');
-            $pdf->Cell(15, 6, number_format($precioUnitario, 2), 1, 0, 'R');
-            $pdf->Cell(15, 6, number_format($subtotalProducto, 2), 1, 1, 'R');
+            $pdf->Cell(10, 4, number_format($precio, 2), 1, 0, 'R');
+            $pdf->Cell(15, 4, number_format($subtotalProducto, 2), 1, 1, 'R');
         }
 
-        // Calcular totales
-        $descuento = $venta->descuento ?? 0;
-        $total = $subtotal + $descuento;
-
-        // Mostrar los totales
-        $pdf->Ln(3);
-        $pdf->SetFont('Arial', 'B', 8);
-        $pdf->Cell(0, 5, 'MONTO PAGADO: ' . number_format($pagado, 2), 0, 1, 'R');
-        $pdf->Cell(0, 5, 'PRECIO ORIGINAL: ' . number_format($total, 2), 0, 1, 'R');
-        $pdf->Cell(0, 5, 'DESCUENTO: ' . number_format($descuento, 2), 0, 1, 'R');
-        $pdf->Cell(0, 5, 'SUBTOTAL: ' . number_format($subtotal, 2), 0, 1, 'R');
-        $pdf->Cell(0, 5, 'TOTAL: ' . number_format($subtotal, 2), 0, 1, 'R');
         // Línea separadora
-        $pdf->Ln(5);
+        $pdf->Ln(1);
         $pdf->Cell(0, 0, '', 'T');
-        $pdf->Ln(5);
+        $pdf->Ln(1);
 
-        // Mensaje de advertencia
-        $pdf->SetFont('Arial', '', 6);
-        $pdf->Cell(0, 4, utf8_decode("La empresa no se hace responsable de daños ocasionados "), 0, 1, 'C');
-        $pdf->Cell(0, 4, utf8_decode("por un mal uso de los productos adquiridos."), 0, 1, 'C');
-        $pdf->Cell(0, 4, utf8_decode("Por favor, revise sus productos antes de salir."), 0, 1, 'C');
-        $pdf->Cell(0, 4, utf8_decode("No se permiten cambios ni devoluciones después de la compra."), 0, 1, 'C');
-        $pdf->Cell(0, 4, utf8_decode("Agradecemos su confianza. Si tiene alguna inquietud, estamos aquí para ayudarle."), 0, 1, 'C');
-        $pdf->Cell(0, 4, utf8_decode("GRACIAS POR SU COMPRA!!!"), 0, 1, 'C');
+        // === TOTALES ===
+        $pdf->SetFont('Arial', 'B', 7);
+        $descuento = $venta->descuento ?? 0;
+        $precio_original = $subtotal + $descuento;
+        $cambio = $pagado - $subtotal;
+
+        $pdf->Cell(0, 3, utf8_decode("PRECIO ORIGINAL: " . number_format($precio_original, 2)), 0, 1, 'R');
+        $pdf->Cell(0, 3, utf8_decode("DESCUENTO: " . number_format($descuento, 2)), 0, 1, 'R');
+        $pdf->Cell(0, 3, utf8_decode("TOTAL: " . number_format($subtotal, 2)), 0, 1, 'R');
+        $pdf->Cell(0, 3, utf8_decode("PAGADO: " . number_format($pagado, 2)), 0, 1, 'R');
+        $pdf->Cell(0, 3, utf8_decode("CAMBIO: " . number_format($cambio, 2)), 0, 1, 'R');
+
+        // Línea separadora
+        $pdf->Ln(1);
+        $pdf->Cell(0, 0, '', 'T');
+        $pdf->Ln(1);
+
+        // === MENSAJE FINAL ===
+        $pdf->SetFont('Arial', 'B', 7);
+        $pdf->Cell(0, 4, utf8_decode("¡GRACIAS POR SU COMPRA!"), 0, 1, 'C');
+        $pdf->Ln(1);
 
         // Salida del PDF
-        $pdf->Output('I', 'Reporte_Venta_' . $venta->id . '.pdf');
+        $pdf->Output('I', 'Nota_Venta_' . $venta->id . '.pdf');
         exit;
     }
 
@@ -806,12 +825,12 @@ class VentaController extends Controller
         $pdf->Image('images/logo.png', 30, 5, 20, 20, 'PNG');
         $pdf->Ln(15);
         $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(0, 5, 'IMPORTADORA AFIOS', 0, 1, 'C');
+        $pdf->Cell(0, 5, 'IMPORTADORA MIRANDA S.A.', 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);
-        $pdf->Cell(0, 5, 'Novedad del mercado,siempre con los nuevos modelos.', 0, 1, 'C');
-        $pdf->Cell(0, 5, 'Telefono: 79133123', 0, 1, 'C');
-        // $pdf->Cell(0, 5, 'Direccion: Caparazon Mall Center, Planta Baja, Local Nro29', 0, 1, 'C');
-        // $pdf->Cell(0, 5, 'Sucursal: Sucursal 1 - CAPARAZON MALL CENTER', 0, 1, 'C');
+        $pdf->Cell(0, 5, 'A un Click del Producto que Necesita!!', 0, 1, 'C');
+        $pdf->Cell(0, 5, 'Telefono: 70621016', 0, 1, 'C');
+        $pdf->Cell(0, 5, 'Direccion: Caparazon Mall Center, Planta Baja, Local Nro29', 0, 1, 'C');
+        $pdf->Cell(0, 5, 'Sucursal: Sucursal 1 - CAPARAZON MALL CENTER', 0, 1, 'C');
         $pdf->Cell(0, 5, 'Fecha: ' . now()->format('Y/m/d'), 0, 1, 'C');
         $pdf->Cell(0, 5, 'Codigo de Venta: IMP' . now()->format('Ymd/H:i'), 0, 1, 'C');
         // Línea separadora

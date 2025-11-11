@@ -64,42 +64,34 @@
                 </div>
 
                 <!-- Tabla de Detalles de Ventas -->
-                <div class="card shadow-lg border-0" style="border-radius: 15px;">
-                    <div class="card-header linear-gradient-nuevo text-white"
-                        style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                        <h3 class="card-title"><i class="fas fa-user-tag"></i> Usuarios Registrados</h3>
-                    </div>
-                    <div class="card-body" style="background: #f8f9fa;">
-                        <div class="table-responsive">
-                            <table id="ventas-reporte-table" class="table table-bordered table-striped">
-                                <thead class="linear-gradient">
-                                    <tr>
-                                        <th>Fecha</th>
-                                        <th>Nombre del Cliente</th>
-                                        <th>Costo Total</th>
-                                        <th>Usuario</th>
-                                        <th>Tipo de Pago</th>
-                                        <th>Cantidad</th>
-                                        <th>Productos</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($ventas as $venta)
-                                        <tr>
-                                            <td>{{ $venta->fecha }}</td>
-                                            <td>{{ $venta->nombre_cliente ?? 'N/A' }}</td>
-                                            <td>{{ number_format($venta->costo_total, 2) }} Bs</td>
-                                            <td>{{ $venta->user->name ?? 'N/A' }}</td>
-                                            <td>{{ $venta->tipo_pago ?? 'N/A' }}</td>
-                                            <td>{{ $venta->ventaProductos->sum('cantidad') }}</td>
-                                            <td>{{ $venta->ventaProductos->map(fn($p) => $p->producto->nombre . ' (' . $p->cantidad . ')')->implode(', ') ?? 'N/A' }}
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div class="table-responsive">
+                    <table id="ventas-reporte-table" class="table table-bordered table-hover table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Nombre del Cliente</th>
+                                <th>Costo Total</th>
+                                <th>Usuario</th>
+                                <th>Tipo de Pago</th>
+                                <th>Cantidad</th>
+                                <th>Productos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($ventas as $venta)
+                                <tr>
+                                    <td>{{ $venta->fecha }}</td>
+                                    <td>{{ $venta->nombre_cliente ?? 'N/A' }}</td>
+                                    <td>{{ number_format($venta->costo_total, 2) }} Bs</td>
+                                    <td>{{ $venta->user->name ?? 'N/A' }}</td>
+                                    <td>{{ $venta->tipo_pago ?? 'N/A' }}</td>
+                                    <td>{{ $venta->ventaProductos->sum('cantidad') }}</td>
+                                    <td>{{ $venta->ventaProductos->map(fn($p) => $p->producto->nombre . ' (' . $p->cantidad . ')')->implode(', ') ?? 'N/A' }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
 
             </div>

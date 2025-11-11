@@ -44,32 +44,22 @@
         </div>
 
 
-        <div class="card shadow-lg border-0" style="border-radius: 15px;">
-            <div class="card-header linear-gradient-nuevo text-white"
-                style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                <h3 class="card-title"><i class="fas fa-user-tag"></i> Productos en Mal Estado</h3>
-            </div>
-            <div class="card-body" style="background: #f8f9fa;">
-                <!-- Comienza la parte responsive -->
-                <div class="table-responsive">
-                    <table id="productosMalEstadoTable" class="table table-bordered table-striped">
-                        <thead class="linear-gradient">
-                            <tr>
-                                <th>ID</th>
-                                <th>Sucursal Origen</th>
-                                <th>Sucursal Destino</th>
-                                <th>Usuario Recepcion</th>
-                                <th>Fecha de Recepcion</th>
-                                <th>Estado</th>
-                                <th>Productos</th>
-                                <th>Acciones</th>
-                            </tr>
 
-                        </thead>
-                    </table>
-                </div>
-            </div>
-        </div>
+        <table id="productosMalEstadoTable" class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Sucursal Origen</th>
+                    <th>Sucursal Destino</th>
+                    <th>Usuario Recepcion</th>
+                    <th>Fecha de Recepcion</th>
+                    <th>Estado</th>
+                    <th>Productos</th>
+                    <th>Acciones</th>
+                </tr>
+
+            </thead>
+        </table>
         <!-- Modal de Recepción de Productos en Mal Estado -->
         <div class="modal fade" id="recepcionMalEstadoModal" tabindex="-1" role="dialog"
             aria-labelledby="recepcionMalEstadoModalLabel" aria-hidden="true">

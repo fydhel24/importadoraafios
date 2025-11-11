@@ -52,4 +52,36 @@ class User extends Authenticatable
         return $this->belongsToMany(Sucursale::class, 'sucursal_user', 'user_id', 'sucursal_id')
             ->withTimestamps();
     }
+    
+    public function pagosUsers()
+    {
+        return $this->hasMany(PagoUser::class, 'user_id');
+    }
+    
+    
+    
+    
+    
+    
+    
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

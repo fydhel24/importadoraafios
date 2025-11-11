@@ -17,7 +17,7 @@
         @endcan
 
         <div class="card shadow-lg border-0" style="border-radius: 15px;">
-            <div class="card-header linear-gradient-nuevo text-white" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+            <div class="card-header bg-gradient-blue text-white" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
                 <h3 class="card-title"><i class="fas fa-cogs"></i> Tipos Registrados</h3>
             </div>
             <div class="card-body" style="background: #f8f9fa;">

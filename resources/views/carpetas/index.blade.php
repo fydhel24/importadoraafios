@@ -150,14 +150,14 @@
                                     </small>
                                 </p>
                                 <div class="btn-group">
-                                    <a href="{{ route('carpetas.show', $carpeta) }}" class="btn btn-action-extra1  btn-sm ">
+                                    <a href="{{ route('carpetas.show', $carpeta) }}" class="btn btn-primary btn-sm">
                                         <i class="fas fa-eye"></i> Ver
                                     </a>
-                                    <button type="button" class="btn btn-action-extra btn-sm " data-toggle="modal"
+                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
                                         data-target="#addCapturaModal" data-carpeta-id="{{ $carpeta->id }}">
                                         <i class="fas fa-camera"></i> Agregar
                                     </button>
-                                    <a href="{{ route('carpetas.edit', $carpeta) }}" class="btn btn-action-edit btn-sm">
+                                    <a href="{{ route('carpetas.edit', $carpeta) }}" class="btn btn-warning btn-sm">
                                         <i class="fas fa-edit"></i> Editar
                                     </a>
                                     <form action="{{ route('carpetas.destroy', $carpeta) }}" method="POST"

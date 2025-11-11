@@ -9,7 +9,7 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header linear-gradient-nuevo text-white">
+        <div class="card-header bg-gradient-blue text-white">
             <h3 class="card-title"><i class="fas fa-chart-line"></i> Seleccione una Sucursal y Fecha</h3>
         </div>
         <div class="card-body">
@@ -82,7 +82,7 @@
             </div>
 
             <table id="salesTable" class="table table-bordered table-striped">
-                <thead class="linear-gradient-nuevo text-white">
+                <thead class="bg-gradient-blue text-white">
                     <tr>
                         <th>Cliente</th>
                         <th>Total</th>
@@ -100,7 +100,7 @@
 
             <h4 class="mt-4">Ventas por Usuario</h4>
             <table id="userSalesTable" class="table table-bordered table-striped">
-                <thead class="linear-gradient-nuevo text-white">
+                <thead class="bg-gradient-blue text-white">
                     <tr>
                         <th>Usuario</th>
                         <th>Total Ventas</th>

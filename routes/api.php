@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CupoController;
 use App\Http\Controllers\PromocionController;
 use App\Http\Controllers\PrecioProductoController;
+use App\Http\Controllers\ControlController;
 //SolicitudTrabajoController
 use App\Http\Controllers\SolicitudTrabajoController;
 //lupenuevo
@@ -38,3 +39,42 @@ Route::get('/precio-productos', [PrecioProductoController::class, 'apiPrecio']);
 Route::get('producto/{id}', [ProductoController::class, 'obtenerProductoPorId']);
 
 Route::post('/solicitudes', [SolicitudTrabajoController::class, 'storeApi']);
+
+
+
+
+//RUTAS PEDIDOS FORMULARIO
+Route::post('/pedidos/formulariosucursal1', [ProductoController::class, 'formulariosucursal1']);
+Route::post('/pedidos/formulariosucursal2', [ProductoController::class, 'formulariosucursal2']);
+Route::post('/pedidos/formulariosucursal3', [ProductoController::class, 'formulariosucursal3']);
+Route::post('/pedidos/formulariosucursal4', [ProductoController::class, 'formulariosucursal4']);
+
+Route::get('/productos-moderna/{id}', [ControlController::class, 'apiProductosModerna']);
+Route::post('/ventas/moderno', [ControlController::class, 'apiFinModernoAntiguo']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

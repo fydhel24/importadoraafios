@@ -40,12 +40,8 @@ Route::resource('pagos', PagoProveedorController::class)->except(['edit', 'updat
 @stop
 
 @section('content')
-    <div class="card shadow-lg border-0" style="border-radius: 15px;">
-            <div class="card-header linear-gradient-nuevo text-white"
-                style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                <h3 class="card-title"><i class="fas fa-user-tag"></i> Proveedores Registrados</h3>
-            </div>
-            <div class="card-body" style="background: #f8f9fa;">
+    <div class="card">
+        <div class="card-body">
             
             @if($proveedores->isEmpty())
                 <div class="alert alert-info">
@@ -54,7 +50,7 @@ Route::resource('pagos', PagoProveedorController::class)->except(['edit', 'updat
             @else
                 <div class="table-responsive">
                     <table class="table table-hover table-striped">
-                        <thead class="linear-gradient">
+                        <thead class="thead-dark">
                             <tr>
                                 <th>Nombre</th>
                                 <th>Código Factura</th>
@@ -80,16 +76,16 @@ Route::resource('pagos', PagoProveedorController::class)->except(['edit', 'updat
                                     </td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="{{ route('proveedores.show', $proveedor) }}" class="btn btn-action-extra btn-sm "title="Ver detalles">
+                                            <a href="{{ route('proveedores.show', $proveedor) }}" class="btn btn-xs btn-info" title="Ver detalles">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('proveedores.edit', $proveedor) }}" class="btn btn-action-edit btn-sm" title="Editar">
+                                            <a href="{{ route('proveedores.edit', $proveedor) }}" class="btn btn-xs btn-warning" title="Editar">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             @if($proveedor->pagos->isEmpty())
                                                 <!-- Botón para eliminar proveedor -->
 <!-- Botón para eliminar proveedor -->
-<button type="button" class="btn btn-action-delete btn-sm" data-toggle="modal" data-target="#deleteModal-{{ $proveedor->id }}" title="Eliminar">
+<button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal-{{ $proveedor->id }}" title="Eliminar">
     <i class="fas fa-trash"></i>
 </button>
 
@@ -124,12 +120,12 @@ Route::resource('pagos', PagoProveedorController::class)->except(['edit', 'updat
 
 
                                             @else
-                                                <button class="btn btn-action-delete btn-sm" disabled title="No se puede eliminar con pagos asociados">
+                                                <button class="btn btn-xs btn-secondary" disabled title="No se puede eliminar con pagos asociados">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             @endif
                                             @if($proveedor->saldo_pendiente > 0)
-                                                <a href="{{ route('pagos.create', ['proveedor_id' => $proveedor->id]) }}" class="btn btn-action-extra btn-sm " title="Registrar pago">
+                                                <a href="{{ route('pagos.create', ['proveedor_id' => $proveedor->id]) }}" class="btn btn-xs btn-success" title="Registrar pago">
                                                     <i class="fas fa-money-bill-wave"></i>
                                                 </a>
                                             @endif

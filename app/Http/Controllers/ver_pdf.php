@@ -77,7 +77,7 @@ class OrdenPdfController extends Controller
 
         $pdf->SetXY($x, $y);
         $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(85, $cellHeight, utf8_decode("IMPORTADORA AFIOS  #" . strtoupper($row['id'])), 1, 0, 'C');
+        $pdf->Cell(85, $cellHeight, utf8_decode("IMPORTADORA MIRANDA  #" . strtoupper($row['id'])), 1, 0, 'C');
         $pdf->Cell(15, $cellHeight, utf8_decode(strtoupper($row['codigo'])), 1, 1, 'C');
         $pdf->SetX($x);
         $nameFontSize = $this->getFontSize($row['nombre'], 20); // Ajusta el tamaño del nombre
@@ -563,9 +563,9 @@ class OrdenPdfController extends Controller
         // Título
         $pdf->SetFont('Helvetica', 'B', 30); // Cambiar a Helvetica y aumentar tamaño a 30
         $pdf->SetTextColor(0, 51, 102); // Color azul oscuro
-        $pdf->Cell(0, 10, utf8_decode("IMPORTADORA AFIOS"), 0, 1, 'C');
+        $pdf->Cell(0, 10, utf8_decode("IMPORTADORA MIRANDA"), 0, 1, 'C');
         $pdf->SetFont('Arial', 'I', 10);
-        $pdf->Cell(0, 10, utf8_decode("Novedad del mercado,siempre con los nuevos modelos."), 0, 1, 'C');
+        $pdf->Cell(0, 10, utf8_decode("A un Click del Producto que necesitas"), 0, 1, 'C');
 
         $pdf->Ln(10);
 
@@ -708,14 +708,14 @@ class OrdenPdfController extends Controller
 
         // Cabecera
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS"), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);
-        $pdf->Cell(0, 4, utf8_decode("Novedad del mercado,siempre con los nuevos modelos."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("A un Click del Producto que Necesita!!"), 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);
-        // $pdf->Cell(0, 4, utf8_decode("NIT: 80020100-0"), 0, 1, 'C');
-        $pdf->Cell(0, 4, utf8_decode("Telefono: 79133123"), 0, 1, 'C');
-        // $pdf->Cell(0, 4, utf8_decode("Direccion: Caparazon Mall Center, Planta Baja, Local Nro29"), 0, 1, 'C');
-        // $pdf->Cell(0, 4, utf8_decode("Sucursal: Sucursal 1 - CAPARAZON MALL CENTER"), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("NIT: 80020100-0"), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("Telefono: 70621016"), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("Direccion: Caparazon Mall Center, Planta Baja, Local Nro29"), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("Sucursal: Sucursal 1 - CAPARAZON MALL CENTER"), 0, 1, 'C');
         $pdf->Cell(0, 4, utf8_decode("Fecha: " . date('Y/m/d')), 0, 1, 'C');
         $pdf->Cell(0, 4, utf8_decode("Codigo de Venta:IMP" . date('Y/m/d')), 0, 1, 'C');
 

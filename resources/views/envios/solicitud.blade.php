@@ -286,33 +286,27 @@
         </div>
 
         <!-- Tabla de Historial -->
-        <div class="card shadow-lg border-0" style="border-radius: 15px;">
-            <div class="card-header linear-gradient-nuevo text-white"
-                style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                <h3 class="card-title"><i class="fas fa-user-tag"></i> Registro de Solicitud de Productos</h3>
+        <div class="card-body">
+            <i class="fas fa-table"></i> Registro de Solicitud de Productos
+
+            <div class="table-responsive">
+                <table id="solicitudesTable" class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Sucursal Origen</th>
+                            <th>Sucursal Destino</th>
+                            <th>Usuario Origen</th>
+                            <th>Usuario Destino</th>
+                            <th>Fecha de Envío</th>
+                            <th>Estado</th>
+                            <th>Productos</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
-            <div class="card-body" style="background: #f8f9fa;">
 
-
-                <div class="table-responsive">
-                    <table id="solicitudesTable" class="table table-bordered table-striped">
-                        <thead class="linear-gradient">
-                            <tr>
-                                <th>ID</th>
-                                <th>Sucursal Origen</th>
-                                <th>Sucursal Destino</th>
-                                <th>Usuario Origen</th>
-                                <th>Usuario Destino</th>
-                                <th>Fecha de Envío</th>
-                                <th>Estado</th>
-                                <th>Productos</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-
-            </div>
         </div>
 
 
@@ -695,42 +689,40 @@
                 });
             });
             // ELIMINAR SOLICITUD
-            $(document).on('click', '.eliminar-solicitud', function() {
-                const id = $(this).data('id');
-                Swal.fire({
-                    title: '¿Estás seguro?',
-                    text: "Esta acción no se puede deshacer.",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Sí, eliminar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url: `/envios/eliminar/${id}`,
-                            method: 'DELETE',
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            success: function(response) {
-                                if (response.success) {
-                                    Swal.fire('Eliminado', response.message, 'success');
-                                    table.ajax.reload();
-                                } else {
-                                    Swal.fire('Error', response.message, 'error');
-                                }
-                            },
-                            error: function() {
-                                Swal.fire('Error',
-                                    'Ocurrió un error al eliminar la solicitud.',
-                                    'error');
-                            },
-                        });
-                    }
-                });
+        $(document).on('click', '.eliminar-solicitud', function() {
+            const id = $(this).data('id');
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Esta acción no se puede deshacer.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `/envios/eliminar/${id}`,
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                Swal.fire('Eliminado', response.message, 'success');
+                                table.ajax.reload();
+                            } else {
+                                Swal.fire('Error', response.message, 'error');
+                            }
+                        },
+                        error: function() {
+                            Swal.fire('Error', 'Ocurrió un error al eliminar la solicitud.', 'error');
+                        },
+                    });
+                }
             });
+        });
         });
     </script>
 @endsection

@@ -17,7 +17,7 @@
         @endcan
 
         <div class="card shadow-lg border-0" style="border-radius: 15px;">
-            <div class="card-header linear-gradient-nuevo text-white"
+            <div class="card-header bg-gradient-blue text-white"
                 style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
                 <h3 class="card-title"><i class="fas fa-user-tag"></i> Usuarios Registrados</h3>
             </div>
@@ -66,8 +66,8 @@
                                     </td>
                                     <td class="text-center">
                                         @can('users.edit')
-                                            <a href="{{ route('users.edit', $user) }}" class="btn btn-action-edit btn-sm"
-                                                title="Editar usuario">
+                                            <a href="{{ route('users.edit', $user) }}" class="btn btn-gradient-success btn-sm"
+                                                title="Editar usuario" style="border-radius: 5px;">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                         @endcan
@@ -77,14 +77,12 @@
                                                 style="display:inline;" id="delete-form-{{ $user->id }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" class="btn btn-action-delete btn-sm"
-                                                    onclick="confirmDelete({{ $user->id }})" title="Eliminar usuario">
+                                                <button type="button" class="btn btn-gradient-danger btn-sm"
+                                                    onclick="confirmDelete({{ $user->id }})" title="Eliminar usuario"
+                                                    style="border-radius: 5px;">
                                                     <i class="fas fa-trash-alt"></i>
-                                                </button>
                                             </form>
                                         @endcan
-
-
                                         @can('users.destroy')
                                             <form action="{{ route('users.resetPassword', $user) }}" method="POST"
                                                 style="display:inline;" id="reset-password-form-{{ $user->id }}">
@@ -103,6 +101,7 @@
                         </tbody>
                     </table>
                 </div>
+
             </div>
         </div>
     </div>

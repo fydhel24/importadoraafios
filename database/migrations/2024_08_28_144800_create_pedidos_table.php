@@ -34,7 +34,7 @@ return new class extends Migration
             $table->timestamps();
         });
           // Cambiar el valor inicial del autoincremento
-    //DB::statement('ALTER TABLE pedidos AUTO_INCREMENT = 1000;');
+    DB::statement('ALTER TABLE pedidos AUTO_INCREMENT = 1000;');
   
     }
 

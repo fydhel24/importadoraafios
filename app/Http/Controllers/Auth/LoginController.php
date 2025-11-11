@@ -46,13 +46,13 @@ class LoginController extends Controller
         $user = \App\Models\User::where('email', $credentials['email'])->first();
 
         if ($user && $user->status !== 'active') {
-            return back()->withErrors(['email' => 'Your account is inactive.']);
+            return back()->withErrors(['email' => 'Cuenta inactiva.']);
         }
 
         if (Auth::attempt($credentials)) {
             return redirect()->intended($this->redirectTo);
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials']);
+        return back()->withErrors(['email' => 'Credenciales invalidas']);
     }
 }

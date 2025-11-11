@@ -6,12 +6,11 @@
 <div class="container-fluid">
     <h1 class="page-title">Cancelar Ventas de la Última Semana</h1>
 
-    <div class="card shadow-lg border-0" style="border-radius: 15px;">
-            <div class="card-header linear-gradient-nuevo text-white"
-                style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                <h3 class="card-title"><i class="fas fa-user-tag"></i> Ventas Registradas en la Última Semana</h3>
-            </div>
-            <div class="card-body" style="background: #f8f9fa;">
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-table"></i> Ventas Registradas en la Última Semana
+        </div>
+        <div class="card-body">
             <!-- Formulario de búsqueda -->
             <div class="mb-3">
                 <input type="text" id="search" class="form-control " placeholder="Buscar venta..." />
@@ -24,9 +23,9 @@
                 </button>
                 
 
-                <div class="table-responsive">
+                <div class="table-responsive mt-4">
                     <table class="table table-bordered table-striped">
-                        <thead class="linear-gradient">
+                        <thead class="thead-light">
                             <tr>
                                 <th><input type="checkbox" id="select-all"></th>
                                 <th>ID Venta</th>
@@ -109,13 +108,13 @@
                                     <td>
                                         <form action="{{ route('cancelarventa.reportesemana', '') }}/${ventaProducto.id}" method="POST">
                                             @csrf
-                                            <button type="submit" class="btn btn-action-extra btn-sm ">
+                                            <button type="submit" class="btn btn-info btn-sm">
                                                 <i class="fas fa-file-alt"></i> Reporte
                                             </button>
                                         </form>
                                         <form action="{{ route('cancelarventa.revertirsemana', '') }}/${ventaProducto.id}" method="POST">
                                             @csrf
-                                            <button type="submit" class="btn btn-action-delete btn-sm">
+                                            <button type="submit" class="btn btn-danger btn-sm">
                                                 <i class="fas fa-undo-alt"></i> Revertir
                                             </button>
                                         </form>

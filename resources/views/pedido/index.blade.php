@@ -23,67 +23,60 @@
                         </div>
                     @endif
 
-                    <div class="card shadow-lg border-0" style="border-radius: 15px;">
-                        <div class="card-header linear-gradient-nuevo text-white"
-                            style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                            <h3 class="card-title"><i class="fas fa-user-tag"></i> Pedidos Registrados</h3>
+                    <div class="card-body bg-white">
+                        <!-- Filtros -->
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="search_nombre">Nombre</label>
+                                <input type="text" id="search_nombre" class="form-control" placeholder="Buscar por Nombre">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="search_estado">Estado</label>
+                                <select id="search_estado" class="form-control">
+                                    <option value="">Seleccionar Estado</option>
+                                    <option value="POR COBRAR">POR COBRAR</option>
+                                    <option value="PAGADO">PAGADO</option>
+                                    <!-- Puedes agregar más opciones aquí -->
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="search_semana">Id Semana</label>
+                                <select id="search_semana" class="form-control">
+                                    <option value="">Seleccionar Semana</option>
+                                    @foreach ($semanas as $semana)
+                                        <option value="{{ $semana->id }}">{{ $semana->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                        <div class="card-body" style="background: #f8f9fa;">
-                            <!-- Filtros -->
-                            <div class="row mb-3">
-                                <div class="col-md-4">
-                                    <label for="search_nombre">Nombre</label>
-                                    <input type="text" id="search_nombre" class="form-control"
-                                        placeholder="Buscar por Nombre">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="search_estado">Estado</label>
-                                    <select id="search_estado" class="form-control">
-                                        <option value="">Seleccionar Estado</option>
-                                        <option value="POR COBRAR">POR COBRAR</option>
-                                        <option value="PAGADO">PAGADO</option>
-                                        <!-- Puedes agregar más opciones aquí -->
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="search_semana">Id Semana</label>
-                                    <select id="search_semana" class="form-control">
-                                        <option value="">Seleccionar Semana</option>
-                                        @foreach ($semanas as $semana)
-                                            <option value="{{ $semana->id }}">{{ $semana->nombre }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <button id="filterBtn" class="btn btn-primary mb-3">Filtrar</button>
+                        <button id="filterBtn" class="btn btn-primary mb-3">Filtrar</button>
 
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped"  id="pedidosTable">
-                                    <thead class="linear-gradient">
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nombre</th>
-                                            <th>Ci</th>
-                                            <th>Celular</th>
-                                            <th>Destino</th>
-                                            <th>Direccion</th>
-                                            <th>Estado</th>
-                                            <th>Cantidad Productos</th>
-                                            <th>Detalle</th>
-                                            <th>Productos</th>
-                                            <th>Monto Deposito</th>
-                                            <th>Monto Enviado Pagado</th>
-                                            <th>Fecha</th>
-                                            <th>Id Semana</th>
-                                            <th>Codigo</th>
-                                            <th>Operaciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- Ajax cargará los datos aquí -->
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="pedidosTable">
+                                <thead class="thead">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nombre</th>
+                                        <th>Ci</th>
+                                        <th>Celular</th>
+                                        <th>Destino</th>
+                                        <th>Direccion</th>
+                                        <th>Estado</th>
+                                        <th>Cantidad Productos</th>
+                                        <th>Detalle</th>
+                                        <th>Productos</th>
+                                        <th>Monto Deposito</th>
+                                        <th>Monto Enviado Pagado</th>
+                                        <th>Fecha</th>
+                                        <th>Id Semana</th>
+                                        <th>Codigo</th>
+                                        <th>Operaciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Ajax cargará los datos aquí -->
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -96,7 +89,7 @@
     <!-- DataTables JS & CSS (CDN) -->
     <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css" rel="stylesheet">
-
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
@@ -120,56 +113,23 @@
                         d.id_semana = $('#search_semana').val();
                     }
                 },
-                columns: [{
-                        data: 'id'
-                    },
-                    {
-                        data: 'nombre'
-                    },
-                    {
-                        data: 'ci'
-                    },
-                    {
-                        data: 'celular'
-                    },
-                    {
-                        data: 'destino'
-                    },
-                    {
-                        data: 'direccion'
-                    },
-                    {
-                        data: 'estado'
-                    },
-                    {
-                        data: 'cantidad_productos'
-                    },
-                    {
-                        data: 'detalle'
-                    },
-                    {
-                        data: 'productos'
-                    },
-                    {
-                        data: 'monto_deposito'
-                    },
-                    {
-                        data: 'monto_enviado_pagado'
-                    },
-                    {
-                        data: 'fecha'
-                    },
-                    {
-                        data: 'semana'
-                    },
-                    {
-                        data: 'codigo'
-                    },
-                    {
-                        data: 'action',
-                        orderable: false,
-                        searchable: false
-                    }
+                columns: [
+                    { data: 'id' },
+                    { data: 'nombre' },
+                    { data: 'ci' },
+                    { data: 'celular' },
+                    { data: 'destino' },
+                    { data: 'direccion' },
+                    { data: 'estado' },
+                    { data: 'cantidad_productos' },
+                    { data: 'detalle' },
+                    { data: 'productos' },
+                    { data: 'monto_deposito' },
+                    { data: 'monto_enviado_pagado' },
+                    { data: 'fecha' },
+                    { data: 'semana' },
+                    { data: 'codigo' },
+                    { data: 'action', orderable: false, searchable: false }
                 ],
                 responsive: true,
                 "language": {
@@ -179,7 +139,7 @@
 
             // Filtrar cuando el usuario haga clic en el botón
             $('#filterBtn').on('click', function() {
-                table.draw(); // Redibuja la tabla con los filtros aplicados
+                table.draw();  // Redibuja la tabla con los filtros aplicados
             });
 
             // Inicializar SlimSelect para el select de semana

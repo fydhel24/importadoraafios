@@ -100,9 +100,9 @@
 @section('content')
     <div class="container">
         <div class="card shadow-lg border-0" style="border-radius: 15px;">
-            <div class="card-header linear-gradient-nuevo text-white"
+            <div class="card-header bg-gradient-primary text-white text-center"
                 style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                <h3 class="card-title"><i class="fas fa-user-tag"></i> Filtro de Ventas Canceladas</h3>
+                <h3 class="card-title"><i class="fas fa-ban"></i> Filtros de Ventas Canceladas</h3>
             </div>
             <div class="card-body" style="background: #f8f9fa;">
                 <form id="filter-form" class="mb-4">
@@ -175,7 +175,7 @@
 
                 <div class="table-responsive">
                     <table id="canceled-sales-table" class="table table-bordered table-striped">
-                        <thead class="linear-gradient">
+                        <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Cliente</th>

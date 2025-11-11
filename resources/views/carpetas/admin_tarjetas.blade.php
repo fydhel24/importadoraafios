@@ -56,6 +56,18 @@
                                     </div>
                                     <i class="fas fa-chevron-right btn-arrow"></i>
                                 </a>
+                                <a href="{{ url('/orden/pedidos/' . (156 + $sucursal->id)) }}" class="btn-orange">
+                                    <div class="btn-icon">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <div class="btn-content">
+                                        <span class="btn-title">Pedidos</span>
+                                        <span class="btn-subtitle">Pedidos de la Sucursal</span>
+                                    </div>
+                                    <i class="fas fa-chevron-right btn-arrow"></i>
+                                </a>
+
+
                             </div>
                         </div>
                     </div>
@@ -384,6 +396,54 @@
 
         .col-xl-4:nth-child(6) .sucursal-card {
             animation-delay: 0.6s;
+        }
+
+        /* //naraja */
+        .btn-orange {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #f97316;
+            /* naranja */
+            color: white;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-orange:hover {
+            background-color: #ea580c;
+            /* naranja más oscuro */
+            transform: translateY(-2px);
+        }
+
+        .btn-orange .btn-icon {
+            margin-right: 12px;
+            font-size: 20px;
+        }
+
+        .btn-orange .btn-content {
+            flex-grow: 1;
+        }
+
+        .btn-orange .btn-title {
+            font-weight: bold;
+            font-size: 16px;
+            display: block;
+        }
+
+        .btn-orange .btn-subtitle {
+            font-size: 12px;
+            opacity: 0.9;
+            display: block;
+        }
+
+        .btn-orange .btn-arrow {
+            font-size: 16px;
+            margin-left: 12px;
         }
     </style>
 @stop

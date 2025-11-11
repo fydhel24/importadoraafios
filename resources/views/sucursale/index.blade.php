@@ -17,7 +17,7 @@
         @endcan
 
         <div class="card shadow-lg border-0" style="border-radius: 15px;">
-            <div class="card-header linear-gradient-nuevo text-white"
+            <div class="card-header bg-gradient-blue text-white"
                 style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
                 <h3 class="card-title"><i class="fas fa-store"></i> Sucursales Registradas</h3>
             </div>

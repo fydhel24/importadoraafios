@@ -120,32 +120,21 @@
                 </div>
             </div>
         </div>
-        <div class="card shadow-lg border-0" style="border-radius: 15px;">
-            <div class="card-header linear-gradient-nuevo text-white"
-                style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                <h3 class="card-title"><i class="fas fa-user-tag"></i> Productos a almacen</h3>
-            </div>
-            <div class="card-body" style="background: #f8f9fa;">
-                <!-- Comienza la parte responsive -->
-                <div class="table-responsive">
-                    <table id="productosMalEstadoTable" class="table table-bordered table-striped">
-                        <thead class="linear-gradient">
-                            <tr>
-                                <th>ID</th>
-                                <th>Sucursal Origen</th>
-                                <th>Destino</th>
-                                <th>Usuario</th>
-                                <th>Fecha de Envío</th>
-                                <th>Estado</th>
-                                <th>Productos</th>
-                                <th>Acciones</th>
-                            </tr>
+        <table id="productosMalEstadoTable" class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Sucursal Origen</th>
+                    <th>Destino</th>
+                    <th>Usuario</th>
+                    <th>Fecha de Envío</th>
+                    <th>Estado</th>
+                    <th>Productos</th>
+                    <th>Acciones</th>
+                </tr>
 
-                        </thead>
-                    </table>
-                </div>
-            </div>
-        </div>
+            </thead>
+        </table>
     </div>
 @endsection
 

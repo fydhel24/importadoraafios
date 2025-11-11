@@ -14,6 +14,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         .card-body {
             padding: 30px;
         }
@@ -91,60 +92,87 @@
 @stop
 
 @section('content')
-    <div class="card">
-        <div class="card-body">
-            <form action="{{ route('change.password') }}" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label for="old_password">Contraseña Actual</label>
-                    <div class="input-group">
-                        <input type="password" class="form-control @error('old_password') is-invalid @enderror" id="old_password" name="old_password" required>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="showOldPassword" onclick="showPassword('old_password', 'showOldPassword')">
-                                <i class="fas fa-eye" id="oldPasswordIcon"></i>
-                            </button>
+    <div class="row justify-content-center"> <div class="col-md-8 col-lg-6"> <div class="card">
+                <div class="card-body">
+                    <form action="{{ route('change.password') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="old_password">Contraseña Actual</label>
+                            <div class="input-group">
+                                <input type="password"
+                                    class="form-control @error('old_password') is-invalid @enderror" id="old_password"
+                                    name="old_password" required>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="showOldPassword"
+                                        onclick="showPassword('old_password', 'showOldPassword')">
+                                        <i class="fas fa-eye" id="oldPasswordIcon"></i>
+                                    </button>
+                                </div>
+                                @error('old_password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                        @error('old_password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password">Nueva Contraseña</label>
-                    <div class="input-group">
-                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="showNewPassword" onclick="showPassword('password', 'showNewPassword')">
-                                <i class="fas fa-eye" id="newPasswordIcon"></i>
-                            </button>
+                        <div class="form-group">
+                            <label for="password">Nueva Contraseña</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                    id="password" name="password" required minlength="8"
+                                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}"
+                                    aria-describedby="passwordHelpBlock"
+                                    title="Debe tener al menos 8 caracteres, incluyendo mayúscula, minúscula, número y carácter especial.">
+
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="showNewPassword"
+                                        onclick="showPassword('password', 'showNewPassword')">
+                                        <i class="fas fa-eye" id="newPasswordIcon"></i>
+                                    </button>
+                                </div>
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <small id="passwordHelpBlock" class="form-text text-muted mt-2">
+                                La contraseña debe contener:
+                                <ul class="mb-0 mt-1 pl-3" id="passwordCriteria">
+                                    <li id="length" class="text-danger">Mínimo 8 caracteres</li>
+                                    <li id="uppercase" class="text-danger">Una letra mayúscula</li>
+                                    <li id="lowercase" class="text-danger">Una letra minúscula</li>
+                                    <li id="number" class="text-danger">Un número</li>
+                                    <li id="special" class="text-danger">Un carácter especial (!@#$%^&amp;*)</li>
+                                </ul>
+                            </small>
                         </div>
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password_confirmation">Confirmar Nueva Contraseña</label>
-                    <div class="input-group">
-                        <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" name="password_confirmation" required>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="showConfirmPassword" onclick="showPassword('password_confirmation', 'showConfirmPassword')">
-                                <i class="fas fa-eye" id="confirmPasswordIcon"></i>
-                            </button>
+
+                        <div class="form-group">
+                            <label for="password_confirmation">Confirmar Nueva Contraseña</label>
+                            <div class="input-group">
+                                <input type="password"
+                                    class="form-control @error('password_confirmation') is-invalid @enderror"
+                                    id="password_confirmation" name="password_confirmation" required>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="showConfirmPassword"
+                                        onclick="showPassword('password_confirmation', 'showConfirmPassword')">
+                                        <i class="fas fa-eye" id="confirmPasswordIcon"></i>
+                                    </button>
+                                </div>
+                                @error('password_confirmation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                        @error('password_confirmation')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                        <button type="submit" class="btn btn-primary">Cambiar Contraseña</button>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-primary">Cambiar Contraseña</button>
-            </form>
+            </div>
         </div>
     </div>
 @stop
@@ -167,4 +195,38 @@
             }
         }
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordInput = document.getElementById('password');
+
+            passwordInput.addEventListener('input', function() {
+                const value = passwordInput.value;
+
+                // Reglas
+                const hasLength = value.length >= 8;
+                const hasUpper = /[A-Z]/.test(value);
+                const hasLower = /[a-z]/.test(value);
+                const hasNumber = /\d/.test(value);
+                const hasSpecial = /[\W_]/.test(value);
+
+                updateCriteria('length', hasLength);
+                updateCriteria('uppercase', hasUpper);
+                updateCriteria('lowercase', hasLower);
+                updateCriteria('number', hasNumber);
+                updateCriteria('special', hasSpecial);
+            });
+
+            function updateCriteria(id, isValid) {
+                const item = document.getElementById(id);
+                if (isValid) {
+                    item.classList.remove('text-danger');
+                    item.classList.add('text-success');
+                } else {
+                    item.classList.remove('text-success');
+                    item.classList.add('text-danger');
+                }
+            }
+        });
+    </script>
+
 @stop

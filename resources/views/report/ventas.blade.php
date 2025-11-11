@@ -147,18 +147,11 @@
 
 
             </div>
-
-        </div>
-        <!-- Tabla de Detalles de Ventas -->
-        <div class="card shadow-lg border-0" style="border-radius: 15px;">
-            <div class="card-header linear-gradient-nuevo text-white"
-                style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                <h3 class="card-title"><i class="fas fa-user-tag"></i> Ventas Registradas</h3>
-            </div>
-            <div class="card-body" style="background: #f8f9fa;">
+            <!-- Tabla de Detalles de Ventas -->
+            <div class="card-body">
                 <div class="table-responsive">
-                    <table id="ventas-table" class="table table-bordered table-striped">
-                        <thead class="linear-gradient">
+                    <table id="ventas-table" class="table table-bordered table-hover table-striped">
+                        <thead class="thead-dark">
                             <tr>
                                 <th>Fecha</th>
                                 <th>estado</th>
@@ -305,6 +298,9 @@
                 const table = $('#ventas-table').DataTable({
                     processing: true,
                     serverSide: true,
+                    order: [
+                        [0, 'desc']
+                    ],
                     ajax: {
                         url: "{{ route('report.ventas') }}",
                         data: function(d) {

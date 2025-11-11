@@ -307,14 +307,14 @@ class PromocionController extends Controller
 
         // Cabecera
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);
-        $pdf->Cell(0, 4, utf8_decode("Novedad del mercado,siempre con los nuevos modelos."), 0, 1, 'C');
-        $pdf->Cell(0, 4, utf8_decode("Telefono: 79133123"), 0, 1, 'C');
-        // $pdf->Cell(0, 4, utf8_decode("Direccion: Caparazon Mall Center, Planta Baja, Local Nro29"), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("A un Click del Producto que Necesita!!"), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("Telefono: 70621016"), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("Direccion: Caparazon Mall Center, Planta Baja, Local Nro29"), 0, 1, 'C');
 
         $pdf->SetFont('Arial', '', 6);
-        // $pdf->Cell(0, 4, utf8_decode("Sucursal: Sucursal " . $pedido['id_sucursal']), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("Sucursal: Sucursal " . $pedido['id_sucursal']), 0, 1, 'C');
 
         $pdf->SetFont('Arial', 'B', 9);
         $pdf->Cell(0, 4, utf8_decode("Fecha: " . $pedido['fecha']), 0, 1, 'C');

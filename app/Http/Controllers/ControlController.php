@@ -78,7 +78,7 @@ class ControlController extends Controller
                 'productos' => $productos,
             ]);
         }
-
+session(['venta_token' => Str::random(40)]);
         // Retornamos la vista con los productos y los usuarios filtrados
         return view('control.pro', compact('sucur', 'productos', 'id', 'categorias', 'marcas', 'users'));
     }
@@ -293,6 +293,18 @@ class ControlController extends Controller
 
     public function fin(Request $request)
     {
+        // Validar token único
+        $token = $request->input('venta_token');
+        $sessionToken = session('venta_token');
+
+        if ($token !== $sessionToken) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Venta ya procesada o token inválido'
+            ]);
+        }
+        // Eliminar el token para evitar reuso
+        session()->forget('venta_token');
         // Validation of the input
         $request->validate([
             'nombre_cliente' => 'required|string',
@@ -840,6 +852,179 @@ class ControlController extends Controller
                 'trace' => $e->getTraceAsString()
             ]);
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
+    public function apiProductosModerna(Request $request, $id)
+    {
+        $sucursal = Sucursale::find($id);
+
+        if (!$sucursal) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sucursal no encontrada'
+            ], 404);
+        }
+
+        // Consulta base sin autenticación
+        $productosQuery = Inventario::where('id_sucursal', $id)
+            ->join('productos', 'productos.id', '=', 'inventario.id_producto')
+            ->with(['producto.categoria', 'producto.marca', 'producto.fotos'])
+            ->orderByDesc('inventario.favorito')
+            ->orderByDesc('productos.estado')
+            ->orderBy('productos.created_at', 'desc');
+
+        // Filtro de búsqueda (si viene en la URL ?search=)
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $productosQuery->whereHas('producto', function ($query) use ($search) {
+                $query->where('nombre', 'like', "%$search%")
+                    ->orWhere('id', 'like', "%$search%");
+            });
+        }
+
+        // Paginación (10 por página)
+        $productos = $productosQuery->paginate(10);
+
+        // Añadir stock adicional
+        foreach ($productos as $inventario) {
+            if ($inventario->producto) {
+                $inventario->producto->stock_actual = $inventario->producto->getStockActual();
+                $inventario->producto->stock_sucursal = $inventario->cantidad;
+            }
+        }
+
+        // Categorías y marcas
+        $categorias = Categoria::all();
+        $marcas = Marca::all();
+
+        // Ya no se filtran usuarios ni se requiere login
+        // Eliminamos completamente auth()->user() y los roles
+        $users = [];
+
+        // Respuesta JSON pública
+        return response()->json([
+            'success' => true,
+            'message' => 'Productos obtenidos correctamente (pública)',
+            'sucursal' => $sucursal,
+            'categorias' => $categorias,
+            'marcas' => $marcas,
+            'usuarios' => $users,
+            'productos' => $productos,
+        ]);
+    }
+    public function apiFinModernoAntiguo(Request $request)
+    {
+        try {
+            // ✅ Validación de los datos recibidos
+            $validated = $request->validate([
+                'nombre_cliente' => 'required|string',
+                'costo_total' => 'required|numeric',
+                'productos' => 'required|json',
+                'id_sucursal' => 'required|numeric',
+                'ci' => 'nullable|string',
+                'tipo_pago' => 'required|string',
+                'garantia' => 'nullable|in:sin garantia,con garantia',
+                'descuento' => 'nullable|numeric',
+                'id_user' => 'required|numeric',
+                'pagado' => 'required|numeric',
+                'pagado_qr' => 'nullable|numeric'
+            ]);
+
+           $productos = json_decode($request->productos, true);
+            $descuentoTotal = $request->descuento ?? 0;
+
+            // ✅ Determinar los montos de pago
+            $efectivo = null;
+            $qr = null;
+
+            if ($request->tipo_pago === 'Efectivo') {
+                $efectivo = $request->costo_total;
+            } elseif ($request->tipo_pago === 'QR') {
+                $qr = $request->costo_total;
+            } elseif ($request->tipo_pago === 'Efectivo y QR') {
+                $efectivo = $request->pagado ?? 0;
+                $qr = $request->pagado_qr ?? 0;
+            }
+
+            // ✅ Crear la venta
+            $venta = Venta::create([
+                'fecha'        => now(),
+                'nombre_cliente' => $request->nombre_cliente,
+                'costo_total'  => $request->costo_total,
+                'id_user'      => $request->id_user,
+                'ci'           => $request->ci,
+                'descuento'    => $descuentoTotal,
+                'tipo_pago'    => $request->tipo_pago,
+                'id_sucursal'  => $request->id_sucursal,
+                'garantia'     => $request->garantia,
+                'efectivo'     => $efectivo,
+                'qr'           => $qr,
+                'pagado'       => $request->pagado,
+                'estado'       => 'RESERVA',
+            ]);
+
+            // ✅ Registrar los productos de la venta
+            foreach ($productos as $producto) {
+                $productoExistente = Producto::find($producto['id']);
+
+                if (!$productoExistente) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => "El producto con ID {$producto['id']} no existe."
+                    ], 404);
+                }
+
+                $inventario = Inventario::where('id_producto', $producto['id'])
+                    ->where('id_sucursal', $request->id_sucursal)
+                    ->first();
+
+                if (!$inventario) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => "No hay inventario para el producto {$productoExistente->nombre}."
+                    ], 400);
+                }
+
+                if ($inventario->cantidad < $producto['cantidad']) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => "Stock insuficiente para el producto {$productoExistente->nombre}."
+                    ], 400);
+                }
+
+                // Registrar en tabla venta_producto
+                VentaProducto::create([
+                    'id_venta' => $venta->id,
+                    'id_producto' => $producto['id'],
+                    'cantidad' => $producto['cantidad'],
+                    'precio_unitario' => $producto['precio'],
+                    'descuento' => 0,
+                ]);
+
+                // Actualizar stock del inventario
+                $inventario->cantidad -= $producto['cantidad'];
+                $inventario->save();
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Venta registrada correctamente',
+                'venta' => $venta,
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Errores de validación
+            return response()->json([
+                'success' => false,
+                'message' => 'Error de validación',
+                'errors' => $e->errors()
+            ], 422);
+        } catch (\Exception $e) {
+            // Errores generales
+            return response()->json([
+                'success' => false,
+                'message' => 'Ocurrió un error al registrar la venta',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 }

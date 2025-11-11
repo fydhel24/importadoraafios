@@ -4,12 +4,11 @@
 
 @section('content')
     <div class="container">
-        <div class="card shadow-lg border-0" style="border-radius: 15px;">
-            <div class="card-header linear-gradient-nuevo text-white"
-                style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                <h3 class="card-title"><i class="fas fa-user-tag"></i> Reporte de stock</h3>
+        <div class="card shadow mb-4">
+            <div class="card-header bg-primary text-white">
+                <h2 class="card-title">Reporte de Productos</h2>
             </div>
-            <div class="card-body" style="background: #f8f9fa;">
+            <div class="card-body">
                 <!-- Formulario de Filtro de Fecha -->
                 <h3>Productos vendidos :</h3>
                 <form action="{{ route('report.stock') }}" method="GET" class="form-inline mb-4">
@@ -30,8 +29,8 @@
 
                 <!-- Tabla de Productos -->
                 <div class="table-responsive">
-                    <table id="products-report-table" class="table table-bordered table-striped">
-                        <thead class="linear-gradient">
+                    <table id="products-report-table" class="table table-bordered table-striped table-hover shadow-sm">
+                        <thead class="thead-dark">
                             <tr>
                                 <th>Nombre del Producto</th>
                                 <th>Stock Incial</th>

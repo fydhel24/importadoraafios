@@ -72,7 +72,7 @@ class PdfController extends Controller
 
         // Usa una fuente que soporte caracteres especiales
         $pdf->SetFont('Arial', 'B', 10); // Tamaño de fuente reducido
-        $pdf->Cell(100, $cellHeight, "IMPORTADORA AFIOS", 1, 1, 'C');  // Ancho ajustado
+        $pdf->Cell(100, $cellHeight, "IMPORTADORA MIRANDA", 1, 1, 'C');  // Ancho ajustado
 
         // Ajustar posición después de escribir la primera celda
         $pdf->SetX($x);
