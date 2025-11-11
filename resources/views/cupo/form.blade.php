@@ -16,7 +16,7 @@
 
         <!-- Porcentaje -->
         <div class="form-group mb-2 mb20">
-    <input type="text" name="porcentaje" class="form-control @error('porcentaje') is-invalid @enderror" 
+    <input type="text" name="porcentaje" class="form-control @error('porcentaje') is-invalid @enderror"
            value="{{ old('porcentaje', 0) }}" id="porcentaje" placeholder="Porcentaje" style="display:none;">
     {!! $errors->first('porcentaje', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
 </div>
@@ -60,7 +60,7 @@
 
 @section('js')
     <script>
-        // Función para generar un código único con las palabras "envivo", "importadora" y "miranda"
+        // Función para generar un código único con las palabras "envivo", "importadora" y "Afios"
         function generateUniqueCode() {
             // Generamos el código con las palabras clave y un sufijo aleatorio
             const prefix = 'I-M-Y';

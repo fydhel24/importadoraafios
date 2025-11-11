@@ -77,7 +77,7 @@ class OrdenPdfController extends Controller
 
         $pdf->SetXY($x, $y);
         $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(85, $cellHeight, utf8_decode("IMPORTADORA MIRANDA  #" . strtoupper($row['id'])), 1, 0, 'C');
+        $pdf->Cell(85, $cellHeight, utf8_decode("IMPORTADORA AFIOS  #" . strtoupper($row['id'])), 1, 0, 'C');
         $pdf->Cell(15, $cellHeight, utf8_decode(strtoupper($row['codigo'])), 1, 1, 'C');
         $pdf->SetX($x);
         $nameFontSize = $this->getFontSize($row['nombre'], 20); // Ajusta el tamaño del nombre
@@ -554,8 +554,8 @@ class OrdenPdfController extends Controller
         $pdf->SetX(150);
         $pdf->SetFont('Arial', 'I', 8); // Reducido a tamaño 8
         $pdf->SetTextColor(0, 102, 204); // Color azul
-        $pdf->Cell(0, 5, utf8_decode("Pagina: importadoramiranda.com/vistas"), 0, 1, 'R');
-        $pdf->Cell(0, 5, utf8_decode("Catalogo: importadoramiranda777.sumerlabs.com"), 0, 1, 'R');
+        $pdf->Cell(0, 5, utf8_decode("Pagina: importadoraAfios.com/vistas"), 0, 1, 'R');
+        $pdf->Cell(0, 5, utf8_decode("Catalogo: importadoraAfios777.sumerlabs.com"), 0, 1, 'R');
         $pdf->Cell(0, 5, utf8_decode("Contactos: 70621016"), 0, 1, 'R');
         $pdf->Cell(0, 5, utf8_decode("Fecha: " . date('Y-m-d')), 0, 1, 'R');
 
@@ -563,7 +563,7 @@ class OrdenPdfController extends Controller
         // Título
         $pdf->SetFont('Helvetica', 'B', 30); // Cambiar a Helvetica y aumentar tamaño a 30
         $pdf->SetTextColor(0, 51, 102); // Color azul oscuro
-        $pdf->Cell(0, 10, utf8_decode("IMPORTADORA MIRANDA"), 0, 1, 'C');
+        $pdf->Cell(0, 10, utf8_decode("IMPORTADORA AFIOS"), 0, 1, 'C');
         $pdf->SetFont('Arial', 'I', 10);
         $pdf->Cell(0, 10, utf8_decode("A un Click del Producto que necesitas"), 0, 1, 'C');
 
@@ -708,7 +708,7 @@ class OrdenPdfController extends Controller
 
         // Cabecera
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);
         $pdf->Cell(0, 4, utf8_decode("A un Click del Producto que Necesita!!"), 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);

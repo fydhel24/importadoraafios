@@ -253,7 +253,7 @@ class RecojoController extends Controller
 
         // Cabecera
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);
         $pdf->Cell(0, 4, utf8_decode("A un Click del Producto que Necesita!!"), 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);
@@ -379,7 +379,7 @@ class RecojoController extends Controller
 
         // Cabecera
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);
         $pdf->Cell(0, 4, utf8_decode("A un Click del Producto que Necesita!!"), 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);
@@ -594,7 +594,7 @@ class RecojoController extends Controller
 
         // Cabecera
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);
         $pdf->Cell(0, 4, utf8_decode("A un Click del Producto que Necesita!!"), 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);
@@ -720,7 +720,7 @@ class RecojoController extends Controller
 
         // Cabecera
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);
         $pdf->Cell(0, 4, utf8_decode("A un Click del Producto que Necesita!!"), 0, 1, 'C');
         $pdf->Cell(0, 4, utf8_decode("Fecha: " . date('Y/m/d H:i:s')), 0, 1, 'C');

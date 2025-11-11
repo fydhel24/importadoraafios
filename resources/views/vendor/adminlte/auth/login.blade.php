@@ -652,8 +652,8 @@
 @section('auth_body')
     {{-- Video de fondo --}}
     <video class="video-background" autoplay muted loop playsinline>
-        <source src="{{ asset('images/videoafios.mp4') }}" type="video/mp4">
-        <source src="{{ asset('images/impmiranda2.0.webm') }}" type="video/webm">
+        <source src="{{ asset('images/videoAFIOS.mp4') }}" type="video/mp4">
+        <source src="{{ asset('images/impAFIOS2.0.webm') }}" type="video/webm">
         Tu navegador no soporta el elemento video.
     </video>
 

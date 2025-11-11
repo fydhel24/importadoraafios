@@ -510,7 +510,7 @@ class VentaController extends Controller
                         <form action="' . route('cancelarventa.reporte', $venta->id) . '" method="POST" style="display:inline;">
                             ' . csrf_field() . '
                             <button type="submit" class="btn btn-info btn-sm" title="Ver Reporte">
-                                <i class="fas fa-file-alt"></i> 
+                                <i class="fas fa-file-alt"></i>
                             </button>
                         </form>
                         <form action="' . route('cancelarventa.revertir', $venta->id) . '" method="POST" style="display:inline;">
@@ -520,10 +520,10 @@ class VentaController extends Controller
                             </button>
                         </form>
                         <button onclick="devolucionRapida(' . $venta->id . ')" class="btn btn-warning btn-sm" title="Devolución Rápida">
-                            <i class="fas fa-exchange-alt"></i> 
+                            <i class="fas fa-exchange-alt"></i>
                         </button>
                         <a href="' . route('cancelarventa.edit', $venta->id) . '" class="btn btn-primary btn-sm" title="Editar Venta">
-                            <i class="fas fa-edit"></i> 
+                            <i class="fas fa-edit"></i>
                         </a>';
                 })
 
@@ -603,7 +603,7 @@ class VentaController extends Controller
             $pdf->Image('images/logo.png', 30, 5, 20, 20, 'PNG');
             $pdf->Ln(15);
             $pdf->SetFont('Arial', 'B', 10);
-            $pdf->Cell(0, 5, 'IMPORTADORA MIRANDA S.A.', 0, 1, 'C');
+            $pdf->Cell(0, 5, 'IMPORTADORA AFIOS S.A.', 0, 1, 'C');
             $pdf->SetFont('Arial', '', 8);
             $pdf->Cell(0, 5, 'A un Click del Producto que Necesita!!', 0, 1, 'C');
             $pdf->Cell(0, 5, 'Telefono: 70621016', 0, 1, 'C');
@@ -706,7 +706,7 @@ class VentaController extends Controller
         $pdf->Ln(15);
 
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);
         $pdf->Cell(0, 3, utf8_decode("A un Click del Producto que Necesita!!"), 0, 1, 'C');
         $pdf->Cell(0, 3, utf8_decode("Fecha: " . date('Y/m/d H:i:s')), 0, 1, 'C');
@@ -825,7 +825,7 @@ class VentaController extends Controller
         $pdf->Image('images/logo.png', 30, 5, 20, 20, 'PNG');
         $pdf->Ln(15);
         $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(0, 5, 'IMPORTADORA MIRANDA S.A.', 0, 1, 'C');
+        $pdf->Cell(0, 5, 'IMPORTADORA AFIOS S.A.', 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);
         $pdf->Cell(0, 5, 'A un Click del Producto que Necesita!!', 0, 1, 'C');
         $pdf->Cell(0, 5, 'Telefono: 70621016', 0, 1, 'C');

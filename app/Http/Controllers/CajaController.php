@@ -29,7 +29,7 @@ class CajaController extends Controller
                     <a href="' . route('cajas.edit', ['caja' => $caja->id, 'id' => $caja->sucursal_id]) . '" class="btn btn-warning btn-sm">
                         <i class="fas fa-lock"></i>Cerrar Caja
                     </a>
-                    <a href="' . route('cajas.editCaja', ['caja' => $caja->id, 'id' => $caja->sucursal_id]) . '" 
+                    <a href="' . route('cajas.editCaja', ['caja' => $caja->id, 'id' => $caja->sucursal_id]) . '"
    class="btn btn-success btn-sm">
     <i class="fas fa-edit"></i>Editar
 </a>
@@ -40,7 +40,7 @@ class CajaController extends Controller
                             <i class="fas fa-trash"></i>Eliminar
                         </button>
                     </form>
-                    
+
 
 
         <a href="' . route('cajas.report', $caja->id) . '" class="btn btn-info btn-sm">
@@ -99,7 +99,7 @@ public function generateIndividualPdf($id)
         // Encabezado elegante con título centralizado
         $pdf->SetFont('Arial', 'B', 16);
         $pdf->SetTextColor(30, 144, 255); // Azul moderno
-        $pdf->Cell(0, 8, "Importadora Miranda", 0, 1, 'C');
+        $pdf->Cell(0, 8, "Importadora Afios", 0, 1, 'C');
         $pdf->Ln(10);
 
         // Información de la caja
@@ -277,7 +277,7 @@ public function generateIndividualPdf($id)
         return redirect()->route('cajas.index', ['id' => $request->sucursal_id])
             ->with('success', 'Caja creada con éxito');
     }
-    
+
 
     public function editCaja(Caja $caja, $id)
     {
@@ -419,7 +419,7 @@ public function generateIndividualPdf($id)
 
         // Obtener el usuario que está realizando el cierre
         $userCierre = auth()->user();
-        
+
 
         foreach ($cajasAbiertas as $caja) {
             // Filtrar las ventas de la misma sucursal entre la fecha de apertura y cierre

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Pedido</title>
-    <link rel="icon" href="https://importadoramiranda.com/images/logo.png" type="image/png">
+    <link rel="icon" href="https://importadoraAfios.com/images/logo.png" type="image/png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2.0/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
@@ -20,7 +20,7 @@
             opacity: .95;
             align-items: center; /* Centra verticalmente */
         }
-        
+
         .loading {
             display: none;
             position: fixed;
@@ -72,11 +72,11 @@
 }
 
     </style>
-   
+
 </head>
 <body>
-    
-        
+
+
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
@@ -111,7 +111,7 @@
                                             <label for="celular" class="required">Celular <span class="example-text">(ej. 69745234)</span></label>
                                             <input type="text" class="form-control" id="celular" name="celular" placeholder="Ingrese el celular" required>
                                         </div>
-                                        
+
                                         <div class="form-group">
                                             <label for="productos">Destino <span class="example-text">(RECUERDE QUE LOS PEDIDOS SE RECEPCIONAN HASTA LAS 11:00 AM)</span></label>
                                             <input type="text"  class="form-control input-celeste" id="destino" name="destino" readonly placeholder="No hay destino agregado" style="display: none;">
@@ -122,8 +122,8 @@
                                                     </button> </div>
                                             </div>
                                         </div>
-                                        
-                                        
+
+
                                         <div class="form-group">
                                             <label for="direccion" class="required">Dirección <span class="example-text">(COCHABAMBA-SACABA AV. TUNEL TRES CUADRAS ANTES
                                                 DE LLEGAR AL TERCER SEMáFORO HACIA SACABA)</span></label>
@@ -137,14 +137,14 @@
                                                 <option value="Pagado">Pagado si ya cancelo la entrega</option>
                                             </select>
                                         </div>
-                                        
+
                                         <div class="form-group"  style="display: none;">
                                             <label for="cantidad_productos" class="required">Cantidad de Productos <span class="example-text">(ej. 3)</span></label>
                                             <input type="number" class="form-control" id="cantidad_productos" name="cantidad_productos" placeholder="Ingrese la cantidad de productos" required>
                                         </div>
-                                        
-                                        
-                                       
+
+
+
                                         <div class="form-group">
                                             <label for="productos">Productos</label>
                                             <div class="input-group">
@@ -178,8 +178,8 @@
                     </div>
                 </div>
             </section>
-       
-    
+
+
 
     <div class="loading">
         <div class="spinner-border" role="status">
@@ -239,7 +239,7 @@
                 </button>
             </div>
             <div class="modal-body">
-               
+
                 <div id="serviceCost" class="mt-3"></div>
                 <div class="d-flex flex-row">
                     <button type="button" class="btn btn-info " id="airService">Por Avión - A domicilio</button>
@@ -315,11 +315,11 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Editar</button>
                     <button type="button" class="btn btn-primary" id="confirm-save">Sí, Guardar</button>
                 </div>
-                
+
             </div>
         </div>
     </div>
-    
+
     <!-- Modals for pdf -->
     <div class="modal fade" id="downloadModal" tabindex="-1" role="dialog" aria-labelledby="downloadModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -340,7 +340,7 @@
             </div>
         </div>
     </div>
-    
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
@@ -473,14 +473,14 @@ function showServiceModal(destination) {
         `;
         document.getElementById('airService').style.display = 'block';
         document.getElementById('busService').style.display = busAvailable ? 'block' : 'none';
-        document.getElementById('finishButton').style.display = 'none'; 
+        document.getElementById('finishButton').style.display = 'none';
     }
 }
 
 document.getElementById('finishButton').addEventListener('click', function() {
     const destinationData = tarifarios[currentTarifarioType][selectedDestination];
     let cost;
-    
+
     if (destinationData) {
         // Si es tarifario local, usa el costo normal
         if (currentTarifarioType === 'local') {
@@ -489,7 +489,7 @@ document.getElementById('finishButton').addEventListener('click', function() {
             // Si es tarifario nacional o provincial, verifica qué servicio se eligió
             cost = document.getElementById('airService').style.display === 'block' ? destinationData.normal : destinationData.costo2;
         }
-        
+
         // Mostrar los datos en el input
         document.getElementById('destino').value = `${selectedDestination}: ${cost}`;
         document.getElementById('destino').style.display = 'block'; // Mostrar el input
@@ -540,7 +540,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const container = document.getElementById('productos-container');
 
- 
+
 
 });
 /////////////////////
@@ -616,7 +616,7 @@ function eliminarProducto(index) {
     totalCost -= productos[index].costo;
     productos.splice(index, 1);
     updateProductsDisplay();
-    
+
     // Vuelve a mostrar los productos en el modal
     mostrarProductosEnModal();
 
@@ -687,9 +687,9 @@ function eliminarProducto(index) {
             document.getElementById('confirm-save').addEventListener('click', async function() {
     const loading = document.querySelector('.loading');
     loading.style.display = 'flex';
-    
+
     const form = document.getElementById('pedido-form');
-    
+
     // Generar PDF
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF();
@@ -702,7 +702,7 @@ function eliminarProducto(index) {
         pdf.save('detalles_pedido.pdf'); // Descarga el PDF
 
         // Enviar el formulario después de descargar el PDF
-        form.submit(); 
+        form.submit();
     } catch (err) {
         console.error('Error al capturar el contenido:', err);
         Swal.fire({

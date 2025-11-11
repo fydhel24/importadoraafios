@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Start your development with FoodHut landing page.">
     <meta name="author" content="Devcrud">
-    <title>Pedidos a traves de BC&PLUS | Importadora Miranda</title>
+    <title>Pedidos a traves de BC&PLUS | Importadora Afios</title>
     <link rel="icon" href="{{ asset('assets/imgs/main4.png') }}" type="image/x-icon">
    <!-- Font Icons -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/themify-icons/css/themify-icons.css') }}">
@@ -301,7 +301,7 @@ background: radial-gradient(circle, rgba(20,78,139,1) 0%, rgba(202,207,212,1) 10
         </ul>
         <a class="navbar-brand m-auto" href="#">
         <img src="{{ asset('assets/imgs/main4.png') }}" class="brand-img" alt="">
-            <span class="brand-txt" style="color: white;">Importadora Miranda</span>
+            <span class="brand-txt" style="color: white;">Importadora Afios</span>
         </a>
         <ul class="navbar-nav">
             <li class="">
@@ -309,12 +309,12 @@ background: radial-gradient(circle, rgba(20,78,139,1) 0%, rgba(202,207,212,1) 10
             </li>
             <li class="">
                 <a class="nav-link button-hover"  style="color: white;" href="#contact">Nuestras Sucursales</a>
-            </li>   
+            </li>
         </ul>
     </div>
 </nav>
-    
-    
+
+
     <!-- header -->
     <header>
         <div id="headerCarousel" class="carousel slide" data-ride="carousel">
@@ -360,13 +360,13 @@ background: radial-gradient(circle, rgba(20,78,139,1) 0%, rgba(202,207,212,1) 10
           </a>
         </div>
       </header>
-      
+
 
 <BR>
 
     <!--  About Section  -->
     <div id="about" class="container-fluid wow fadeIn" data-wow-duration="1.5s">
-        <center><h1>IMPORTADORA MIRANDA</h1></center>
+        <center><h1>IMPORTADORA AFIOS</h1></center>
         <center><h3>"A un Click del Producto que Necesitas"</h3></center>
         <center><h1 class="highlight">Pedidos a través de BC&PLUS</h1></center>
     </div>
@@ -451,7 +451,7 @@ background: radial-gradient(circle, rgba(20,78,139,1) 0%, rgba(202,207,212,1) 10
                <th scope="col">DESTINOS</th>
                <th scope="col">Sobres y Paquetes</th>
                <th scope="col">Kg Adicional</th>
-               <th scope="col">Tiempo de Transito</th>            
+               <th scope="col">Tiempo de Transito</th>
             </tr>
          </thead>
          <tbody>
@@ -620,11 +620,11 @@ background: radial-gradient(circle, rgba(20,78,139,1) 0%, rgba(202,207,212,1) 10
                                 <h1 class="text-center mb-4"><a href="#" class="badge badge-primary" style="background-color: rgba(255, 255, 255, 0.2); color: white; text-decoration: none; padding: 10px 15px; border-radius: 5px; margin-right: 10px;">
         Santa Cruz - 15 Bs
     </a></h1>
-                            
-                              
+
+
                             </div>
                             <iframe src="https://www.google.com/maps/d/embed?mid=1MB2nGuQGyBhjAZUxXOoYhfO2hlYQYIA&ehbc=2E312F" width="640" height="480"></iframe>
-                            
+
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -634,25 +634,25 @@ background: radial-gradient(circle, rgba(20,78,139,1) 0%, rgba(202,207,212,1) 10
                                 <h1 class="text-center mb-4"><a href="#" class="badge badge-primary" style="background-color: rgba(255, 255, 255, 0.2); color: white; text-decoration: none; padding: 10px 15px; border-radius: 5px; margin-right: 10px;">
         Tarija - 15 Bs
     </a></h1>
-                            
+
 
                             </div>
                              <iframe src="https://www.google.com/maps/d/embed?mid=1w_sdHFToJy5caFqPtDIQfC8Q7mBp8M0&ehbc=2E312F" width="640" height="480"></iframe>
-                            
+
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="card bg-transparent border my-3 my-md-0">
                             <div class="card-body">
-                                                               <h4 class="pt20 pb20">COSTO DE ENVIO</h4> 
+                                                               <h4 class="pt20 pb20">COSTO DE ENVIO</h4>
                                 <h1 class="text-center mb-4"><a href="#" class="badge badge-primary" style="background-color: rgba(255, 255, 255, 0.2); color: white; text-decoration: none; padding: 10px 15px; border-radius: 5px; margin-right: 10px;">
         Oruro - 15 Bs
     </a></h1>
-                                
+
 
                             </div>
                             <iframe src="https://www.google.com/maps/d/embed?mid=1JcqsIT3MbbzRaO4jehXq4thNulDzpvY&hl=es_419&ehbc=2E312F" width="640" height="480"></iframe>
-                            
+
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -662,19 +662,19 @@ background: radial-gradient(circle, rgba(20,78,139,1) 0%, rgba(202,207,212,1) 10
                                 <h1 class="text-center mb-4"><a href="#" class="badge badge-primary" style="background-color: rgba(255, 255, 255, 0.2); color: white; text-decoration: none; padding: 10px 15px; border-radius: 5px; margin-right: 10px;">
         Cochabamba - 15 Bs
     </a></h1>
-                                
+
 
                             </div>
                             <iframe src="https://www.google.com/maps/d/embed?mid=1dNsmJ-9aX8CZntkwMOgyTjzcXrzlp8Qe&ehbc=2E312F" width="640" height="480"></iframe>
                         </div>
                     </div>
-                      
+
                 </div>
             </div>
         </div>
     </div>
 
-    
+
     <!-- CONTACT Section  -->
     <div id="contact" class="container-fluid text-light border-top wow fadeIn" style="background: rgb(0,0,0); background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(9,9,121,1) 24%, rgba(74,5,177,1) 59%, rgba(0,212,255,1) 100%);">
         <style>
@@ -683,13 +683,13 @@ background: radial-gradient(circle, rgba(20,78,139,1) 0%, rgba(202,207,212,1) 10
                 font-family: Arial, sans-serif; /* Fuente */
                 font-size: 18px; /* Tamaño del texto */
             }
-        
+
             .custom-text a {
                 color: white; /* Color del enlace */
                 text-decoration: none; /* Sin subrayado por defecto */
                 transition: color 0.3s ease, text-decoration 0.3s ease; /* Transición suave */
             }
-        
+
             .custom-text a:hover {
                 color: #080808; /* Cambia el color del texto al pasar el mouse */
                 text-decoration: wavy; /* Agrega subrayado al pasar el mouse */
@@ -699,57 +699,57 @@ background: radial-gradient(circle, rgba(20,78,139,1) 0%, rgba(202,207,212,1) 10
         <div class="col-md-6 px-4 my-4">
             <iframe src="https://www.google.com/maps/d/embed?mid=1tL_B9SRx7HKvtBFDET2LeznuYcR18Qo&ehbc=2E312F" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
-    
+
         <div class="col-md-6 px-5 has-height-lg middle-items">
             <h3 style="color: white;">VISITA NUESTRAS SUCURSALES</h3>
-            
+
             <div class="text-muted">
                 <p class="custom-text">
                     <span class="ti-location-pin pr-3"></span>
-                    <a href="https://www.tiktok.com/@importadoramiranda777/video/7397830715041221894"  target="_blank">SUCURSAL 1 - Caparazón Mall Center Planta Baja, Local Nº29 Garaje al lado de los cajeros, Pleno Puente Vita</a>
+                    <a href="https://www.tiktok.com/@importadoraAfios777/video/7397830715041221894"  target="_blank">SUCURSAL 1 - Caparazón Mall Center Planta Baja, Local Nº29 Garaje al lado de los cajeros, Pleno Puente Vita</a>
                 </p>
                 <p class="custom-text">
                     <span class="ti-location-pin pr-3"></span>
-                    <a href="https://www.tiktok.com/@importadoramiranda777/video/7397869859373108485" target="_blank">SUCURSAL 2 - Plaza Bonita local 13 Cerca al puente vita, Av. Buenos Aires</a>
+                    <a href="https://www.tiktok.com/@importadoraAfios777/video/7397869859373108485" target="_blank">SUCURSAL 2 - Plaza Bonita local 13 Cerca al puente vita, Av. Buenos Aires</a>
                 </p>
                 <p class="custom-text">
                     <span class="ti-location-pin pr-3"></span>
-                    <a href="https://www.tiktok.com/@importadoramiranda777/video/7397944655444249862" target="_blank">SUCURSAL 3 - Galería las Vegas, Puesto Nº3</a>
+                    <a href="https://www.tiktok.com/@importadoraAfios777/video/7397944655444249862" target="_blank">SUCURSAL 3 - Galería las Vegas, Puesto Nº3</a>
                 </p>
                 <p class="custom-text">
                     <span class="ti-location-pin pr-3"></span>
-                    <a href="https://www.tiktok.com/@importadoramiranda777/video/7397944655444249862" target="_blank">SUCURSAL 4 - Uyustus Frente al Banco Fie, Av. Buenos Aires</a>
+                    <a href="https://www.tiktok.com/@importadoraAfios777/video/7397944655444249862" target="_blank">SUCURSAL 4 - Uyustus Frente al Banco Fie, Av. Buenos Aires</a>
                 </p>
-                
+
                 <p class="custom-text">
                     <span class="ti-support pr-3"></span>
                     <a href="tel:+59170621016">+591 70621016</a>
                 </p>
                 <p class="custom-text">
                     <span class="ti-email pr-3"></span>
-                    <a href="mailto:importadoramiranda.com">importadoramiranda.com</a>
+                    <a href="mailto:importadoraAfios.com">importadoraAfios.com</a>
                 </p>
             </div>
         </div>
     </div>
-    
+
             <CENTER><h3 class="mt-4">Síguenos en Nuestras Redes Sociales:</h3>
                 <div>
                     <a href="https://www.facebook.com/profile.php?id=100063558189871" target="_blank" class="text-light pr-3"><i class="fab fa-facebook fa-2x"></i></a>
                     <a href="https://api.whatsapp.com/send?phone=59170621016" target="_blank" class="text-light pr-3"><i class="fab fa-whatsapp fa-2x"></i></a>
-                    <a href="https://www.tiktok.com/@importadoramiranda777" target="_blank" class="text-light pr-3"><i class="fab fa-tiktok fa-2x"></i></a>
-                    <a href="https://importadoramiranda777.sumerlabs.com/" target="_blank" class="text-light pr-3"><i class="fas fa-file-alt fa-2x"></i></a>
-                    <a href="https://www.instagram.com/importadoramiranda777/" target="_blank" class="text-light pr-3"><i class="fab fa-instagram fa-2x"></i></a>
+                    <a href="https://www.tiktok.com/@importadoraAfios777" target="_blank" class="text-light pr-3"><i class="fab fa-tiktok fa-2x"></i></a>
+                    <a href="https://importadoraAfios777.sumerlabs.com/" target="_blank" class="text-light pr-3"><i class="fas fa-file-alt fa-2x"></i></a>
+                    <a href="https://www.instagram.com/importadoraAfios777/" target="_blank" class="text-light pr-3"><i class="fab fa-instagram fa-2x"></i></a>
                 </div></CENTER>
         </div>
     </div>
 </div>
 
-    
+
 <div class="bg-dark text-light text-center border-top wow fadeIn" style="
 background: rgb(75, 178, 180);
 background: linear-gradient(90deg, rgba(75, 178, 180, 1) 7%, rgba(0, 15, 173, 1) 41%, rgba(99, 38, 190, 1) 61%, rgba(226, 18, 64, 1) 100%);
-"> <p class="mb-0 py-3 text-muted small" style="color: white;">&copy; IMPORTADORA MIRANDA <script>document.write(new Date().getFullYear())</script> <i class="ti-heart text-danger"></i> By <i>DevD</i></p>
+"> <p class="mb-0 py-3 text-muted small" style="color: white;">&copy; IMPORTADORA AFIOS <script>document.write(new Date().getFullYear())</script> <i class="ti-heart text-danger"></i> By <i>DevD</i></p>
     </div>
     <!-- end of page footer -->
 
@@ -765,7 +765,7 @@ background: linear-gradient(90deg, rgba(75, 178, 180, 1) 7%, rgba(0, 15, 173, 1)
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const tables = document.querySelectorAll('.animated-table');
-    
+
             // Función para verificar si un elemento está visible en pantalla
             const isElementInViewport = (el) => {
                 const rect = el.getBoundingClientRect();
@@ -776,7 +776,7 @@ background: linear-gradient(90deg, rgba(75, 178, 180, 1) 7%, rgba(0, 15, 173, 1)
                     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
                 );
             };
-    
+
             // Función para aplicar la clase 'visible' cuando el elemento esté en el viewport
             const checkVisibility = () => {
                 tables.forEach(table => {
@@ -785,10 +785,10 @@ background: linear-gradient(90deg, rgba(75, 178, 180, 1) 7%, rgba(0, 15, 173, 1)
                     }
                 });
             };
-    
+
             // Chequear visibilidad al cargar la página
             checkVisibility();
-    
+
             // Chequear visibilidad al hacer scroll
             window.addEventListener('scroll', checkVisibility);
         });
@@ -827,6 +827,6 @@ window.addEventListener('scroll', function() {
 
 
     </script>
-    
+
 </body>
 </html>

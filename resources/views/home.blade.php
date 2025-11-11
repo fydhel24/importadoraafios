@@ -9,7 +9,7 @@
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="header-logo simple-rotating-logo">
         </div>
         <div class="ml-3">
-            <h2 class="welcome-text">¡Bienvenidos al sistema de Importadora Miranda!</h2>
+            <h2 class="welcome-text">¡Bienvenidos al sistema de Importadora Afios!</h2>
             <h1 class="main-title subtle-animated">
                 <i class="fas fa-chart-line mr-2"></i>
                 Panel de Estadísticas de Ventas
@@ -47,7 +47,7 @@
         <div class="star-performer-section">
             <div class="star-card star-seller-card improved-star-card">
                 <div class="star-background-effect-subtle"></div>
-                
+
                 <div class="star-header">
                     <div class="crown-container">
                         <i class="fas fa-crown star-icon simple-crown"></i>
@@ -74,7 +74,7 @@
                 @endif
             </div>
         </div>
-        
+
         <div class="chart-section">
             <div class="chart-card improved-chart">
                 <div class="card-header-custom">
@@ -93,7 +93,7 @@
         <div class="star-performer-section">
             <div class="star-card star-branch-card improved-star-card">
                 <div class="star-background-effect-subtle branch-effect"></div>
-                
+
                 <div class="star-header">
                     <div class="crown-container">
                         <i class="fas fa-trophy star-icon simple-trophy"></i>
@@ -120,7 +120,7 @@
                 @endif
             </div>
         </div>
-        
+
         <div class="chart-section">
             <div class="chart-card improved-chart">
                 <div class="card-header-custom">
@@ -563,20 +563,20 @@ body {
     .dashboard-container {
         padding: 0 0.5rem;
     }
-    
+
     .content-header-modern {
         padding: 1.5rem;
         text-align: center;
     }
-    
+
     .main-title {
         font-size: 1.8rem;
     }
-    
+
     .welcome-text {
         font-size: 1rem;
     }
-    
+
     .chart-container {
         height: 250px;
     }
@@ -613,13 +613,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // Animación de contadores suave
     function animateCounters() {
         const counters = document.querySelectorAll('.improved-number[data-target]');
-        
+
         counters.forEach(counter => {
             const target = parseInt(counter.getAttribute('data-target'));
             const duration = 1500; // 1.5 segundos
             const increment = target / (duration / 16);
             let current = 0;
-            
+
             const timer = setInterval(() => {
                 current += increment;
                 if (current >= target) {
@@ -775,9 +775,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // Fecha y hora
     function updateDateTime() {
         const now = new Date();
-        const dateOptions = { 
-            year: 'numeric', 
-            month: 'long', 
+        const dateOptions = {
+            year: 'numeric',
+            month: 'long',
             day: 'numeric'
         };
         const formattedDate = now.toLocaleDateString('es-ES', dateOptions);

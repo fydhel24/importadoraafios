@@ -7,7 +7,7 @@
     <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
         <div class="text-center text-md-start mb-3 mb-md-0">
             <h1 class="header-title mb-2">Listado de Semanas</h1>
-            <p class="header-subtitle mb-0">¡Bienvenidos al sistema de Importadora Miranda!</p>
+            <p class="header-subtitle mb-0">¡Bienvenidos al sistema de Importadora Afios!</p>
         </div>
         <div class="search-box">
             <input type="text" id="searchInput" class="form-control shadow-sm" placeholder="Buscar semanas...">
@@ -28,7 +28,7 @@
     <!-- Contenedor de tarjetas -->
     <div class="row" id="semanasContainer">
         @foreach($ordered as $semana)
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4 semana-card" data-nombre="{{ strtolower($semana->nombre) }}" 
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4 semana-card" data-nombre="{{ strtolower($semana->nombre) }}"
              data-fecha="{{ strtolower($semana->fecha) }}">
             <div class="card border-light shadow-lg modern-card" style="border-radius: 15px; background-color: #fdfdfd;">
                 <div class="card-body text-center">
@@ -318,12 +318,12 @@
             flex: 0 0 50%;
             max-width: 50%;
         }
-        
+
         .modern-card {
             height: auto;
             min-height: 260px;
         }
-        
+
         #searchInput {
             width: 80% !important;
         }
@@ -334,7 +334,7 @@
             flex: 0 0 100%;
             max-width: 100%;
         }
-        
+
         #searchInput {
             width: 95% !important;
         }

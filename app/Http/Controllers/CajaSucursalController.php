@@ -27,7 +27,7 @@ class CajaSucursalController extends Controller
             // Si no tiene acceso, redirigir o lanzar un error
             return redirect()->route('home')->with('success', 'No tienes permisos suficientes para acceder a esta página.');
         });
-    } 
+    }
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -317,7 +317,7 @@ class CajaSucursalController extends Controller
 
         // Establecer las fuentes y tamaños
         $pdf->SetFont('Arial', 'B', 14);
-        $pdf->Cell(0, 10, "Reporte de Caja - Importadora Miranda", 0, 1, 'C');
+        $pdf->Cell(0, 10, "Reporte de Caja - Importadora AFIOS", 0, 1, 'C');
         $pdf->Ln(5);
 
         // Crear la tabla (sin líneas verticales)
@@ -397,7 +397,7 @@ class CajaSucursalController extends Controller
 
         // Establecer las fuentes y tamaños
         $pdf->SetFont('Arial', 'B', 14);
-        $pdf->Cell(0, 10, "Reporte de Caja - Importadora Miranda", 0, 1, 'C');
+        $pdf->Cell(0, 10, "Reporte de Caja - Importadora Afios", 0, 1, 'C');
         $pdf->Ln(5);
 
         // Crear la tabla (sin líneas verticales)

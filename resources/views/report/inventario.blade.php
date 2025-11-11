@@ -7,7 +7,7 @@
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header bg-primary text-white">
-            <h2 class="card-title">Reporte de Inventario - Importadora Miranda</h2>
+            <h2 class="card-title">Reporte de Inventario - Importadora Afios</h2>
         </div>
         <div class="card-body">
             <!-- Formulario de Filtro de Fecha -->
@@ -23,7 +23,7 @@
                 <button type="submit" class="btn btn-primary font-weight-bold mr-2">
                     <i class="fas fa-filter"></i> Filtrar
                 </button>
-                <a href="{{ route('report.inventario.pdf', ['start_date' => request('start_date'), 'end_date' => request('end_date')]) }}" 
+                <a href="{{ route('report.inventario.pdf', ['start_date' => request('start_date'), 'end_date' => request('end_date')]) }}"
                    class="btn btn-success font-weight-bold" target="_blank">
                     <i class="fas fa-file-pdf"></i> Generar PDF
                 </a>

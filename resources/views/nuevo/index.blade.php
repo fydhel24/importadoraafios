@@ -137,7 +137,7 @@ textarea#productos:focus {
     <div class="container">
         <div class="col-sm-12 text-center">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="logo" width="100px">
-            <h2 class="m-0">🤩BIENVENIDOS A IMPORTADORA MIRANDA🤩</h2>  </div>
+            <h2 class="m-0">🤩BIENVENIDOS A IMPORTADORA AFIOS🤩</h2>  </div>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -150,7 +150,7 @@ textarea#productos:focus {
                                     <label for="nombre" class="form-label">Nombre  <span class="example-text">(ej. Juan Pablo Perez Veliz)</span></label>
                                     <input type="text" class="form-control" id="nombre" name="nombre" required>
                                     <div class="invalid-feedback">Por favor, ingrese su nombre.</div>
-                                    
+
                                 </div>
                                 <div class="mb-3">
                                     <label for="ci" class="form-label">CI <span class="example-text">(ej. 75395145 LP)</span> </label>
@@ -165,7 +165,7 @@ textarea#productos:focus {
                                 <button type="button" class="btn btn-primary" onclick="nextStep(1)"> <i class="fa fa-arrow-right" aria-hidden="true"></i> Siguiente</button>
                             </form>
                         </div>
-    
+
                         <!-- Step 2 -->
                        <!-- Step 2 -->
 <div class="step" id="step-2">
@@ -213,7 +213,7 @@ textarea#productos:focus {
                                 <button type="button" class="btn btn-primary" onclick="nextStep(3)"> <i class="fa fa-arrow-right" aria-hidden="true"></i> Siguiente</button>
                             </form>
                         </div>
-    
+
                         <!-- Step 4 -->
                         <div class="step" id="step-4">
                             <h2>QUIERES PAGAR EL ENVIO DE SU PRODUCTO?</h2>
@@ -225,7 +225,7 @@ textarea#productos:focus {
                                     <i class="fa fa-times" aria-hidden="true"></i> NO cancelar la entrega
                                 </button> </div>
                         </div>
-    
+
                         <!-- Step 5 -->
                         <!-- Step 5 -->
                         <div class="step" id="step-5">
@@ -236,7 +236,7 @@ textarea#productos:focus {
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProductModal"> <i class="fa fa-edit" aria-hidden="true"></i>Editar Producto</button>
                             <button type="button" class="btn btn-primary" onclick="nextStep(5)"> <i class="fa fa-arrow-right" aria-hidden="true"></i> Siguiente</button>
                         </div>
-                        
+
     <!-- Modal para agregar producto -->
     <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -345,7 +345,7 @@ textarea#productos:focus {
         </div>
     </div>
 </div>
-    
+
                        <!-- Step 6 -->
 <div class="step" id="step-6">
     <div class="mb-3">
@@ -406,7 +406,7 @@ textarea#productos:focus {
             </div>
         </div>
     </div>
-    
+
     <script src="estiloFormulario/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -572,7 +572,7 @@ function submitAndGeneratePDF() {
                 confirmButtonText: 'Aceptar',
             }).then(() => {
                 setTimeout(() => {
-                    Swal.close(); 
+                    Swal.close();
                     window.location.href = '{{ route("nuevo.index") }}';// Cierra la alerta después de 5 segundos
                 }, 5000); // 5000 milisegundos = 5 segundos
             });
@@ -705,7 +705,7 @@ function addProduct() {
     document.getElementById('costoProducto').value = '';
     document.getElementById('cantidadProducto').value = '';
     document.getElementById('detalleProducto').value = '';
-    
+
     updateTextareaVisibility();
 }
 function updateTextareaVisibility() {
@@ -736,10 +736,10 @@ function updateProductsList() {
 }
 
 function updateProductsTextarea() {
-    const productosText = productos.map(product => 
+    const productosText = productos.map(product =>
         `Nombre: ${product.nombre}, Costo: ${product.costo}, Cantidad: ${product.cantidad}, Detalle: ${product.detalle}`
     ).join('\n');
-    
+
     productosData = productosText; // Update productosData with the formatted text
     document.getElementById('productos').value = productosData; // Update the textarea content
     updateTextareaVisibility(); // Update visibility based on new data

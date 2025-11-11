@@ -1,4 +1,4 @@
-{{-- filepath: d:\Trabajo Miranda\20-03-2025\pro\resources\views\sales\canceled_sales.blade.php --}}
+{{-- filepath: d:\Trabajo AFIOS\20-03-2025\pro\resources\views\sales\canceled_sales.blade.php --}}
 @extends('adminlte::page')
 
 @section('title', 'Ventas Canceladas')
@@ -159,7 +159,7 @@
                             </div>
                         </div>
                     </div>
-                  
+
                     <div class="col-md-4">
                         <div class="small-box bg-warning">
                             <div class="inner">

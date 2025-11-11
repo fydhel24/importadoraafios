@@ -3,7 +3,7 @@
 @section('title', 'Reporte de Caja Sucursal')
 
 @section('content_header')
-    <h1 class="text-center">Reporte de Caja Sucursal - Importadora Miranda</h1>
+    <h1 class="text-center">Reporte de Caja Sucursal - Importadora Afios</h1>
 @stop
 
 @section('content')
@@ -44,7 +44,7 @@
         }
 
         /* Estilo para las fechas, hacerlas más grandes y negritas */
-        .fecha-campo {  
+        .fecha-campo {
             font-weight: bold;  /* Negrita */
             color: #08090a;     /* Color azul para el texto */
         }

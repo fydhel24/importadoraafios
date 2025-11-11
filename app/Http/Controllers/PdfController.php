@@ -72,14 +72,14 @@ class PdfController extends Controller
 
         // Usa una fuente que soporte caracteres especiales
         $pdf->SetFont('Arial', 'B', 10); // Tamaño de fuente reducido
-        $pdf->Cell(100, $cellHeight, "IMPORTADORA MIRANDA", 1, 1, 'C');  // Ancho ajustado
+        $pdf->Cell(100, $cellHeight, "IMPORTADORA AFIOS", 1, 1, 'C');  // Ancho ajustado
 
         // Ajustar posición después de escribir la primera celda
         $pdf->SetX($x);
         $pdf->SetFont('Arial', '', 8);
         $nameCellWidth = 65; // Ancho de la celda del nombre
         $ciCellWidth = 35; // Ancho de la celda del CI
-        
+
         // Añadir celdas en la misma fila
         $pdf->Cell($nameCellWidth, $cellHeight, "Nombre: " . strtoupper($row['nombre']), 1, 0, 'L');
         $pdf->Cell($ciCellWidth, $cellHeight, "CI: " . strtoupper($row['ci']), 1, 1, 'L');
@@ -133,30 +133,30 @@ class PdfController extends Controller
     {
         // Obtener todos los pedidos
         $pedidos = Pedido::all();
-    
+
         // Crear instancia de FPDF
         $pdf = new FPDF('P', 'mm', array(216, 330)); // Orientación Portrait (P), unidades en milímetros, tamaño de página en mm
-    
+
         // Agregar la primera página
         $pdf->AddPage();
         $pdf->SetFont('Arial', 'B', 12); // Fuente de tamaño 12 para el texto
-    
+
         // Definir márgenes
         $margin = 10; // Margen de 10 mm alrededor de la página
-    
+
         // Definir el tamaño de las celdas en función de la página oficio (216x330 mm) menos márgenes
         $pageWidth = 216 - 2 * $margin; // Ancho de la página menos márgenes
         $pageHeight = 330 - 2 * $margin; // Altura de la página menos márgenes
-    
+
         $numColumns = 2; // Número de columnas
         $numRows = 3; // Número de filas
-    
+
         $cellWidth = $pageWidth / $numColumns; // Ancho de cada celda (2 columnas)
         $cellHeight = $pageHeight / $numRows; // Altura de cada celda (3 filas)
-    
+
         // Ruta del logo
         $logoPath = public_path('images/logo_gris-3.png'); // Ruta al logo en el directorio 'public'
-    
+
         // Contadores
         $cellCount = 0;
         $cellsInPage = 0;
@@ -164,7 +164,7 @@ class PdfController extends Controller
         $i=1;
         // Recorrer los pedidos y crear celdas con información
         foreach ($pedidos as $pedido) {
-            
+
             // Si se alcanzó el número máximo de celdas por página, agregar una nueva página
             if ($cellsInPage >= $cellPerPage) {
                 $pdf->AddPage(); // Agregar nueva página
@@ -173,20 +173,20 @@ class PdfController extends Controller
                 $cellsInPage = 0; // Restablecer el contador de celdas por página
                 $cellCount = 0; // Reiniciar el contador de celdas por fila
             }
-    
+
             // Calcular la posición de la celda actual
             $x = $margin + ($cellCount % $numColumns) * $cellWidth;
             $y = $margin + floor($cellCount / $numColumns) * $cellHeight;
-    
+
             // Crear un marco alrededor de la celda
             $pdf->Rect($x, $y, $cellWidth, $cellHeight);
-    
+
             // Agregar el logo como marca de agua dentro de la celda
             $pdf->Image($logoPath, $x, $y, $cellWidth, $cellHeight, 'PNG'); // Ajusta tamaño y posición según sea necesario
-    
+
             // Reducir el espaciado entre líneas de texto
             $lineHeight = 10; // Ajusta este valor para cambiar el espaciado entre líneas
-    
+
             // Convertir datos a mayúsculas
             $id = strtoupper($pedido->id);
             $nombre = strtoupper($pedido->nombre);
@@ -194,41 +194,41 @@ class PdfController extends Controller
             $celular = strtoupper($pedido->celular);
             $destino = strtoupper($pedido->destino);
             $estado = strtoupper($pedido->estado);
-    
+
             // Agregar los datos del pedido dentro del cuadro
             $pdf->SetXY($x + 5, $y + 5);
             $pdf->SetFont('Arial', 'B', 16); // Fuente para el texto
-    
+
             // Ajustar el texto largo dentro de la celda usando MultiCell
             $pdf->MultiCell($cellWidth - 10, $lineHeight, utf8_decode('N#: ' . $i), 0, 'M');
-    
+
             $pdf->SetXY($x + 5, $pdf->GetY()); // Ajustar la posición Y para la siguiente línea
             $pdf->MultiCell($cellWidth - 10, $lineHeight, utf8_decode('NOMBRE: ' . $nombre), 0, 'L');
-    
+
             $pdf->SetXY($x + 5, $pdf->GetY()); // Ajustar la posición Y para la siguiente línea
             $pdf->MultiCell($cellWidth - 10, $lineHeight, utf8_decode('CI: ' . $ci), 0, 'L');
-    
+
             $pdf->SetXY($x + 5, $pdf->GetY()); // Ajustar la posición Y para la siguiente línea
             $pdf->MultiCell($cellWidth - 10, $lineHeight, utf8_decode('CEL: ' . $celular), 0, 'L');
-    
+
             $pdf->SetXY($x + 5, $pdf->GetY()); // Ajustar la posición Y para la siguiente línea
             $pdf->MultiCell($cellWidth - 10, $lineHeight, utf8_decode('DESTINO: ' . $destino), 0, 'L');
-    
+
             $pdf->SetXY($x + 5, $pdf->GetY()); // Ajustar la posición Y para la siguiente línea
             $pdf->MultiCell($cellWidth - 10, $lineHeight, utf8_decode('ESTADO: ' . $estado), 0, 'L');
-    
+
             // Mover el cursor a la siguiente celda
             $cellCount++;
             $cellsInPage++; // Incrementar el contador de celdas por página
             $i++;
         }
-    
+
         // Output el PDF al navegador
         return response($pdf->Output('S', 'pedidos.pdf'))
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'inline; filename="pedidos.pdf"');
     }
-    
 
-    
+
+
 }

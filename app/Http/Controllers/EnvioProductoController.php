@@ -1104,7 +1104,7 @@ class EnvioProductoController extends Controller
 
         // Configuración del encabezado
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
         $pdf->Ln(2); // Espacio adicional
         $pdf->Cell(0, 0, '', 'T'); // Línea separadora
         $pdf->Ln(2);
@@ -1175,7 +1175,7 @@ class EnvioProductoController extends Controller
 
         // Configuración del título y encabezado
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
 
         // Línea separadora
         $pdf->Ln(2);
@@ -1255,7 +1255,7 @@ class EnvioProductoController extends Controller
 
         // Configuración del título y encabezado
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
 
         // Línea separadora
         $pdf->Ln(2);
@@ -1385,7 +1385,7 @@ class EnvioProductoController extends Controller
 
         // Encabezado principal
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
         $pdf->Ln(2);
         $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(0, 4, utf8_decode("REPORTE DE ENVÍOS"), 0, 1, 'C');
@@ -1513,8 +1513,8 @@ class EnvioProductoController extends Controller
                         $colorBoton = $estado === 'mal estado confirmado' ? 'btn-primary' : 'btn-success';
                         $icono = $estado === 'mal estado confirmado' ? 'fas fa-file-pdf' : 'fas fa-check-circle';
 
-                        $botones .= '<button class="btn ' . $colorBoton . ' btn-sm confirmar-mal-estado" 
-                                            data-id="' . $historial->id . '" 
+                        $botones .= '<button class="btn ' . $colorBoton . ' btn-sm confirmar-mal-estado"
+                                            data-id="' . $historial->id . '"
                                             data-estado="' . $estado . '">
                                             <i class="' . $icono . '"></i> ' . $textoBoton . '
                                      </button>';
@@ -1647,7 +1647,7 @@ class EnvioProductoController extends Controller
 
         // Encabezado principal
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
         $pdf->Ln(2);
         $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(0, 4, utf8_decode("REPORTE DE MAL ESTADO CONFIRMADO"), 0, 1, 'C');
@@ -1986,7 +1986,7 @@ class EnvioProductoController extends Controller
 
         // Encabezado principal
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
         $pdf->Ln(2);
         $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(0, 4, utf8_decode("REPORTE DE ENVIO AL ALMACEN "), 0, 1, 'C');

@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'title' => 'IMPORTADORA MIRANDA',
+    'title' => 'IMPORTADORA AFIOS',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'logo' => '<b class="logo-importadora">Importadora</b> <b class="logo-miranda">Miranda</b>',
+    'logo' => '<b class="logo-importadora">Importadora</b> <b class="logo-AFIOS">AFIOS</b>',
 
 
 
@@ -364,7 +364,7 @@ return [
             'can' => 'proveedores.index',
             'topnav_right' => true
         ],
-        
+
        [
     'text' => '',
     'url'  => '/solicitudes',
@@ -416,8 +416,8 @@ return [
 
             ],
         ],
-        
-        
+
+
         [
             'text' => 'Cuaderno',
             'icon' => 'fas fa-book',
@@ -464,7 +464,7 @@ return [
                     'icon' => 'fas fa-hourglass-half', // Icono de pendiente o espera
                     'can' => 'pedidos.index',
                 ],
-                
+
  [
     'text' => 'Cuaderno Pendientes',
     'url'  => '/envios/faltante', // Usa la ruta que configuraste en routes/web.php
@@ -684,13 +684,13 @@ return [
                     'icon' => 'fas fa-solid fa-horse',
                     'can' => 'control.index'
                 ],
-               
+
             ],
         ],
-        
-        
-        
-        
+
+
+
+
          [
             'text' => 'Ventas Promocion',
             'icon' => 'fas fa-solid fa-cash-register',
@@ -714,7 +714,7 @@ return [
                     'icon' => 'fas fa-bolt', // Ícono de rayo (rápido, ágil)
 
                 ], */
-                
+
             ],
         ],
 
@@ -766,7 +766,7 @@ return [
             'icon' => 'fas fa-fw fa-chart-pie',
             'submenu' => [
 
-                
+
                 [
                     'text' => 'Reporte de ventas del usuario',
                     'url' => '/reporte-usuario-ventas', // Enlace a la nueva vista para las ventas del usuario autenticado

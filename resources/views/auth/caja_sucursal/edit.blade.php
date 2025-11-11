@@ -6,7 +6,7 @@
     <div class="container">
         <div class="card shadow mb-4">
             <div class="card-header bg-primary text-white">
-                <h2 class="card-title">Editar Reporte de Caja Sucursal - Importadora Miranda</h2>
+                <h2 class="card-title">Editar Reporte de Caja Sucursal - Importadora Afios</h2>
             </div>
             <div class="card-body">
                 <form action="{{ route('caja_sucursal.update', $fechaSucursal->id) }}" method="POST">

@@ -1,4 +1,4 @@
-{{-- filepath: d:\Trabajo Miranda\20-03-2025\pro\resources\views\sales_report\index.blade.php --}}
+{{-- filepath: d:\Trabajo AFIOS\20-03-2025\pro\resources\views\sales_report\index.blade.php --}}
 @extends('adminlte::page')
 
 @section('title', 'Reporte de Ventas')
@@ -141,7 +141,7 @@
                 dateFormat: "Y-m-d", // Formato de fecha
                 defaultDate: "{{ now()->format('Y-m-d') }}" // Fecha predeterminada
             });
-            
+
             // Configurar DataTable para las ventas
             const salesTable = $('#salesTable').DataTable({
                 processing: true,
@@ -152,7 +152,7 @@
                         d.branch_id = $('#branchSelect').val();
                         d.date = $('#datePicker').val(); // Enviar la fecha seleccionada
                         d.search_term = $('#salesTable_filter input').val(); // Obtener el valor del campo de búsqueda
-      
+
                     },
                     dataSrc: function(json) {
                         // Actualizar totales

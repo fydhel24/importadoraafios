@@ -6,7 +6,7 @@
     <div class="container mt-5">
         <div class="card shadow-sm border-light rounded">
             <div class="card-header bg-light text-dark text-center">
-                <h2 class="card-title font-weight-bold">Editar Reporte de Caja - Importadora Miranda</h2>
+                <h2 class="card-title font-weight-bold">Editar Reporte de Caja - Importadora Afios</h2>
             </div>
             <div class="card-body">
                 <form action="{{ route('caja_sucursal.update', $fechaSucursal->id) }}" method="POST">

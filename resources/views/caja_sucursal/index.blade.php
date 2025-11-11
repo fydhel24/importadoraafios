@@ -3,7 +3,7 @@
 @section('title', 'Reporte de Caja')
 
 @section('content_header')
-    <h1 class="text-center">Reporte de Caja - Importadora Miranda</h1>
+    <h1 class="text-center">Reporte de Caja - Importadora Afios</h1>
 @stop
 
 @section('content')

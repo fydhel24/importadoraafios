@@ -6,7 +6,7 @@
     <div class="container">
         <div class="card shadow mb-4">
             <div class="card-header bg-primary text-white">
-                <h2 class="card-title">Reporte de Ventas - Importadora Miranda</h2>
+                <h2 class="card-title">Reporte de Ventas - Importadora Afios</h2>
             </div>
             <div class="card-header">
                 <!-- Formulario de Filtro de Fecha -->

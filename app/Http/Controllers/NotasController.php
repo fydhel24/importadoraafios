@@ -59,7 +59,7 @@ class NotasController extends Controller
 
         // Cabecera
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA MIRANDA S.A."), 0, 1, 'C');
+        $pdf->Cell(0, 4, utf8_decode("IMPORTADORA AFIOS S.A."), 0, 1, 'C');
         $pdf->SetFont('Arial', '', 8);
         $pdf->Cell(0, 4, utf8_decode("A un Click del Producto que Necesita!!"), 0, 1, 'C');
         $pdf->Cell(0, 4, utf8_decode("Telefono: 70621016"), 0, 1, 'C');
@@ -124,7 +124,7 @@ class NotasController extends Controller
             $pdf->MultiCell(0, 4, utf8_decode("Total Efectivo: " . $pedido['efectivo']), 0, 'R');
             $pdf->MultiCell(0, 4, utf8_decode("Total Qr: " . $pedido['qr']), 0, 'R');
             $pdf->MultiCell(0, 4, utf8_decode("Sub. Total: " . $pedido['subtotal']), 0, 'R');
-    
+
         }else{
             if($pedido['forma_pago']=='Efectivo'){
 
@@ -132,7 +132,7 @@ class NotasController extends Controller
                 $pdf->SetFont('Arial', 'B', 8);
                 $pdf->MultiCell(0, 4, utf8_decode("Total Efectivo: " . $pedido['subtotal']), 0, 'R');
                 $pdf->MultiCell(0, 4, utf8_decode("Sub. Total: " . $pedido['subtotal']), 0, 'R');
-        
+
             }else{
                 $pdf->Ln(2);
                 $pdf->SetFont('Arial', 'B', 8);
@@ -228,38 +228,38 @@ class NotasController extends Controller
         // Mostrar el PDF en el navegador con un nombre de archivo personalizado
         $pdf->Output('I', 'nota_de_venta_seleccionados.pdf');
     }
-    
+
     public function generarNotaVenta(Request $request)
     {
         // Obtener los IDs de los pedidos seleccionados
         $pedidoIds = $request->input('pedidos', []);
-    
+
         // Validar si se seleccionaron pedidos
         if (empty($pedidoIds)) {
             return response()->json(['error' => 'No se seleccionaron pedidos.'], 400);
         }
-    
+
         // Obtener los registros de PedidoProducto con las relaciones necesarias
         $pedidosProductos = PedidoProducto::with(['pedido', 'producto'])
             ->whereIn('id_envio', $pedidoIds)
             ->get()
             ->groupBy('id_envio'); // Agrupar por pedido/envío
-    
+
         // Crear el PDF (formato tipo ticket)
         $pdf = new FPDF('P', 'mm', [80, 180]);
         $pdf->SetAutoPageBreak(true, 10);
-    
+
         foreach ($pedidosProductos as $pedidoId => $items) {
             $pedido = $items->first()->pedido;
-    
+
             if (!$pedido) continue;
-    
+
             $pdf->AddPage();
             $marginTop = 5;
-    
+
             // Armar el string de productos igual que en imprimirSeleccionados()
             $productosNombres = [];
-    
+
             foreach ($items as $item) {
                 if ($item->producto) {
                     $productosNombres[] = $item->producto->nombre;
@@ -267,14 +267,14 @@ class NotasController extends Controller
                     $productosNombres[] = strtoupper($item->producto_id ?? 'N/A');
                 }
             }
-    
+
             $productosString = implode(', ', $productosNombres);
-    
+
             // Calcular subtotal y total basado en los productos
             $subtotal = $items->sum(function ($item) {
                 return $item->cantidad * $item->precio;
             });
-    
+
             // Preparar los datos como en imprimirSeleccionados()
             $pedidoData = [
                 'nombre_cliente' => $pedido->nombre,
@@ -291,11 +291,11 @@ class NotasController extends Controller
                 'cambio'         => 0,
                 'forma_pago'     => 'Pago con tarjeta',
             ];
-    
+
             // Llamar a la misma función para imprimir el estilo tipo ticket
             $this->datos($pdf, $pedidoData, $marginTop);
         }
-    
+
         // Mostrar el PDF
         return response($pdf->Output('S', 'nota_venta_tickets.pdf'))
             ->header('Content-Type', 'application/pdf')

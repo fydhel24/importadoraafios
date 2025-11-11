@@ -1,4 +1,4 @@
-{{-- filepath: d:\Trabajo Miranda\20-03-2025\pro\resources\views\sales_report\week.blade.php --}}
+{{-- filepath: d:\Trabajo AFIOS\20-03-2025\pro\resources\views\sales_report\week.blade.php --}}
 @extends('adminlte::page')
 
 @section('title', 'Reporte de Ventas - Por Semana')

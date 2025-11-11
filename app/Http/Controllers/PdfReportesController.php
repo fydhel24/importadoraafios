@@ -108,7 +108,7 @@ class PdfReportesController extends Controller
 
         // Establecer fuentes y tamaños
         $pdf->SetFont('Arial', 'B', 14);
-        $pdf->Cell(0, 10, "Reporte de Ventas - Importadora Miranda", 0, 1, 'C');
+        $pdf->Cell(0, 10, "Reporte de Ventas - Importadora Afios", 0, 1, 'C');
         $pdf->Ln(5);
 
         // Resumen de ventas
@@ -362,7 +362,7 @@ class PdfReportesController extends Controller
 
         // Encabezado
         $pdf->SetFont('Arial', 'B', 14);
-        $pdf->Cell(0, 10, utf8_decode($title . " - Importadora Miranda"), 0, 1, 'C');
+        $pdf->Cell(0, 10, utf8_decode($title . " - Importadora Afios"), 0, 1, 'C');
         $pdf->Ln(5);
 
         // Resumen de ventas
@@ -531,7 +531,7 @@ class PdfReportesController extends Controller
         $pdf->Image(public_path('images/logo_old_2.png'), 250, 10, 30); // Logo derecho
         // Establecer fuentes y tamaños
         $pdf->SetFont('Arial', 'B', 14);
-        $pdf->Cell(0, 10, "Reporte de Ventas - Importadora Miranda", 0, 1, 'C');
+        $pdf->Cell(0, 10, "Reporte de Ventas - Importadora Afios", 0, 1, 'C');
         $pdf->Ln(5);
 
         // Resumen de ventas
@@ -638,7 +638,7 @@ class PdfReportesController extends Controller
 
         // Título del reporte
         $pdf->SetFont('Arial', 'B', 14);
-        $pdf->Cell(0, 10, "Reporte de Inventario - Importadora Miranda", 0, 1, 'C');
+        $pdf->Cell(0, 10, "Reporte de Inventario - Importadora Afios", 0, 1, 'C');
         $pdf->Ln(5);
 
         // Resumen de inventario
@@ -750,7 +750,7 @@ class PdfReportesController extends Controller
 
         // Título del reporte
         $pdf->SetFont('Arial', 'B', 14);
-        $pdf->Cell(0, 10, "Reporte de Pedidos - Importadora Miranda", 0, 1, 'C');
+        $pdf->Cell(0, 10, "Reporte de Pedidos - Importadora Afios", 0, 1, 'C');
         $pdf->Ln(5);
 
         // Resumen de pedidos
@@ -873,7 +873,7 @@ class PdfReportesController extends Controller
 
         // Título del reporte
         $pdf->SetFont('Arial', 'B', 14);
-        $pdf->Cell(0, 10, "Reporte de Pedidos de Productos - Importadora Miranda", 0, 1, 'C');
+        $pdf->Cell(0, 10, "Reporte de Pedidos de Productos - Importadora Afios", 0, 1, 'C');
         $pdf->Ln(5);
 
         // Resumen de pedidos de productos

@@ -402,7 +402,7 @@ class ProductoController extends Controller
         // Get the last ID of the week
         /* $ultimaSemana = Semana::latest('id')->first();
         $id_semana = $ultimaSemana ? $ultimaSemana->id : null; */
-        // Usar la semana 
+        // Usar la semana
         $semanaFija = Semana::find(102);
         if (!$semanaFija) {
             return response()->json([
@@ -522,7 +522,7 @@ class ProductoController extends Controller
         // Get the last ID of the week
         /* $ultimaSemana = Semana::latest('id')->first();
         $id_semana = $ultimaSemana ? $ultimaSemana->id : null; */
-        // Usar la semana 
+        // Usar la semana
         $semanaFija = Semana::find(103);
         if (!$semanaFija) {
             return response()->json([
@@ -647,7 +647,7 @@ class ProductoController extends Controller
         // Configurar encabezado del PDF
         $pdf->SetFont('Arial', 'B', 16);
         $pdf->SetTextColor(0, 51, 102); // Color azul oscuro para el encabezado
-        $pdf->Cell(0, 10, 'REPORTE DE PRODUCTOS - IMPORTADORA MIRANDA', 0, 1, 'C');
+        $pdf->Cell(0, 10, 'REPORTE DE PRODUCTOS - IMPORTADORA AFIOS', 0, 1, 'C');
         $pdf->Ln(10); // Salto de línea
         $pdf->Line(10, $pdf->GetY(), 280, $pdf->GetY()); // Línea horizontal
         $pdf->Ln(5); // Salto de línea para separación
@@ -1197,7 +1197,7 @@ class ProductoController extends Controller
         // Get the last ID of the week
         /* $ultimaSemana = Semana::latest('id')->first();
         $id_semana = $ultimaSemana ? $ultimaSemana->id : null; */
-        // Usar la semana 
+        // Usar la semana
         $semanaFija = Semana::find(157);
         if (!$semanaFija) {
             return response()->json([
@@ -1317,7 +1317,7 @@ class ProductoController extends Controller
         // Get the last ID of the week
         /* $ultimaSemana = Semana::latest('id')->first();
         $id_semana = $ultimaSemana ? $ultimaSemana->id : null; */
-        // Usar la semana 
+        // Usar la semana
         $semanaFija = Semana::find(158);
         if (!$semanaFija) {
             return response()->json([
@@ -1437,7 +1437,7 @@ class ProductoController extends Controller
         // Get the last ID of the week
         /* $ultimaSemana = Semana::latest('id')->first();
         $id_semana = $ultimaSemana ? $ultimaSemana->id : null; */
-        // Usar la semana 
+        // Usar la semana
         $semanaFija = Semana::find(159);
         if (!$semanaFija) {
             return response()->json([
@@ -1557,7 +1557,7 @@ class ProductoController extends Controller
         // Get the last ID of the week
         /* $ultimaSemana = Semana::latest('id')->first();
         $id_semana = $ultimaSemana ? $ultimaSemana->id : null; */
-        // Usar la semana 
+        // Usar la semana
         $semanaFija = Semana::find(160);
         if (!$semanaFija) {
             return response()->json([
