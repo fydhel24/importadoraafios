@@ -398,12 +398,30 @@ class ProductoController extends Controller
         $fotoPath = $request->file('foto_comprobante')
             ? $request->file('foto_comprobante')->store('fotos', 'public')
             : null;
+        $hoy = Carbon::now();
+        $numeroSemana = $hoy->weekOfYear;
+        $anio = $hoy->year;
 
+        // Buscar una semana con fecha dentro de la semana actual
+        $inicioSemana = $hoy->copy()->startOfWeek();
+        $finSemana = $hoy->copy()->endOfWeek();
+
+        $semana = Semana::whereBetween('fecha', [$inicioSemana, $finSemana])->first();
+
+        if (!$semana) {
+            // Crear una nueva semana si no existe
+            $semana = Semana::create([
+                'nombre' => 'Semana ' . $numeroSemana . ' - ' . $anio,
+                'fecha' => $hoy->toDateString(),
+            ]);
+        }
+
+        $id_semana = $semana->id;
         // Get the last ID of the week
-        $ultimaSemana = Semana::latest('id')->first();
-        $id_semana = $ultimaSemana ? $ultimaSemana->id : null;
+        /* $ultimaSemana = Semana::latest('id')->first();
+        $id_semana = $ultimaSemana ? $ultimaSemana->id : null; */
         // Usar la semana
-       /*  $semanaFija = Semana::find(102);
+        /*  $semanaFija = Semana::find(102);
         if (!$semanaFija) {
             return response()->json([
                 'error' => 'No se encontró la semana.'
