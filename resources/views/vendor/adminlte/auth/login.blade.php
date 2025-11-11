@@ -8,7 +8,7 @@
         /* ========================================
            RESET Y CONFIGURACIÓN BASE
         ======================================== */
-
+        
         /* Reset completo para evitar conflictos con AdminLTE */
         * {
             box-sizing: border-box !important;
@@ -44,7 +44,7 @@
         /* ========================================
            FONDO DE VIDEO Y OVERLAY
         ======================================== */
-
+        
         /* Video de fondo responsivo */
         .video-background {
             position: fixed !important;
@@ -76,7 +76,7 @@
         /* ========================================
            CONTENEDOR PRINCIPAL
         ======================================== */
-
+        
         /* Container principal - Mobile First */
        .login-page {
     height: 100% !important;
@@ -92,7 +92,7 @@
         /* ========================================
            FORMULARIO DE LOGIN
         ======================================== */
-
+        
         /* Contenedor del formulario con glassmorphism */
         .auth-page {
             background: rgba(255, 255, 255, 0.15) !important;
@@ -100,7 +100,7 @@
             -webkit-backdrop-filter: blur(20px) !important;
             padding: 35px 30px !important;
             border-radius: 24px !important;
-            box-shadow:
+            box-shadow: 
                 0 25px 50px rgba(0, 0, 0, 0.3),
                 0 0 0 1px rgba(255, 255, 255, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
@@ -155,7 +155,7 @@
         /* ========================================
            TÍTULO Y HEADER
         ======================================== */
-
+        
         .auth-header {
             text-align: center !important;
             margin-bottom: 35px !important;
@@ -168,7 +168,7 @@
             font-size: 2.2rem !important;
             font-weight: 800 !important;
             margin: 0 !important;
-            text-shadow:
+            text-shadow: 
                 0 4px 8px rgba(0, 0, 0, 0.4),
                 0 0 20px rgba(118, 75, 162, 0.3) !important;
             letter-spacing: 1.5px !important;
@@ -181,7 +181,7 @@
         /* ========================================
            CAMPOS DE INPUT
         ======================================== */
-
+        
         /* Grupos de input */
         .form-group {
             margin-bottom: 25px !important;
@@ -210,7 +210,7 @@
             color: #ffffff !important;
             font-weight: 500 !important;
             min-height: 58px !important;
-            box-shadow:
+            box-shadow: 
                 0 8px 20px rgba(0, 0, 0, 0.1),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
             outline: none !important;
@@ -221,7 +221,7 @@
         .input-group input:focus {
             border-color: rgba(118, 75, 162, 0.6) !important;
             background: rgba(255, 255, 255, 0.18) !important;
-            box-shadow:
+            box-shadow: 
                 0 0 25px rgba(118, 75, 162, 0.3),
                 0 15px 35px rgba(0, 0, 0, 0.15),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
@@ -247,7 +247,7 @@
         /* ========================================
            ICONOS DE INPUT
         ======================================== */
-
+        
         .input-group-append {
             position: absolute !important;
             right: 20px !important;
@@ -278,7 +278,7 @@
         /* ========================================
            SECCIÓN REMEMBER ME
         ======================================== */
-
+        
         .remember-section {
             display: flex !important;
             align-items: center !important;
@@ -321,7 +321,7 @@
         /* ========================================
            BOTÓN DE LOGIN
         ======================================== */
-
+        
         .btn-login {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%) !important;
             backdrop-filter: blur(15px) !important;
@@ -335,7 +335,7 @@
             width: 100% !important;
             cursor: pointer !important;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-            box-shadow:
+            box-shadow: 
                 0 12px 30px rgba(118, 75, 162, 0.4),
                 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
             text-transform: uppercase !important;
@@ -369,7 +369,7 @@
 
         .btn-login:hover {
             transform: translateY(-3px) scale(1.02) !important;
-            box-shadow:
+            box-shadow: 
                 0 20px 40px rgba(118, 75, 162, 0.6),
                 0 0 0 1px rgba(255, 255, 255, 0.2) !important;
             background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 50%, #e084f7 100%) !important;
@@ -382,7 +382,7 @@
         /* ========================================
            MENSAJES DE ERROR
         ======================================== */
-
+        
         .invalid-feedback {
             display: block !important;
             color: #ff9999 !important;
@@ -407,7 +407,7 @@
         /* ========================================
            ELEMENTOS DECORATIVOS
         ======================================== */
-
+        
         .floating-elements {
             position: absolute !important;
             top: 0 !important;
@@ -455,7 +455,7 @@
         /* ========================================
            ANIMACIONES
         ======================================== */
-
+        
         @keyframes slideInUp {
             0% {
                 opacity: 0;
@@ -487,18 +487,18 @@
         /* ========================================
            RESPONSIVE DESIGN
         ======================================== */
-
+        
         /* Tablets (768px - 1024px) */
         @media (min-width: 768px) and (max-width: 1024px) {
             .login-page {
                 padding: 40px !important;
             }
-
+            
             .auth-page {
                 max-width: 450px !important;
                 padding: 40px 35px !important;
             }
-
+            
             .auth-header h1 {
                 font-size: 2.4rem !important;
             }
@@ -509,17 +509,17 @@
             .login-page {
                 padding: 50px !important;
             }
-
+            
             .auth-page {
                 max-width: 480px !important;
                 padding: 45px 40px !important;
             }
-
+            
             .auth-header h1 {
                 font-size: 2.6rem !important;
                 letter-spacing: 2px !important;
             }
-
+            
             .input-group input,
             .btn-login {
                 min-height: 62px !important;
@@ -531,40 +531,40 @@
             .login-page {
                 padding: 15px !important;
             }
-
+            
             .auth-page {
                 padding: 25px 20px !important;
                 max-width: 350px !important;
                 border-radius: 20px !important;
             }
-
+            
             .auth-header {
                 margin-bottom: 25px !important;
             }
-
+            
             .auth-header h1 {
                 font-size: 1.8rem !important;
                 letter-spacing: 1px !important;
             }
-
+            
             .input-group input {
                 padding: 16px 50px 16px 18px !important;
                 min-height: 52px !important;
                 font-size: 16px !important; /* Evita zoom en iOS */
             }
-
+            
             .btn-login {
                 padding: 16px 25px !important;
                 min-height: 52px !important;
                 font-size: 15px !important;
                 letter-spacing: 1px !important;
             }
-
+            
             .remember-section {
                 padding: 14px 18px !important;
                 margin: 20px 0 !important;
             }
-
+            
             .floating-circle {
                 display: none !important; /* Ocultar en móviles para mejor rendimiento */
             }
@@ -575,12 +575,12 @@
             .login-page {
                 padding: 25px !important;
             }
-
+            
             .auth-page {
                 padding: 30px 25px !important;
                 max-width: 380px !important;
             }
-
+            
             .auth-header h1 {
                 font-size: 2rem !important;
             }
@@ -589,7 +589,7 @@
         /* ========================================
            OPTIMIZACIONES Y ACCESIBILIDAD
         ======================================== */
-
+        
         /* Optimización para iOS - Evitar zoom automático */
         @media (max-width: 768px) {
             .input-group input {
@@ -618,7 +618,7 @@
         /* Mejoras para pantallas de alta densidad */
         @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
             .auth-header h1 {
-                text-shadow:
+                text-shadow: 
                     0 2px 4px rgba(0, 0, 0, 0.4),
                     0 0 10px rgba(118, 75, 162, 0.3) !important;
             }
@@ -644,7 +644,7 @@
 {{-- Header del formulario --}}
 @section('auth_header')
     <div class="auth-header">
-
+        
     </div>
 @stop
 
@@ -652,21 +652,21 @@
 @section('auth_body')
     {{-- Video de fondo --}}
     <video class="video-background" autoplay muted loop playsinline>
-        <source src="{{ asset('images/videoAFIOS.mp4') }}" type="video/mp4">
-        <source src="{{ asset('images/impAFIOS2.0.webm') }}" type="video/webm">
+        <source src="{{ asset('images/videoafios.mp4') }}" type="video/mp4">
+        <source src="{{ asset('images/impmiranda2.0.webm') }}" type="video/webm">
         Tu navegador no soporta el elemento video.
     </video>
-
+    
     {{-- Overlay de gradiente --}}
     <div class="video-overlay"></div>
-
+    
     {{-- Elementos decorativos flotantes --}}
     <div class="floating-elements">
         <div class="floating-circle"></div>
         <div class="floating-circle"></div>
         <div class="floating-circle"></div>
     </div>
-
+    
     {{-- Contenedor principal del formulario --}}
     <div class="auth-page">
         <form action="{{ $login_url }}" method="post" novalidate>
@@ -674,10 +674,10 @@
 
             {{-- Campo de Email --}}
             <div class="input-group">
-                <input type="email"
-                       name="email"
+                <input type="email" 
+                       name="email" 
                        class="form-control @error('email') is-invalid @enderror"
-                       value="{{ old('email') }}"
+                       value="{{ old('email') }}" 
                        placeholder="Introduce tu correo electrónico"
                        autofocus
                        autocomplete="email"
@@ -696,8 +696,8 @@
 
             {{-- Campo de Contraseña --}}
             <div class="input-group">
-                <input type="password"
-                       name="password"
+                <input type="password" 
+                       name="password" 
                        class="form-control @error('password') is-invalid @enderror"
                        placeholder="Introduce tu contraseña"
                        autocomplete="current-password"
@@ -716,9 +716,9 @@
 
             {{-- Sección Remember Me --}}
             <div class="remember-section">
-                <input type="checkbox"
-                       name="remember"
-                       id="remember"
+                <input type="checkbox" 
+                       name="remember" 
+                       id="remember" 
                        {{ old('remember') ? 'checked' : '' }}>
                 <label for="remember">
                     {{ __('Recuérdame para la próxima vez') }}
