@@ -400,16 +400,16 @@ class ProductoController extends Controller
             : null;
 
         // Get the last ID of the week
-        /* $ultimaSemana = Semana::latest('id')->first();
-        $id_semana = $ultimaSemana ? $ultimaSemana->id : null; */
+        $ultimaSemana = Semana::latest('id')->first();
+        $id_semana = $ultimaSemana ? $ultimaSemana->id : null;
         // Usar la semana
-        $semanaFija = Semana::find(102);
+       /*  $semanaFija = Semana::find(102);
         if (!$semanaFija) {
             return response()->json([
                 'error' => 'No se encontró la semana.'
             ], 404);
         }
-        $id_semana = $semanaFija->id;
+        $id_semana = $semanaFija->id; */
 
 
         // Create the pedido
